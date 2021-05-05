@@ -17,7 +17,7 @@ func TestNewStack(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := NewStack()
+			s := NewStack(true)
 			s.Push(1)
 			s.Push(2)
 			s.Push(3)
