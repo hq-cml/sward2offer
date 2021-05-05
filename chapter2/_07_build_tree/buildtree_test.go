@@ -2,7 +2,7 @@ package _07_build_tree
 
 import (
 	"fmt"
-	"swordoff/common"
+	"github.com/hq-cml/sward2offer/common"
 	"testing"
 )
 
