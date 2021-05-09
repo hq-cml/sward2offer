@@ -10,6 +10,9 @@ abfb
 */
 
 func FindPath(arr []byte, rows, cols int, find string) bool {
+	if rows < 1 || cols <1 || len(arr) != rows*cols  {
+		return false
+	}
 	visited := make([]bool, rows * cols)
 	idx := 0
 	//可从任意一个格子开始，任意一般性
