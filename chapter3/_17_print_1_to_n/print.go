@@ -53,7 +53,7 @@ func mockIncr(str []byte) bool {
 //利用递归实现
 //写出来之后，会感觉很简单
 //实际写的过程中，非常烧脑，主要是字符串的低位和字符索引的低位
-//正好是反的，所以一不小心就会出错
+//正好是反的，所以一不小心就会出错，这种情况最好就是在纸上画出来，将idx标注出来
 func PrintN_2(n int) {
 	if n == 0 {
 		return
@@ -76,5 +76,4 @@ func recursePrint(str []byte, idx int) {
 			recursePrint(str, idx + 1)
 		}
 	}
-
 }
