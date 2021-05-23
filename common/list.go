@@ -53,3 +53,17 @@ func nodePrint(node *ListNode) {
         fmt.Print(node.Val, " ")
     }
 }
+
+
+func (l *ListNode)PushNodePtr(node *ListNode) *ListNode {
+    if l == nil {
+        return node
+    }
+    p := l
+    for p.Next != nil {
+        p = p.Next
+    }
+    p.Next = node
+
+    return l
+}
