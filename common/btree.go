@@ -15,6 +15,14 @@ func NewNode(i int) *Node {
 	}
 }
 
+func NewNodeWithChild(i int, left, right *Node) *Node {
+	return &Node{
+		I:     i,
+		Left:  left,
+		Right: right,
+	}
+}
+
 func Pre(n *Node) {
 	if n == nil {
 		return
