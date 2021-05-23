@@ -43,7 +43,7 @@ func (l *ListNode)Foreach(f func(*ListNode)) {
     }
 }
 
-func nodePrint(node *ListNode) {
+func NodePrint(node *ListNode) {
     if node == nil {
         return
     }

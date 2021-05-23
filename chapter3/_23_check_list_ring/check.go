@@ -37,6 +37,7 @@ func CheckRing(head *common.ListNode) (bool, int) {
     return find, l
 }
 
+//找到入口
 func FindEntry(head *common.ListNode) (*common.ListNode){
     exist, length := CheckRing(head)
     if !exist {

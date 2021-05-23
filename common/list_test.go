@@ -16,7 +16,7 @@ func TestListNode_Foreach(t *testing.T) {
         {
             name:   "case1",
             args:   args{
-                f: nodePrint,
+                f: NodePrint,
             },
         },
     }
