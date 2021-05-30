@@ -4,11 +4,11 @@ import (
 	"github.com/hq-cml/sward2offer/common"
 )
 
-func Symmetry(root *common.Node) bool {
+func Symmetry(root *common.TreeNode) bool {
 	return symmetry(root, root)
 }
 
-func symmetry(root1, root2 *common.Node) bool {
+func symmetry(root1, root2 *common.TreeNode) bool {
 	if root1 == nil && root2 == nil {
 		return true
 	}

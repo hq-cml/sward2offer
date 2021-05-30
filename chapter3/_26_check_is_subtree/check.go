@@ -4,7 +4,7 @@ import "github.com/hq-cml/sward2offer/common"
 
 //递归！
 //我自己的方法，比书上的还精简~
-func Check(root1, root2 *common.Node) bool {
+func Check(root1, root2 *common.TreeNode) bool {
     if root2 == nil {
         return true
     }

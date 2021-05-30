@@ -7,8 +7,8 @@ import (
 
 func TestCheck(t *testing.T) {
     type args struct {
-        root1 *common.Node
-        root2 *common.Node
+        root1 *common.TreeNode
+        root2 *common.TreeNode
     }
     tree1 := common.NewNodeWithChild(8,
         common.NewNode(9),

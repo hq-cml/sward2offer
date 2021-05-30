@@ -7,6 +7,26 @@ type ListNode struct {
     Next *ListNode
 }
 
+func NewList() *ListNode {
+    return nil
+}
+
+func (l *ListNode)Empty() bool {
+    return l == nil
+}
+
+func (l *ListNode)Len() int {
+    length := 0
+    if l.Empty() {
+        return length
+    }
+    for l != nil {
+        l = l.Next
+        length ++
+    }
+    return length
+}
+
 //入队列，队尾
 func (l *ListNode)PushNode(v int) *ListNode {
     node := &ListNode{

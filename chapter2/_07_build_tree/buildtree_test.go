@@ -14,7 +14,7 @@ func TestBuildTree(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    *common.Node
+		want    *common.TreeNode
 		wantErr bool
 	}{
 		{

@@ -8,7 +8,7 @@ import (
 
 func TestMirror(t *testing.T) {
 	type args struct {
-		root *common.Node
+		root *common.TreeNode
 	}
 	tests := []struct {
 		name string

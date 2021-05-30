@@ -7,7 +7,7 @@ import (
 
 //pre: 1, 2, 4, 7, 3, 5, 6, 8
 //mid: 4, 7, 2, 1, 5, 3, 8, 6
-func BuildTree(pre, mid []int) (*common.Node, error) {
+func BuildTree(pre, mid []int) (*common.TreeNode, error) {
 	if len(pre) != len(mid) {
 		return nil, errors.New("valid pre & mid")
 	}

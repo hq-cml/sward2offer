@@ -3,27 +3,27 @@ package common
 import "fmt"
 
 //binary tree
-type Node struct {
+type TreeNode struct {
 	I     int
-	Left  *Node
-	Right *Node
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func NewNode(i int) *Node {
-	return &Node{
+func NewNode(i int) *TreeNode {
+	return &TreeNode{
 		I: i,
 	}
 }
 
-func NewNodeWithChild(i int, left, right *Node) *Node {
-	return &Node{
+func NewNodeWithChild(i int, left, right *TreeNode) *TreeNode {
+	return &TreeNode{
 		I:     i,
 		Left:  left,
 		Right: right,
 	}
 }
 
-func Pre(n *Node) {
+func Pre(n *TreeNode) {
 	if n == nil {
 		return
 	}
@@ -33,7 +33,7 @@ func Pre(n *Node) {
 	Pre(n.Right)
 }
 
-func Mid(n *Node) {
+func Mid(n *TreeNode) {
 	if n == nil {
 		return
 	}
@@ -42,7 +42,7 @@ func Mid(n *Node) {
 	Mid(n.Right)
 }
 
-func Post(n *Node) {
+func Post(n *TreeNode) {
 	if n == nil {
 		return
 	}

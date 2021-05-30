@@ -7,7 +7,7 @@ import (
 
 func TestSymmetry(t *testing.T) {
 	type args struct {
-		root *common.Node
+		root *common.TreeNode
 	}
 	tests := []struct {
 		name string
