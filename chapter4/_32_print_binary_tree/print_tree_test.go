@@ -68,3 +68,35 @@ func TestPrintTreeInMultiLine(t *testing.T) {
         })
     }
 }
+
+func TestPrintTreeSnakeLine(t *testing.T) {
+    type args struct {
+        root *common.TreeNode
+    }
+    tests := []struct {
+        name    string
+        args    args
+        wantErr bool
+    }{
+        {
+            name:    "case1",
+            args:    args{
+                common.NewNodeWithChild(1,
+                    common.NewNodeWithChild(2,
+                        common.NewNode(4),
+                        common.NewNode(5)),
+                    common.NewNodeWithChild(3,
+                        nil,
+                        common.NewNode(6))),
+            },
+            wantErr: false,
+        },
+    }
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            if err := PrintTreeSnakeLine(tt.args.root); (err != nil) != tt.wantErr {
+                t.Errorf("PrintTreeSnakeLine() error = %v, wantErr %v", err, tt.wantErr)
+            }
+        })
+    }
+}

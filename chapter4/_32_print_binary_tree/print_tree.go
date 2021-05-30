@@ -76,3 +76,60 @@ func PrintTreeInMultiLine(root *common.TreeNode) error {
 
     return nil
 }
+
+//蛇形线，按行打印二叉树
+//根据特点，将队列换成栈，且考虑左右关系
+func PrintTreeSnakeLine(root *common.TreeNode) error {
+    if root == nil {
+        return nil
+    }
+
+    mystack1 := common.NewStack(true)
+    mystack2 := common.NewStack(true)
+    mystack1.Push(root)
+    currentLevel := 1
+    currentLevelCnt := 1
+    nextLevelCnt := 0
+    for mystack1.Len() != 0 {
+        e, _ := mystack1.Pop()
+        node, ok := e.(*common.TreeNode)
+        if !ok {
+            return fmt.Errorf("Wrong type:%v", reflect.TypeOf(node))
+        }
+        if node == nil {
+            continue
+        }
+
+        var node1 *common.TreeNode
+        var node2 *common.TreeNode
+        if currentLevel % 2 == 1 {
+            node1 = node.Right
+            node2 = node.Left
+        } else {
+            node1 = node.Left
+            node2 = node.Right
+        }
+
+        if node1 != nil {
+            mystack2.Push(node1)
+            nextLevelCnt ++
+        }
+
+        if node2 != nil {
+            mystack2.Push(node2)
+            nextLevelCnt ++
+        }
+
+        fmt.Print(node.I, " ")
+        currentLevelCnt --
+        if currentLevelCnt == 0 {
+            fmt.Println() //换行
+            currentLevelCnt = nextLevelCnt
+            nextLevelCnt = 0
+            currentLevel ++
+            mystack1, mystack2 = mystack2, mystack1 //对换两个栈
+        }
+    }
+
+    return nil
+}
