@@ -12,7 +12,7 @@ func Check(root1, root2 *common.TreeNode) bool {
         return false
     }
 
-    if root1.I == root2.I {
+    if root1.Val == root2.Val {
         return (Check(root1.Left, root2.Left) &&
             Check(root1.Right, root2.Right)) ||
             Check(root1.Left, root2) ||

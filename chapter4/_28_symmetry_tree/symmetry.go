@@ -16,7 +16,7 @@ func symmetry(root1, root2 *common.TreeNode) bool {
 		return false
 	}
 
-	if root1.I != root2.I {
+	if root1.Val != root2.Val {
 		return false
 	}
 

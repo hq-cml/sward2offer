@@ -26,7 +26,7 @@ func PrintTreeIn1Line(root *common.TreeNode) error {
         if node == nil {
             continue
         }
-        fmt.Print(node.I, " ")
+        fmt.Print(node.Val, " ")
         mylist.PushBack(node.Left)
         mylist.PushBack(node.Right)
     }
@@ -65,7 +65,7 @@ func PrintTreeInMultiLine(root *common.TreeNode) error {
             nextLevelCnt ++
         }
 
-        fmt.Print(node.I, " ")
+        fmt.Print(node.Val, " ")
         currentLevelCnt --
         if currentLevelCnt == 0 {
             fmt.Println() //换行
@@ -120,7 +120,7 @@ func PrintTreeSnakeLine(root *common.TreeNode) error {
             nextLevelCnt ++
         }
 
-        fmt.Print(node.I, " ")
+        fmt.Print(node.Val, " ")
         currentLevelCnt --
         if currentLevelCnt == 0 {
             fmt.Println() //换行
