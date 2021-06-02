@@ -10,5 +10,11 @@ func main() {
 
     tmp := strings.Trim("$aa,aab,", ",")
     fmt.Println(tmp)
-   // fmt.Println(len(tmp))
+
+    a := []int{1,2,3}
+    length := len(a)
+    fmt.Println(a[0:length])
+    fmt.Println(a[length:])
+    fmt.Println(a[0:0])
+    //fmt.Println(a[length+1:])
 }
