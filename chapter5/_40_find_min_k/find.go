@@ -51,18 +51,19 @@ func FindMinK2(arr []int, k int) ([]int, error) {
 		return arr, nil
 	}
 
-	heap := common.NewMaxHeapInt(nil)
+	//大顶堆
+	heap := common.NewHeapInt(nil, false)
 	for _, v := range arr {
 		if heap.Len() < k {
-			heap.Put(v)
+			heap.Push(v)
 		} else {
 			top := heap.Get(0)
 			if top > v {
 				heap.Remove(0)
-				heap.Put(v)
+				heap.Push(v)
 			}
 		}
 	}
 
-	return heap.Arr(), nil
+	return heap.All(), nil
 }

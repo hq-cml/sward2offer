@@ -121,7 +121,7 @@ func TestFindMinK2(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name:    "case5",
+			name:    "case6",
 			args:    args{
 				arr: []int{4,1,4,4,4,3,2,6,5,7,8},
 				k:   6,
@@ -133,7 +133,7 @@ func TestFindMinK2(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := FindMinK2(tt.args.arr, tt.args.k)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("FindMinK1() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("FindMinK2() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			fmt.Println(got)

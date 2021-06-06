@@ -7,8 +7,58 @@ const (
 	HEAP_TYPE_MAX        //1，大顶堆
 )
 
-//堆实现：typ标志是大顶堆还是小顶堆
-type HeapInt struct {
+//对外
+type HeapInt struct{
+	*heapInt
+}
+
+//min:是否是小顶堆
+func NewHeapInt(arr []int, min bool) *HeapInt {
+	var p *heapInt
+	if min {
+		p = newMinHeapInt(arr)
+	} else {
+		p = newMaxHeapInt(arr)
+	}
+	return &HeapInt{
+		p,
+	}
+}
+
+func (h *HeapInt)Len() int {
+	return h.heapInt.Len()
+}
+
+func (h *HeapInt)Push(i int) {
+	heap.Push(h.heapInt, i)
+}
+
+func (h *HeapInt)Pop() int {
+	x := h.Get(0)
+	heap.Remove(h.heapInt, 0)
+	return x
+}
+
+func (h *HeapInt)Get(idx int) int {
+	return h.heapInt.dataArr[idx]
+}
+
+func (h *HeapInt)Remove(idx int) int {
+	x := h.Get(idx)
+	heap.Remove(h.heapInt, idx)
+	return x
+}
+
+func (h *HeapInt)All() []int {
+	arr := make([]int, h.Len())
+	copy(arr, h.heapInt.dataArr)
+	return arr
+}
+
+/*
+ * 实际的堆实现：typ标志是大顶堆还是小顶堆
+ */
+type heapInt struct {
 	dataArr []int
 	typ     int
 }
@@ -16,8 +66,8 @@ type HeapInt struct {
 /*
  * New...
  */
-func NewMinHeapInt(arr []int) *HeapInt {
-	h := &HeapInt{
+func newMinHeapInt(arr []int) *heapInt {
+	h := &heapInt{
 		typ:     HEAP_TYPE_MIN,
 		dataArr: arr,
 	}
@@ -25,8 +75,8 @@ func NewMinHeapInt(arr []int) *HeapInt {
 	return h
 }
 
-func NewMaxHeapInt(arr []int) *HeapInt {
-	h := &HeapInt{
+func newMaxHeapInt(arr []int) *heapInt {
+	h := &heapInt{
 		typ:     HEAP_TYPE_MAX,
 		dataArr: arr,
 	}
@@ -37,15 +87,15 @@ func NewMaxHeapInt(arr []int) *HeapInt {
 /*
  * 实现heap.Interface
  */
-func (h *HeapInt)Len() int {
+func (h *heapInt)Len() int {
 	return len(h.dataArr)
 }
 
-func (h *HeapInt)Swap(i, j int) {
+func (h *heapInt)Swap(i, j int) {
 	h.dataArr[i], h.dataArr[j] = h.dataArr[j], h.dataArr[i]
 }
 
-func (h *HeapInt)Less(i, j int) bool {
+func (h *heapInt)Less(i, j int) bool {
 	if h.typ == HEAP_TYPE_MIN {
 		return h.dataArr[i] < h.dataArr[j]
 	} else {
@@ -53,39 +103,16 @@ func (h *HeapInt)Less(i, j int) bool {
 	}
 }
 
-//实现heap.Interface，对外莫用
+//实现heap.Interface
 // add x as element Len()
-func (h *HeapInt) Push(x interface{}) {
+func (h *heapInt) Push(x interface{}) {
 	h.dataArr = append(h.dataArr, x.(int))
 }
 
-//实现heap.Interface，对外莫用
+//实现heap.Interface
 // remove and return element Len() - 1.
-func (h *HeapInt) Pop() interface{} {
+func (h *heapInt) Pop() interface{} {
 	x := h.dataArr[len(h.dataArr)-1]
 	h.dataArr = h.dataArr[0 : len(h.dataArr)-1]
 	return x
-}
-
-/*
- * 其他函数，对外用
- */
-func (h *HeapInt)Get(idx int) int {
-	return h.dataArr[idx]
-}
-
-func (h *HeapInt)Put(i int) {
-	heap.Push(h, i)
-}
-
-func (h *HeapInt)Remove(idx int) int {
-	x := h.Get(idx)
-	heap.Remove(h, idx)
-	return x
-}
-
-func (h *HeapInt)Arr() []int {
-	arr := make([]int, h.Len())
-	copy(arr, h.dataArr)
-	return arr
 }

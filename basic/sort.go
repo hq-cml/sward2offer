@@ -25,9 +25,9 @@ func HeapSort(arr []int) []int {
     }
 
     s := []int{}
-    heap := common.NewMinHeapInt(s)
+    heap := common.NewHeapInt(s, true)
     for _, v := range arr {
-        heap.Put(v)
+        heap.Push(v)
     }
 
     ret := []int{}
