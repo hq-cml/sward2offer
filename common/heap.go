@@ -39,6 +39,10 @@ func (h *HeapInt)Pop() int {
 	return x
 }
 
+func (h *HeapInt)Top() int {
+	return h.Get(0)
+}
+
 func (h *HeapInt)Get(idx int) int {
 	return h.heapInt.dataArr[idx]
 }
