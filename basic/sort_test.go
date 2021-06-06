@@ -45,3 +45,27 @@ func TestQuickSort(t *testing.T) {
         })
     }
 }
+
+func TestHeapSort(t *testing.T) {
+    type args struct {
+        arr []int
+    }
+    tests := []struct {
+        name string
+        args args
+        want []int
+    }{
+        {
+            name: "case1",
+            args: args{
+                arr: []int{5,1,3,4,2,7,8,6},
+            },
+        },
+    }
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            got := HeapSort(tt.args.arr)
+            fmt.Println(got)
+        })
+    }
+}
