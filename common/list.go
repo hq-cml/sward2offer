@@ -27,6 +27,21 @@ func (l *ListNode)Len() int {
     return length
 }
 
+func (l *ListNode)InsertHead(i int) *ListNode {
+    if l == nil {
+        l = &ListNode{
+            Val:    i,
+            Next: nil,
+        }
+    } else {
+        l = &ListNode{
+            Val:    i,
+            Next: l,
+        }
+    }
+    return l
+}
+
 //入队列，队尾
 func (l *ListNode)PushNode(v int) *ListNode {
     node := &ListNode{
