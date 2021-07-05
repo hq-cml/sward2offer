@@ -1,3 +1,6 @@
+/*
+ * 两个队列，实现一个栈
+ */
 package _09_two_stack_list
 
 import (
@@ -9,7 +12,10 @@ type Stack struct {
     l2 list.List
 }
 
-// 永远向非空的栈压入数据，如果均为空，则任意
+//思路：
+//始终保持一个队列是空的，
+//插入操作：直插入非空队列
+//删除操作：将非空的队列前面的值，逐个删除插入另一个空队列，只最后留一个删除，作为实际删除
 func (s *Stack)Push(v interface{}) {
     if s.l1.Len() > 0 {
         s.l1.PushBack(v)
@@ -31,6 +37,7 @@ func (s *Stack)Pop()(v interface{}, exist bool) {
         src, dst = &s.l2, &s.l1
     }
 
+    //吐出n-1个元素，插入空队列，留下最后一个删除
     n := src.Len()
     for n > 1 {
         head := src.Front()
