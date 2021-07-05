@@ -17,6 +17,8 @@ import (
 
 //pre: 1, 2, 4, 7, 3, 5, 6, 8
 //mid: 4, 7, 2, 1, 5, 3, 8, 6
+//这个题目，也适合先用简单例子，来把抽象的问题具象化，会发现这其实也是一个递归的过程。
+//其实就是模拟自己在纸上画图的过程，首先利用前序和中序的特点，确定根和左右子树部分，然后继续递归。
 func BuildTree(pre, mid []int) (*common.TreeNode, error) {
 	if len(pre) != len(mid) {
 		return nil, errors.New("valid pre & mid")

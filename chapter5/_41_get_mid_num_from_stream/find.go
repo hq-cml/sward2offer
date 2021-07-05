@@ -1,3 +1,6 @@
+/*
+
+ */
 package _41_get_mid_num_from_stream
 
 import (
