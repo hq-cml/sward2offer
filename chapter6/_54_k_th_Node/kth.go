@@ -1,5 +1,11 @@
 package _54_k_th_Node
 /*
+
+// 面试题54：二叉搜索树的第k个结点
+// 题目：给定一棵二叉搜索树，请找出其中的第k大的结点。
+
+这题的主要思路其实中序遍历，然后求第k个元素即可。
+
  * 二叉搜索树的第K大节点
  */
 import "github.com/hq-cml/sward2offer/common"
