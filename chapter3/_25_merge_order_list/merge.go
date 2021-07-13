@@ -3,13 +3,12 @@
  * 题目：输入两个递增排序的链表，合并这两个链表并使新链表中的结点仍然是按
  * 照递增排序的。例如输入图3.11中的链表1和链表2，则合并之后的升序链表如链
  * 表3所示。
-
-这道题目我是自己写的代码，作者提供了一个很精妙的递归写法，但是我觉得实际面试中，很难这么想到。
  */
 package _25_merge_order_list
 
 import "github.com/hq-cml/sward2offer/common"
 
+//思路1：普通写法
 func Merge(head1, head2 *common.ListNode) *common.ListNode {
     if head1 == nil {
         return head2
@@ -22,13 +21,13 @@ func Merge(head1, head2 *common.ListNode) *common.ListNode {
     var head *common.ListNode
     if head1.Val <= head2.Val {
         head = head1
-        head1 = head.Next
+        head1 = head1.Next
     } else {
         head = head2
         head2 = head2.Next
     }
 
-    //剩余节点处理
+    //两条队列均非空的时候
     p := head
     for head1 != nil && head2 != nil {
         if head1.Val <= head2.Val {
@@ -41,6 +40,7 @@ func Merge(head1, head2 *common.ListNode) *common.ListNode {
         p = p.Next
     }
 
+    //剩余节点处理
     if head1 != nil {
         p.Next = head1
     } else {
@@ -50,7 +50,7 @@ func Merge(head1, head2 *common.ListNode) *common.ListNode {
     return head
 }
 
-//递归
+//思路2：递归，很精妙的递归写法，但是我觉得实际面试中，很难这么想到。
 func MergeRecurs(head1, head2 *common.ListNode) *common.ListNode {
     if head1 == nil {
         return head2
@@ -62,7 +62,7 @@ func MergeRecurs(head1, head2 *common.ListNode) *common.ListNode {
     var head *common.ListNode
     if head1.Val <= head2.Val {
         head = head1
-        head1 = head.Next
+        head1 = head1.Next
     } else {
         head = head2
         head2 = head2.Next
