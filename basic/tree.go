@@ -4,7 +4,8 @@ import "github.com/hq-cml/sward2offer/common"
 
 //求一课二叉树的指定节点的路径
 //假设所有的节点值不重复
-//这是先序遍历递归算法的一个应用
+//本质上：这是先序遍历递归算法的一个应用
+//注意：这里的实现中，path没有回退机制，其实这是利用了一个golang的slice特性
 func FindPath(root *common.TreeNode, need int, path []int) ([]int, bool) {
     if root == nil {
         return nil, false

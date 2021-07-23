@@ -1,26 +1,21 @@
 /*
-// 面试题67：把字符串转换成整数
-// 题目：请你写一个函数StrToInt，实现把字符串转换成整数这个功能。当然，不
-// 能使用atoi或者其他类似的库函数。
-
-这道题主要考察完整性的考虑，包括非法输入的表示（利用全局变量）：
-1. 输入非法字符
-2. 正负号，包括仅仅只有正负号
-3. TODO，没考虑越界问题
+ * 面试题67：把字符串转换成整数
+ * 题目：请你写一个函数StrToInt，实现把字符串转换成整数这个功能。当然，不
+ * 能使用atoi或者其他类似的库函数。
  */
 package chapter7
-/*
- * Atoi，主要是各种边界和异常考虑的全面性
- * 1. 输入非法字符
- * 2. 正负号，包括仅仅只有正负号
- * 3. 越界问题
- */
+
 import (
     "errors"
     "math"
     "strings"
 )
 
+//思路：主要是各种边界和异常考虑的全面性
+//1. 输入非法字符
+//2. 正负号，包括仅仅只有正负号
+//3. 越界问题
+//4. 不支持浮点小数
 func Atoi(str string) (int, error) {
     //过滤空格字符
     str = strings.Trim(str, " ")
@@ -68,6 +63,7 @@ func checkOverflow(n int, minus bool) bool {
 }
 
 //带四舍五入的Atoi
+//支持对于小数的四舍五入
 func AtoiApproximate(str string) (int, error) {
     //过滤空格字符
     str = strings.Trim(str, " ")

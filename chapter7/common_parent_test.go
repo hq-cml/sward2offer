@@ -62,8 +62,24 @@ func TestFindCommonParent(t *testing.T) {
                 num1: 4,
                 num2: 8,
             },
-            want:  0,
+            want:  -1,
             want1: false,
+        },
+        {
+            name:  "case4",
+            args:  args{
+                root: common.NewNodeWithChild(1,
+                    common.NewNodeWithChild(2,
+                        common.NewNode(4),
+                        common.NewNode(5)),
+                    common.NewNodeWithChild(3,
+                        nil,
+                        common.NewNode(6))),
+                num1: 3,
+                num2: 6,
+            },
+            want:  3,
+            want1: true,
         },
     }
     for _, tt := range tests {

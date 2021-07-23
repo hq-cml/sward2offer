@@ -47,13 +47,13 @@ func TestFindMidNum1(t *testing.T) {
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
-            got, err := FindMidNum1(tt.args.arr)
+            got, err := FindMidNum(tt.args.arr)
             if (err != nil) != tt.wantErr {
-                t.Errorf("FindMidNum1() error = %v, wantErr %v", err, tt.wantErr)
+                t.Errorf("FindMidNum() error = %v, wantErr %v", err, tt.wantErr)
                 return
             }
             if got != tt.want {
-                t.Errorf("FindMidNum1() got = %v, want %v", got, tt.want)
+                t.Errorf("FindMidNum() got = %v, want %v", got, tt.want)
             }
         })
     }

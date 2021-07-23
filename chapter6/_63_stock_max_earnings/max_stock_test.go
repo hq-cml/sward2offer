@@ -18,6 +18,20 @@ func TestMaxStock(t *testing.T) {
 			},
 			want: 11,
 		},
+		{
+			name: "case2",
+			args: args{
+				price: []int{9, 11, 8, 5, 5, 5, 6},
+			},
+			want: 2,
+		},
+		{
+			name: "case3",
+			args: args{
+				price: []int{11, 9, 8, 7, 6, 5},
+			},
+			want: -1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

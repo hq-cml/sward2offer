@@ -1,7 +1,7 @@
 /*
-// 面试题62：圆圈中最后剩下的数字
-// 题目：0, 1, …, n-1这n个数字排成一个圆圈，从数字0开始每次从这个圆圈里
-// 删除第m个数字。求出这个圆圈里剩下的最后一个数字。
+ * 面试题62：圆圈中最后剩下的数字
+ * 题目：0, 1, …, n-1这n个数字排成一个圆圈，从数字0开始每次从这个圆圈里
+ * 删除第m个数字。求出这个圆圈里剩下的最后一个数字。
  */
 package _62_joseph_ring
 
@@ -17,22 +17,22 @@ func CalclRing(n, m int) (int, error) {
     if n <= 0 || m <= 0 {
         return -1, errors.New("Invalid err")
     }
+    if n == 1 {
+        return 0, nil             //单节点成环，即只有一个数字，直接返回
+    }
+
     l := common.NewList()
-    l = l.PushNode(0)
+    l = l.PushNode(0)          //构造首节点
     head := l
     var node *common.ListNode
-    for i:=1; i<n; i++ { //构造环
+    for i:=1; i<n; i++ {          //构造环
         node = &common.ListNode{
             Val:  i,
             Next: nil,
         }
         l = l.PushNodePtr(node)
     }
-    if node != nil {
-        node.Next = head
-    } else {
-        head.Next = head  //单节点成环
-    }
+    node.Next = head              //尾结点指向head
 
     var pre *common.ListNode
     p := head
@@ -41,7 +41,7 @@ func CalclRing(n, m int) (int, error) {
             pre = p
             p = p.Next
         }
-        pre.Next = p.Next
+        pre.Next = p.Next    //删掉一个节点
         fmt.Println("Del:", p.Val)
         p = p.Next
     }

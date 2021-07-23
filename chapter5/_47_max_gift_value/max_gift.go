@@ -1,26 +1,25 @@
 /*
-// 面试题47：礼物的最大价值
-// 题目：在一个m×n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值
-// （价值大于0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向左或
-// 者向下移动一格直到到达棋盘的右下角。给定一个棋盘及其上面的礼物，请计
-// 算你最多能拿到多少价值的礼物？
-
-
-这种题一般都是动态规划，并且递归的分析问题，但是循环的去解决。
+ * 面试题47：礼物的最大价值
+ * 题目：在一个m×n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值
+ * （价值大于0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向左或
+ * 者向下移动一格直到到达棋盘的右下角。给定一个棋盘及其上面的礼物，请计
+ * 算你最多能拿到多少价值的礼物？
  */
 package _47_max_gift_value
 
 import (
 	"math"
 )
-
+//思路：
+//这种最优解的题目，通常都是动态规划，并且递归的分析问题，但是循环的去解决。
 //这个和上一题很相似，只不过是1维变2维了
-//动态规划
 func MaxGiftValue(values []int, rows, cols int, recurse bool) int {
+	//校验
 	if len(values) != rows * cols {
 		return 0
 	}
 
+	//是否递归的进行
 	if recurse {
 		return giftRecurse(values, rows, cols, rows-1, cols-1)
 	} else {
@@ -28,8 +27,8 @@ func MaxGiftValue(values []int, rows, cols int, recurse bool) int {
 	}
 }
 
-//递归方案
-//f(i,j) = max{f(i-1,j), f(i,j-1)} + gift[i,j]
+//思路1：递归方案
+//f(i,j) = gift[i,j] + max[f(i-1,j), f(i,j-1)]
 func giftRecurse(values []int, rows, cols int, i, j int) int {
 	//先计算好最底层值
 	if i < 0 || j < 0 {
@@ -44,7 +43,7 @@ func giftRecurse(values []int, rows, cols int, i, j int) int {
 		giftRecurse(values, rows, cols, i, j-1)) + values[i*cols + j]
 }
 
-//循环方案
+//思路2；循环方案
 //递归的逆向思维，用一个数组来缓存局部的最大值
 func giftLoop(values []int, rows, cols int, i, j int) int {
 	maxValues := make([]int, rows * cols)

@@ -84,7 +84,7 @@ func Pow2(f float64, exp int) (float64, error) {
 	}
 }
 
-//看不懂了
+//TODO 看不懂了
 func powRecurse(f float64, exp int) float64 {
 	if exp == 0 {
 		return 1

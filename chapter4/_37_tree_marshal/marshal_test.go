@@ -35,6 +35,14 @@ func TestTreeMarshal(t *testing.T) {
                     common.NewNode(3)),
             },
         },
+        {
+            name: "case3",
+            args: args{
+                root: common.NewNodeWithChild(1,
+                    nil,
+                    nil),
+            },
+        },
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
@@ -42,6 +50,7 @@ func TestTreeMarshal(t *testing.T) {
             fmt.Println(got)
             root := TreeUnMarshal(got)
             common.Pre(root)
+            fmt.Println()
         })
     }
 }

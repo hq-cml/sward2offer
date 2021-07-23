@@ -1,9 +1,6 @@
 /*
  * 面试题29：顺时针打印矩阵
  * 题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。
-
-这个题比较抽象
-借助画图，发现规律，想清楚退出的边界，其实，就没那么难了
  */
 package _29_print_circle_arr
 
@@ -12,12 +9,18 @@ import (
 	"fmt"
 )
 
+// 思路：
+// 这个题比较抽象借，借助画图，发现规律
+// 从外到内，一圈圈的打印，每一圈都是顺时针的顺序
 func Print(arr []int, rows, cols int) error {
 	if len(arr) != rows*cols || len(arr) == 0 {
 		return errors.New("Wrong arr!")
 	}
 
+	//每一圈左上角的坐标，都是从(idx, idx)开始
 	idx := 0
+
+	//退出边界，就是idx>rows/2或者idx>cols/2
 	for rows > idx*2 && cols > idx*2 {
 		printCircle(arr, idx, rows, cols)
 		idx ++
@@ -25,6 +28,7 @@ func Print(arr []int, rows, cols int) error {
 	return nil
 }
 
+//从矩阵的左上角，顺时针打印一个圈
 func printCircle(arr []int, idx int, rows, cols int) {
 	endRows := rows - idx -1
 	endCols := cols - idx -1

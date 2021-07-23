@@ -12,7 +12,7 @@ type HeapInt struct{
 	*heapInt
 }
 
-//min:是否是小顶堆
+//min:是否是小顶堆，如果是false则创建大顶堆
 func NewHeapInt(arr []int, min bool) *HeapInt {
 	var p *heapInt
 	if min {
@@ -78,7 +78,6 @@ func newMinHeapInt(arr []int) *heapInt {
 	heap.Init(h) //初始化
 	return h
 }
-
 func newMaxHeapInt(arr []int) *heapInt {
 	h := &heapInt{
 		typ:     HEAP_TYPE_MAX,
@@ -99,6 +98,7 @@ func (h *heapInt)Swap(i, j int) {
 	h.dataArr[i], h.dataArr[j] = h.dataArr[j], h.dataArr[i]
 }
 
+//最核心：决定是大顶堆还是小顶堆，就是Less的实现
 func (h *heapInt)Less(i, j int) bool {
 	if h.typ == HEAP_TYPE_MIN {
 		return h.dataArr[i] < h.dataArr[j]

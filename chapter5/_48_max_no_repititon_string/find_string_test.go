@@ -1,6 +1,9 @@
 package _48_max_no_repititon_string
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestFindMaxNoRepititionString(t *testing.T) {
 	type args struct {
@@ -52,6 +55,14 @@ func TestFindMaxNoRepititionStrSlideWindow(t *testing.T) {
 			want:  1,
 			want1: 4,
 		},
+		{
+			name:  "case2",
+			args:  args{
+				str: "abcdeefghij",
+			},
+			want:  5,
+			want1: 6,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -84,10 +95,19 @@ func TestFindMaxNoRepititionStrDynamicPlan(t *testing.T) {
 			want:  1,
 			want1: 4,
 		},
+		{
+			name:  "case2",
+			args:  args{
+				str: "abcdeefghij",
+			},
+			want:  5,
+			want1: 6,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, got1 := FindMaxNoRepititionStrDynamicPlan(tt.args.str)
+			fmt.Println(got, got1)
 			if got != tt.want {
 				t.Errorf("FindMaxNoRepititionStrDynamicPlan() got = %v, want %v", got, tt.want)
 			}
