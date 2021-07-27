@@ -28,6 +28,30 @@ func TestCalc(t *testing.T) {
             want:    18,
             wantErr: false,
         },
+        {
+            name:    "case3",
+            args:    args{
+                arr: []int{1,-2, 3, 5, -3, 2},
+            },
+            want:    8,
+            wantErr: false,
+        },
+        {
+            name:    "case4",
+            args:    args{
+                arr: []int{1,-2, 3, 5, -1, 2},
+            },
+            want:    9,
+            wantErr: false,
+        },
+        {
+            name:    "case5",
+            args:    args{
+                arr: []int{-9,-2, -3, -5, -3},
+            },
+            want:    -2,
+            wantErr: false,
+        },
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {

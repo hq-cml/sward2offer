@@ -57,6 +57,7 @@ func Pow1(f float64, exp int) (float64, error) {
 }
 
 //效率比Pow1更高
+//利用递归的方式来提速
 func Pow2(f float64, exp int) (float64, error) {
 	if exp == 0 {
 		return 1, nil
@@ -84,8 +85,13 @@ func Pow2(f float64, exp int) (float64, error) {
 	}
 }
 
-//TODO 看不懂了
+//原理：
+// 如果exp=32，则其实可以写成 (f^16)^2 = ((f^8)^2)^2 ...递归
+// 如果exp=31，则其实可以写成 (f^15)^2 * f = ((f^7)^2* f)^2 * f ...递归
+// 更加抽象的，可以将exp抽象成为奇数或者偶数
+// 这样，将乘法的次数，对数递减logN
 func powRecurse(f float64, exp int) float64 {
+	//递归结束条件
 	if exp == 0 {
 		return 1
 	}
@@ -93,10 +99,11 @@ func powRecurse(f float64, exp int) float64 {
 		return f
 	}
 
-	r := powRecurse(f, exp>>1)
-	r = r*r
-	if exp & 1 == 1 {
+	r := powRecurse(f, exp>>1)  //向下递归
+	r = r*r           // 求平方
+	if exp & 1 == 1 { // exp 是奇数
 		return r*f
+	} else {
+		return r      // exp 是偶数
 	}
-	return r
 }

@@ -35,3 +35,31 @@ func TestFindWindowMax(t *testing.T) {
         })
     }
 }
+
+func TestFindWindowMaxSlide(t *testing.T) {
+    type args struct {
+        arr       []int
+        windowLen int
+    }
+    tests := []struct {
+        name  string
+        args  args
+        want  []int
+        want1 bool
+    }{
+        {
+            name:  "case1",
+            args:  args{
+                arr:       []int{2,3,4,2,6,2,5,1},
+                windowLen: 3,
+            },
+            want1: true,
+        },
+    }
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            got, _ := FindWindowMaxSlide(tt.args.arr, tt.args.windowLen)
+            fmt.Println(got)
+        })
+    }
+}
