@@ -10,15 +10,16 @@
  * 处理后：
  *           1            前序： 1 2 4 5 3 6 7
  *         2              中：   4 5 2 6 7 3 1
- *      4     3           后：   5 4 7 6 3 2 1
- *       5   6
- *            7
+ *       4   3            后：   5 4 7 6 3 2 1
+ *        5   6
+ *           7
  */
 package _brother_2_child
 
 import "github.com/hq-cml/sward2offer/common"
 
 //递归方式
+//难度：3*
 func Change2ChildRecurse(root *common.TreeNode) {
     if root == nil {
         return
@@ -44,9 +45,10 @@ func Change2ChildRecurse(root *common.TreeNode) {
 //非递归方式
 //借助一个栈，模拟递归的过程
 //这个比较烧脑，牛逼
+//难度：4*
 func Change2ChildNoRecursion(root *common.TreeNode) {
     myStack := common.NewStack(false)
-    p := root
+    p := root //p是精髓
 
     for p != nil || myStack.Len()!=0 {
         //一路捅到最左边，先入栈
@@ -67,7 +69,7 @@ func Change2ChildNoRecursion(root *common.TreeNode) {
             } else {
                 tmp.Left.Right = p
             }
-            tmp.Right = nil   //Not forget to set right to NULL
+            tmp.Right = nil   //Don't forget to set right to NULL
         }
     }
 }

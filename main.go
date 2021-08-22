@@ -1,17 +1,40 @@
 package main
 
 import (
-    "fmt"
+    "math/rand"
+    "time"
 )
 
-func tt(a []int) {
-    a = append(a, 1)
-    fmt.Println(a)
+func shuffle(arr []int) {
+    length := len(arr)
+    rand.Seed(time.Now().Unix())
+    for i:=length-1; i>=1; i-- {
+        idx := rand.Int63n(int64(i))
+        arr[i], arr[idx] = arr[idx], arr[i]
+    }
 }
-//父亲
+
+type A struct {
+    a *int
+    b string
+}
+
+type B struct {
+    a *A
+    b string
+    c []string
+}
+
 func main() {
-    a  := []int{1,2,3}
-    fmt.Println(a)
-    tt(a)
-    fmt.Println(a) //外层感知不到
+    a1 := A{}
+    a2 := A{}
+    if a1==a2 {
+
+    }
+
+    b1 := B{}
+    b2 := B{}
+    if b1==b2 {
+
+    }
 }
