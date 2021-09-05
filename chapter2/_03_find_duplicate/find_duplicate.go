@@ -21,6 +21,8 @@ import "errors"
  * 这两类题目，感觉面试中短时间很难想到。
  * 自己直接实现了一个空间换时间的思路。这个方法的空间复杂度和时间复杂度都是O(N)，
  * 如果需要改进空间复杂度，也可以考虑使用bitmap改进型，及2个bit，表示一位。
+ *
+ * 另一种朴素的思路是排序，不过这个显然复杂度太高了
  */
 
 //题一：思路1
@@ -29,6 +31,7 @@ import "errors"
 //返回，exist标识是否重复，d标识重复的数，如果存在
 func FindDuplicate0(s []int) (d int, exist bool){
 	n := len(s)
+	//基础校验
 	if n == 0 {
 		return -1, false
 	}
@@ -38,6 +41,7 @@ func FindDuplicate0(s []int) (d int, exist bool){
 		}
 	}
 
+	//正式逻辑
 	m := make([]bool, n)
 	for i:=0; i<n; i++ {
 		if ! m[s[i]] {
@@ -69,7 +73,7 @@ func FindDuplicate1(s []int) (d int, exist bool){
 	//如果不存在重复，那么应该s[i] == i
 	//反之就是如果s[i] != i，就可能存在重复
 	for i:=0; i<n; i++ {
-		for s[i] != i {    //紧着第i位，一直交换（颇为巧妙）
+		for s[i] != i {    //紧着第i位，一直交换，指导s[i]==i为止（颇为巧妙）
 			x := s[i]
 			if x == s[x] {
 				return x, true
@@ -84,7 +88,7 @@ func FindDuplicate1(s []int) (d int, exist bool){
 }
 
 //题二：
-//采用了一种类似于二分查找的思路
+//采用了一种类似于二分查找的思路，只不过划分的抓手不是下标，而是范围区间
 //比如分为1-4, 4-7两个区间，然后看哪个区间的长度超过n/2，
 //超过，则意味着重复，则对该区域存在重复继续探测
 func FindDuplicate2 (s []int) (int, bool, error) {
@@ -92,7 +96,6 @@ func FindDuplicate2 (s []int) (int, bool, error) {
 	if n <= 1 { //数组为空或者仅有一个元素，则必然不重复
 		return -1, false, nil
 	}
-
 	//检验数据合法性
 	for i:=0; i<n; i++ {
 		if s[i] < 1 || s[i] > (n-1) {
@@ -100,6 +103,7 @@ func FindDuplicate2 (s []int) (int, bool, error) {
 		}
 	}
 
+	//正式逻辑
 	beg := 1
 	end := n-1
 	for beg <= end { //n >= 2，所以end最小是1
