@@ -16,48 +16,52 @@ import "github.com/hq-cml/sward2offer/common"
 //如果删除的是末尾节点：退化成普通删除
 //仅单个节点：删除头，返回NULL
 //总体来说，复杂度仍然是O(1)
-func DeleteNodeInO1(head *common.ListNode, del *common.ListNode) (*common.ListNode) {
-    if head == nil || del == nil {
-        return head
-    }
+//难度：3*
+func DeleteNodeInO1(head *common.ListNode, del *common.ListNode) *common.ListNode {
+	if head == nil || del == nil {
+		return head
+	}
 
-    if head == del { //待删除的是头结点
-        return head.Next
-    } else if del.Next == nil { //待删除的节点是末尾
-        p1 := head
-        p2 := head.Next
-        for p2 != del {
-            p1 = p2
-            p2 = p2.Next
-        }
-        p1.Next = nil
-    } else { //替换
-        del.Val = del.Next.Val
-        del.Next = del.Next.Next
-    }
-    return head
+	if head == del { //待删除的是头结点
+		return head.Next
+	} else if del.Next == nil { //待删除的节点是末尾
+		p1 := head
+		p2 := head.Next
+		for p2 != nil && p2 != del {
+			p1 = p2
+			p2 = p2.Next
+		}
+		if p2 == del {
+			p1.Next = nil
+		}
+	} else { //替换
+		del.Val = del.Next.Val
+		del.Next = del.Next.Next
+	}
+	return head
 }
 
 //删除有序链表的重复节点
 //这道题的作者的意思是删除重复的节点，一个不留，我觉得不合理，改成了过滤重复。
-func DeleteDuplicate(head *common.ListNode) (*common.ListNode){
-    if head == nil || head.Next == nil {
-        return head
-    }
+//难度：2*
+func DeleteDuplicate(head *common.ListNode) *common.ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
 
-    p1 := head
-    p2 := head.Next
-    for {
-        for p2 != nil && p1.Val == p2.Val {
-            p2 = p2.Next
-            p1.Next = p2
-        }
-        if p2 == nil {
-            break
-        }
-        p1 = p2
-        p2 = p2.Next
-    }
+	p1 := head
+	p2 := head.Next
+	for {
+		for p2 != nil && p1.Val == p2.Val {
+			p2 = p2.Next
+			p1.Next = p2
+		}
+		if p2 == nil {
+			break
+		}
+		p1 = p2
+		p2 = p2.Next
+	}
 
-    return head
+	return head
 }

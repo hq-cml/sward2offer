@@ -15,7 +15,7 @@ func myPrint(s string) {
 	s = strings.TrimLeft(s, "0")
 	if len(s) == 0 {
 		fmt.Println("0")
-	}else {
+	} else {
 		fmt.Println(s)
 	}
 }
@@ -23,6 +23,7 @@ func myPrint(s string) {
 //思路1：
 //用字符串来模拟数字的打印。主要是考虑思维的全面性，因为要考虑大数的问题，所以就涉及到进位的问题，很复杂。
 //利用字符串数字模拟加1算法，核心是判断什么时候到头
+//难度：4*
 func PrintN_1(n int) {
 	if n <= 0 {
 		return
@@ -31,7 +32,7 @@ func PrintN_1(n int) {
 	//初始化
 	str := make([]byte, n)
 	str[n-1] = '1'
-	for i:=0; i<n-1; i++ {
+	for i := 0; i < n-1; i++ {
 		str[i] = '0'
 	}
 
@@ -46,12 +47,12 @@ func PrintN_1(n int) {
 // 返回值标志是否达到最大值溢出
 func mockIncr(str []byte) bool {
 	n := len(str)
-	for i := n-1; i >= 0; i-- { //从个位数开始（数组的最后一位）
+	for i := n - 1; i >= 0; i-- { //从个位数开始（数组的最后一位）
 		if str[i] == '9' {
 			if i > 0 {
-				str[i] = '0'
+				str[i] = '0' //进位
 			} else {
-				return true
+				return true //i==0，此时再加1已经溢出
 			}
 		} else {
 			str[i] = str[i] + 1
@@ -61,18 +62,18 @@ func mockIncr(str []byte) bool {
 	return false
 }
 
-
 //思路2：
 //利用递归做全排列
 //写出来之后，会感觉很简单
 //实际写的过程中，非常烧脑，主要是字符串的低位和字符索引的低位正好是反的，
 //所以一不小心就会出错，这种情况最好就是在纸上画出来，将idx标注出来
+//难度：5*
 func PrintN_2(n int) {
 	if n == 0 {
 		return
 	}
 	str := make([]byte, n)
-	recursePrint(str, 0)  //从数字的最高位（n位）开始
+	recursePrint(str, 0) //从数字的最高位（n位）开始
 }
 
 //牛逼，仅限于欣赏
@@ -80,14 +81,14 @@ func recursePrint(str []byte, idx int) {
 	if idx == len(str)-1 {
 		// 结束条件：
 		// idx的最高位，正好是数字的个位数（最低位），0到9遍历
-		for i:=0; i < 10; i++ {
+		for i := 0; i < 10; i++ {
 			str[idx] = '0' + byte(i)
 			myPrint(string(str))
 		}
 	} else {
-		for i:=0; i < 10; i++ {
-			str[idx] = '0' + byte(i)   //第i位（只要i不是个位），0到9遍历
-			recursePrint(str, idx + 1) //递归下去
+		for i := 0; i < 10; i++ {
+			str[idx] = '0' + byte(i) //第idx位（只要idx不是个位），0到9遍历
+			recursePrint(str, idx+1) //递归下去
 		}
 	}
 }
