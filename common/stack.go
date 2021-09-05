@@ -11,20 +11,20 @@ type Stack interface {
 	Pop() (interface{}, bool)
 }
 
+//self标识是否自行实现栈
 func NewStack(self bool) Stack {
 	if !self {
-		return &StackListImpl{
-		}
+		return &StackListImpl{}
 	} else {
 		return &StackSelfImpl{
-			s : []interface {}{},
+			s: []interface{}{},
 		}
 	}
 }
 
 // 利用container/list实现
 type StackListImpl struct {
-	l list.List    //开箱即用
+	l list.List //开箱即用
 }
 
 func (s *StackListImpl) Len() int {
@@ -53,30 +53,30 @@ func (s *StackListImpl) Pop() (interface{}, bool) {
 
 //自己实现
 type StackSelfImpl struct {
-	s []interface {}
+	s []interface{}
 }
 
 func (stack *StackSelfImpl) Len() int {
 	return len(stack.s)
 }
 
-func (stack *StackSelfImpl) Push(value interface{})  {
+func (stack *StackSelfImpl) Push(value interface{}) {
 	stack.s = append(stack.s, value)
 }
 
 //栈顶元素，但是栈不会变化
-func (stack *StackSelfImpl) Top() (interface{}, bool)  {
+func (stack *StackSelfImpl) Top() (interface{}, bool) {
 	if len(stack.s) == 0 {
 		return nil, false
 	}
-	return stack.s[len(stack.s) - 1], true
+	return stack.s[len(stack.s)-1], true
 }
 
-func (stack *StackSelfImpl) Pop() (interface{}, bool)  {
+func (stack *StackSelfImpl) Pop() (interface{}, bool) {
 	if len(stack.s) == 0 {
 		return nil, false
 	}
-	value := stack.s[len(stack.s) - 1]
-	stack.s = stack.s[:len(stack.s) - 1]
+	value := stack.s[len(stack.s)-1]
+	stack.s = stack.s[:len(stack.s)-1]
 	return value, true
 }

@@ -26,15 +26,5 @@ type B struct {
 }
 
 func main() {
-    a1 := A{}
-    a2 := A{}
-    if a1==a2 {
 
-    }
-
-    b1 := B{}
-    b2 := B{}
-    if b1==b2 {
-
-    }
 }

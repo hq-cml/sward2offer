@@ -1,6 +1,9 @@
 package basic
 
-import "testing"
+import (
+    "fmt"
+    "testing"
+)
 
 func TestPartition(t *testing.T) {
     type args struct {
@@ -49,12 +52,22 @@ func TestPartition(t *testing.T) {
             },
             want: 4,
         },
+        {
+            name: "case5",
+            args: args{
+                arr:    []int{5,3,7,6,4,1,0,2,9,10,8},
+                begIdx: 0,
+                endIdx: 10,
+            },
+            want: 5,
+        },
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
             if got := Partition(tt.args.arr, tt.args.begIdx, tt.args.endIdx); got != tt.want {
                 t.Errorf("Partition() = %v, want %v", got, tt.want)
             }
+            fmt.Println(tt.args.arr)
         })
     }
 }
