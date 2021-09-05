@@ -1,15 +1,12 @@
 /*
-// 面试题66：构建乘积数组
-// 题目：给定一个数组A[0, 1, …, n-1]，请构建一个数组B[0, 1, …, n-1]，其
-// 中B中的元素B[i] =A[0]×A[1]×… ×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法。
-
-这道题也非常巧妙，想想成一个二维矩阵。
-然后分别按照从上到下和从下到上的顺序计算。
+ * 面试题66：构建乘积数组
+ * 题目：给定一个数组A[0, 1, …, n-1]，请构建一个数组B[0, 1, …, n-1]，其
+ * 中B中的元素B[i] =A[0]×A[1]×… ×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法。
  */
 package _66_multiply_array
 
 //思路：
-//思路1：如果可以用触发，是比较简单的，乘起来之后每行分别除以对应数，复杂度O(n)。但是题目要求不能用除法
+//思路1：如果可以用除法，是比较简单的，乘起来之后每行分别除以对应数，复杂度O(n)。但是题目要求不能用除法
 //思路2：常规思路就是两次循环，则复杂度O(n^2)
 //思路3：一个改进思路，构造一个逻辑二维矩阵
 //      然后分别按照从上到下和从下到上的顺序计算
@@ -21,28 +18,29 @@ package _66_multiply_array
 //        2, 3, 1
 //难度：4*，这种思路很抽象实际中很难想到
 func Multiply(src []int) []int {
-    if len(src) == 0 {
-        return src
-    }
-    if len(src) == 1 {
-        return []int{1}
-    }
+	//特殊情况
+	if len(src) == 0 {
+		return src
+	}
+	if len(src) == 1 {
+		return []int{1}
+	}
 
-    //最终结果容器
-    dst := make([]int, len(src))
-    dst[0] = 1
+	//最终结果容器
+	dst := make([]int, len(src))
+	dst[0] = 1
 
-    //先自上而下 (左下角)
-    for i:=1; i<len(src); i++ {         //将i理解为行
-        dst[i] = dst[i-1] * src[i-1]
-    }
-    //fmt.Println(dst)
+	//先自上而下 (左下角)
+	for i := 1; i < len(src); i++ { //将i理解为行
+		dst[i] = dst[i-1] * src[i-1]
+	}
+	//fmt.Println(dst)
 
-    //再自下而上(右上角）
-    tmp := 1
-    for i:=len(src)-2; i >= 0; i-- {   //将i理解为行
-        tmp *= src[i+1]
-        dst[i] *= tmp
-    }
-    return dst
+	//再自下而上(右上角）
+	tmp := 1
+	for i := len(src) - 2; i >= 0; i-- { //将i理解为行
+		tmp *= src[i+1]
+		dst[i] *= tmp
+	}
+	return dst
 }

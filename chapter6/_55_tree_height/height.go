@@ -11,20 +11,20 @@
 package _55_tree_height
 
 import (
-    "github.com/hq-cml/sward2offer/common"
-    "math"
+	"github.com/hq-cml/sward2offer/common"
+	"math"
 )
 
 //题目1：树高度
 //思路：看到树，递归是第一思考顺位
 //难度：2*
 func TreeHeight(root *common.TreeNode) int {
-    if root == nil {
-        return 0
-    }
+	if root == nil {
+		return 0
+	}
 
-    return 1 + int(math.Max(
-        float64(TreeHeight(root.Left)), float64(TreeHeight(root.Right))))
+	return 1 + int(math.Max(
+		float64(TreeHeight(root.Left)), float64(TreeHeight(root.Right))))
 }
 
 //题目2：判断是否平衡二叉树
@@ -34,17 +34,17 @@ func TreeHeight(root *common.TreeNode) int {
 //难度：2*
 //思路1：
 func CheckBalance(root *common.TreeNode) bool {
-    if root == nil {
-        return true
-    }
+	if root == nil {
+		return true
+	}
 
-    leftHeight := TreeHeight(root.Left)
-    rightHeight := TreeHeight(root.Right)
-    if int(math.Abs(float64(leftHeight - rightHeight))) > 1 {
-        return false
-    }
+	leftHeight := TreeHeight(root.Left)
+	rightHeight := TreeHeight(root.Right)
+	if int(math.Abs(float64(leftHeight-rightHeight))) > 1 {
+		return false
+	}
 
-    return CheckBalance(root.Left) && CheckBalance(root.Right)
+	return CheckBalance(root.Left) && CheckBalance(root.Right)
 }
 
 //思路2:
@@ -52,33 +52,34 @@ func CheckBalance(root *common.TreeNode) bool {
 //利用后续遍历，将统计高度和判断平衡同时执行，并且还能避免重复计算
 //难度：4*
 func CheckBalace2(root *common.TreeNode) bool {
-    depth := 0
-    return isBalance(root, &depth)
+	depth := 0
+	return isBalance(root, &depth)
 }
 
 //后序递归
+//关键是这个depth参数，很巧妙
 func isBalance(root *common.TreeNode, depth *int) bool {
-    if root == nil {
-        *depth = 0
-        return true
-    }
+	if root == nil {
+		*depth = 0
+		return true
+	}
 
-    //后序遍历
-    left, right := 0, 0
-    if !isBalance(root.Left, &left) ||
-        !isBalance(root.Right, &right) {
-        return false
-    }
+	//后序遍历
+	left, right := 0, 0
+	if !isBalance(root.Left, &left) ||
+		!isBalance(root.Right, &right) {
+		return false
+	}
 
-    //高度差
-    diff := int(math.Abs(float64(left - right)))
-    if diff <= 1 {
-        if left > right {
-            *depth = 1 + left
-        } else {
-            *depth = 1 + right
-        }
-        return true
-    }
-    return false
+	//高度差
+	diff := int(math.Abs(float64(left - right)))
+	if diff <= 1 {
+		if left > right { //depth需要选择大的
+			*depth = 1 + left
+		} else {
+			*depth = 1 + right
+		}
+		return true
+	}
+	return false
 }

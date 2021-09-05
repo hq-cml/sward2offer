@@ -10,7 +10,6 @@
  * 滑动窗口，它们的最大值分别为{4, 4, 6, 6, 6, 5}，
  * PS：这题也是编程之美3.7
  */
-
 package _59_list_max_value
 
 //方法1：
@@ -18,62 +17,60 @@ package _59_list_max_value
 //利用MaxList来实现：结合之前的O(1)复杂度求栈最大值 & 两个栈模拟队列
 //将前面多次的成果，组装起来，在stack.go和list.go中
 //难度：3*
-func FindWindowMax(arr []int, windowLen int) ([]int, bool)  {
-    if arr == nil {
-        return nil, false
-    }
-    if len(arr) < windowLen {
-        return nil, false
-    }
+func FindWindowMax(arr []int, windowLen int) ([]int, bool) {
+	if arr == nil {
+		return nil, false
+	}
+	if len(arr) < windowLen {
+		return nil, false
+	}
 
-    help := NewMaxList()
+	help := NewMaxList()
 
-    ret := []int{}
-    for k, v := range arr {
-        if k < (windowLen-1) { //窗口不满，直接进入
-            help.Insert(v)
-            continue
-        }
-        help.Insert(v)
-        max, ok := help.Max()
-        if ok {
-            ret = append(ret, max)
-        }
-        help.Pop()
-    }
+	ret := []int{}
+	for k, v := range arr {
+		if k < (windowLen - 1) { //窗口不满，直接进入
+			help.Insert(v)
+			continue
+		}
+		help.Insert(v)
+		max, ok := help.Max()
+		if ok {
+			ret = append(ret, max)
+		}
+		help.Pop()
+	}
 
-    return ret, true
+	return ret, true
 }
-
-
 
 //方法2：
 //利用自己实现的O(1)复杂度的队列来实现
 //作者给的思路太晦涩，我自己实现了一套
-func FindWindowMaxSlide(arr []int, windowLen int) ([]int, bool)  {
-    if arr == nil || windowLen <= 0 {
-        return nil, false
-    }
-    if len(arr) < windowLen {
-        return nil, false
-    }
-    ret := []int{}
-    l := NewMaxListArr()
-    for k, v := range arr {
-        if k < (windowLen-1) { //窗口不满，直接进入
-            l.PushBack(v)
-            continue
-        }
-        l.PushBack(v)
-        max, ok := l.Max()
-        if ok {
-            ret = append(ret, max)
-        }
-        l.PopFront()
-    }
-    return ret, true
+//难度：3*
+func FindWindowMaxSlide(arr []int, windowLen int) ([]int, bool) {
+	if arr == nil || windowLen <= 0 {
+		return nil, false
+	}
+	if len(arr) < windowLen {
+		return nil, false
+	}
+	ret := []int{}
+	l := NewMaxListArr()
+	for k, v := range arr {
+		if k < (windowLen - 1) { //窗口不满，直接进入
+			l.PushBack(v)
+			continue
+		}
+		l.PushBack(v)
+		max, ok := l.Max()
+		if ok {
+			ret = append(ret, max)
+		}
+		l.PopFront()
+	}
+	return ret, true
 }
-
 
 //方法3：
 // 本题还可以用维护一个大顶堆的方式来实现！

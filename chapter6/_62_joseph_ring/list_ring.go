@@ -6,46 +6,52 @@
 package _62_joseph_ring
 
 import (
-    "errors"
-    "fmt"
-    "github.com/hq-cml/sward2offer/common"
+	"errors"
+	"fmt"
+	"github.com/hq-cml/sward2offer/common"
 )
 
 //约瑟夫环
 //难度：2*
 func CalclRing(n, m int) (int, error) {
-    if n <= 0 || m <= 0 {
-        return -1, errors.New("Invalid err")
-    }
-    if n == 1 {
-        return 0, nil             //单节点成环，即只有一个数字，直接返回
-    }
+	if n <= 0 || m <= 0 {
+		return -1, errors.New("Invalid err")
+	}
+	if n == 1 {
+		return 0, nil //单节点成环，即只有一个数字，直接返回
+	}
 
-    l := common.NewList()
-    l = l.PushNode(0)          //构造首节点
-    head := l
-    var node *common.ListNode
-    for i:=1; i<n; i++ {          //构造环
-        node = &common.ListNode{
-            Val:  i,
-            Next: nil,
-        }
-        l = l.PushNodePtr(node)
-    }
-    node.Next = head              //尾结点指向head
+	//构造一个长度为n的环形节点
+	head := initRing(n)
 
-    var pre *common.ListNode
-    p := head
-    for p.Next != p { //剩下不止一个节点
-        for i:=0; i<m-1; i++ {
-            pre = p
-            p = p.Next
-        }
-        pre.Next = p.Next    //删掉一个节点
-        fmt.Println("Del:", p.Val)
-        p = p.Next
-    }
-    return p.Val, nil
+	var pre *common.ListNode
+	p := head
+	for p.Next != p { //剩下不止一个节点
+		for i := 0; i < m-1; i++ {
+			pre = p
+			p = p.Next
+		}
+		pre.Next = p.Next //删掉一个节点
+		fmt.Println("Del:", p.Val)
+		p = p.Next
+	}
+	return p.Val, nil
+}
+
+func initRing(n int) *common.ListNode {
+	l := common.NewList()
+	l = l.PushNode(0) //构造首节点
+	head := l
+	var node *common.ListNode
+	for i := 1; i < n; i++ { //构造环
+		node = &common.ListNode{
+			Val:  i,
+			Next: nil,
+		}
+		l = l.PushNodePtr(node)
+	}
+	node.Next = head //尾结点指向head
+	return head
 }
 
 //方法2：

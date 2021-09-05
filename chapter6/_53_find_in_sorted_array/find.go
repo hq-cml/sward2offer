@@ -15,98 +15,100 @@
  */
 package _53_find_in_sorted_array
 
-
 //总的思路：因为是在有序数组中的各种查找，所以二分查找是最直接的想法，并且是各种变种
 
 //题目1：
 //思路1：这个题目最朴素的想法是从头遍历，但是显然不合要求，复杂度O(N)
-//思路2：利用二分查找，找到第一个3，然后从两边扩散，不断减小和增大探测，直到找到边界。但是这么做的复杂度仍然是O(n)，所以仍然不和要求
+//思路2：利用二分查找，找到第一个3，然后从两边扩散，不断减小和增大探测，直到找到边界。
+//      但是这么做的复杂度不是特别稳定，假设要找的数组非常巨大，比如占了99%，则复杂度基本退化成O(n)，所以仍然不和要求
 //思路3：一个二分查找的变种，能够分别以O(lgN)的复杂度，找到3的上下边界。然后相减得到长度。
 //难度：3*
 func CalcCnt(arr []int, k int) int {
-    if len(arr) == 0 {
-        return -1
-    }
+	if len(arr) == 0 {
+		return -1
+	}
 
-    return findLastK(arr, k) -
-        findFirstK(arr, k) + 1
+	return findLastK(arr, k) -
+		findFirstK(arr, k) + 1
 }
 
 //利用二分查找找到上边界
-func findFirstK(arr []int ,k int) int {
-    i := 0
-    j := len(arr) - 1
-    firstIdx := -1
-    for i <= j {
-        mid := (i+j) / 2
-        if arr[mid] == k {
-            firstIdx = mid
-            j = mid - 1
-        } else if arr[mid] < k {
-            i = mid + 1
-        } else {
-            j = mid - 1
-        }
-    }
+func findFirstK(arr []int, k int) int {
+	i := 0
+	j := len(arr) - 1
+	firstIdx := -1
+	for i <= j {
+		mid := (i + j) / 2
+		if arr[mid] == k {
+			firstIdx = mid
+			j = mid - 1
+		} else if arr[mid] < k {
+			i = mid + 1
+		} else {
+			j = mid - 1
+		}
+	}
 
-    return firstIdx
+	return firstIdx
 }
 
 //利用二分查找找到下边界
-func findLastK(arr []int ,k int) int {
-    i := 0
-    j := len(arr) - 1
-    lastIdx := -1
-    for i <= j {
-        mid := (i+j) / 2
-        if arr[mid] == k {
-            lastIdx = mid
-            i = mid + 1
-        } else if arr[mid] < k {
-            i = mid + 1
-        } else {
-            j = mid - 1
-        }
-    }
+func findLastK(arr []int, k int) int {
+	i := 0
+	j := len(arr) - 1
+	lastIdx := -1
+	for i <= j {
+		mid := (i + j) / 2
+		if arr[mid] == k {
+			lastIdx = mid
+			i = mid + 1
+		} else if arr[mid] < k {
+			i = mid + 1
+		} else {
+			j = mid - 1
+		}
+	}
 
-    return lastIdx
+	return lastIdx
 }
 
 //题目2:
 //仍然是二分查找的变种，按照题目的描述，在缺失数据之前，所有的元素等于下标，
 //从缺失元素开始，下标!=元素。所以，仍然可以利用二分查找来发现第一个元素!=下标的成员。
+//难度：3*
 func FindNumberLost(arr []int) int {
-    i := 0
-    j := len(arr) - 1
-    idx := -1
-    for i <= j {
-        mid := (i+j) / 2
-        if arr[mid] == mid {
-            i = mid + 1
-        } else {
-            idx = mid
-            j = mid - 1
-        }
-    }
+	i := 0
+	j := len(arr) - 1
+	idx := -1
+	for i <= j {
+		mid := (i + j) / 2
+		if arr[mid] == mid {
+			i = mid + 1
+		} else {
+			idx = mid
+			j = mid - 1
+		}
+	}
 
-    return idx
+	return idx
 }
 
 //题目3:
 //仍然是二分法查找的变种
+//难度：3*
 func FindNumberSameAsIndex(arr []int) int {
-    i := 0
-    j := len(arr) - 1
-    for i <= j {
-        mid := (i+j) / 2
-        if arr[mid] == mid {
-            return mid
-        } else if arr[mid] > mid {
-            j = mid - 1
-        } else {
-            i = mid + 1
-        }
-    }
+	i := 0
+	j := len(arr) - 1
+	for i <= j {
+		mid := (i + j) / 2
+		if arr[mid] == mid {
+			return mid
+		} else if arr[mid] > mid {
+			j = mid - 1
+		} else {
+			i = mid + 1
+		}
+	}
 
-    return -1
+	return -1
 }
