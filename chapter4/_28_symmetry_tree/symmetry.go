@@ -10,7 +10,8 @@ import (
 )
 
 //思路1：首先用上一题的方案，求出镜像，然后分别得到先、中、后序序列。和原树的三序列对比。效率比较低
-//思路2；直接利用递归，左右子节点互换，进行比对。
+//思路2；将一棵树，一分为二！利用递归，左右子节点互换，进行比对。
+//难度：4*
 func Symmetry(root *common.TreeNode) bool {
 	return symmetry(root, root)
 }
@@ -34,3 +35,19 @@ func symmetry(root1, root2 *common.TreeNode) bool {
 	return symmetry(root1.Left, root2.Right) &&
 		symmetry(root1.Right, root2.Left)
 }
+
+//错误！的思想
+//很容易就进入的误区！
+//func Symmetry2(root *common.TreeNode) bool {
+//	if root == nil {
+//		return true
+//	}
+//	if root.Right != nil && root.Left != nil &&
+//		root.Left.Val == root.Right.Val {
+//		return Symmetry2(root.Left) && Symmetry2(root.Right)
+//	} else if root.Right == nil && root.Left == nil {
+//		return true
+//	} else {
+//		return false
+//	}
+//}

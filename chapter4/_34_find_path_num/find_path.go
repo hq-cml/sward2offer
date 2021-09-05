@@ -6,8 +6,8 @@
 package _34_find_path_num
 
 import (
-    "fmt"
-    "github.com/hq-cml/sward2offer/common"
+	"fmt"
+	"github.com/hq-cml/sward2offer/common"
 )
 
 //思路：
@@ -22,29 +22,31 @@ import (
 //tt(a)          //1,2,3,1
 //fmt.Println(a) //外层感知不到 1,2,3
 func FindPath(root *common.TreeNode, num int) {
-    path := []int{} //维护一个数组作为路径记录
-    findPath(root, num, path)
+	path := []int{} //维护一个数组作为路径记录
+	findPath(root, num, path)
 }
 
+//难度：4*
+//本质上是一个先序遍历
 func findPath(node *common.TreeNode, num int, path []int) {
-    if node == nil {
-        return
-    }
+	if node == nil {
+		return
+	}
 
-    path = append(path, node.Val)
-    if sum(path) == num &&
-        node.Left == nil && node.Right == nil {
-        fmt.Println("The Path:", path)
-    }
+	path = append(path, node.Val)
+	if sum(path) == num &&
+		node.Left == nil && node.Right == nil { //题目要求必须是叶节点，所有左右需==nil
+		fmt.Println("The Path:", path)
+	}
 
-    findPath(node.Left, num, path)
-    findPath(node.Right, num, path)
+	findPath(node.Left, num, path)
+	findPath(node.Right, num, path)
 }
 
 func sum(arr []int) int {
-    num := 0
-    for _, v := range arr {
-        num += v
-    }
-    return num
+	num := 0
+	for _, v := range arr {
+		num += v
+	}
+	return num
 }
