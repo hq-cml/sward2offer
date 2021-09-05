@@ -12,44 +12,52 @@ func TestFindMajority1(t *testing.T) {
 		want    int
 		wantErr bool
 	}{
+		//{
+		//	name: "case1",
+		//	args: args{
+		//		arr: []int{3, 2, 5, 6, 7, 2, 2, 2, 2},
+		//	},
+		//	want:    2,
+		//	wantErr: false,
+		//},
+		//{
+		//	name: "case2",
+		//	args: args{
+		//		arr: []int{3, 2, 5, 6, 7, 2, 2, 2, 2, 2},
+		//	},
+		//	want:    2,
+		//	wantErr: false,
+		//},
+		//{
+		//	name: "case3",
+		//	args: args{
+		//		arr: []int{2, 2, 2, 2, 2, 2},
+		//	},
+		//	want:    2,
+		//	wantErr: false,
+		//},
+		//{
+		//	name: "case4",
+		//	args: args{
+		//		arr: []int{2},
+		//	},
+		//	want:    2,
+		//	wantErr: false,
+		//},
+		//{
+		//	name: "case5",
+		//	args: args{
+		//		arr: []int{2, 1, 1},
+		//	},
+		//	want:    1,
+		//	wantErr: false,
+		//},
 		{
-			name:    "case1",
-			args:    args{
-				arr: []int{3,2,5,6,7,2,2,2,2},
+			name: "case6",
+			args: args{
+				arr: []int{1, 2, 3, 2, 2, 2, 5, 4, 2},
 			},
 			want:    2,
-			wantErr: false,
-		},
-		{
-			name:    "case2",
-			args:    args{
-				arr: []int{3,2,5,6,7,2,2,2,2,2},
-			},
-			want:    2,
-			wantErr: false,
-		},
-		{
-			name:    "case3",
-			args:    args{
-				arr: []int{2,2,2,2,2,2},
-			},
-			want:    2,
-			wantErr: false,
-		},
-		{
-			name:    "case4",
-			args:    args{
-				arr: []int{2},
-			},
-			want:    2,
-			wantErr: false,
-		},
-		{
-			name:    "case5",
-			args:    args{
-				arr: []int{2,1,1},
-			},
-			want:    1,
 			wantErr: false,
 		},
 	}
@@ -78,41 +86,41 @@ func TestFindMajority2(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "case1",
-			args:    args{
-				arr: []int{3,2,5,6,7,2,2,2,2},
+			name: "case1",
+			args: args{
+				arr: []int{3, 2, 5, 6, 7, 2, 2, 2, 2},
 			},
 			want:    2,
 			wantErr: false,
 		},
 		{
-			name:    "case2",
-			args:    args{
-				arr: []int{3,2,5,6,7,2,2,2,2,2},
+			name: "case2",
+			args: args{
+				arr: []int{3, 2, 5, 6, 7, 2, 2, 2, 2, 2},
 			},
 			want:    2,
 			wantErr: false,
 		},
 		{
-			name:    "case3",
-			args:    args{
-				arr: []int{2,2,2,2,2,2},
+			name: "case3",
+			args: args{
+				arr: []int{2, 2, 2, 2, 2, 2},
 			},
 			want:    2,
 			wantErr: false,
 		},
 		{
-			name:    "case4",
-			args:    args{
+			name: "case4",
+			args: args{
 				arr: []int{2},
 			},
 			want:    2,
 			wantErr: false,
 		},
 		{
-			name:    "case5",
-			args:    args{
-				arr: []int{2,1,1},
+			name: "case5",
+			args: args{
+				arr: []int{2, 1, 1},
 			},
 			want:    1,
 			wantErr: false,

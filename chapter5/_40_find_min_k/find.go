@@ -17,12 +17,13 @@ import (
 
 //思路1：
 //采用快排的partition函数的思路，这个基本上很难想到
+//难度：5*
 func FindMinK1(arr []int, k int) ([]int, error) {
 	if len(arr) == 0 {
 		return nil, errors.New("invalid")
 	}
 
-	if k <=0 || k > len(arr) {
+	if k <= 0 || k > len(arr) {
 		return nil, errors.New("invalid")
 	}
 
@@ -57,7 +58,7 @@ func FindMinK2(arr []int, k int) ([]int, error) {
 	}
 
 	//异常情况
-	if k <=0 || k > len(arr) {
+	if k <= 0 || k > len(arr) {
 		return nil, errors.New("invalid")
 	}
 
@@ -75,7 +76,7 @@ func FindMinK2(arr []int, k int) ([]int, error) {
 		} else {
 			//数量达到k，是否push
 			top := heap.Top()
-			if top > v {
+			if top > v { //有更小的出现
 				heap.Remove(0) //堆底层实现是一个数组，0元素，就是top元素
 				heap.Push(v)
 			}

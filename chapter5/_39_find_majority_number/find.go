@@ -3,6 +3,8 @@
  * 题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例
  * 如输入一个长度为9的数组{1, 2, 3, 2, 2, 2, 5, 4, 2}。由于数字2在数组中
  * 出现了5次，超过数组长度的一半，因此输出2。
+ *
+ * 编程之美：2.3 寻找水王
  */
 package _39_find_majority_number
 
@@ -22,15 +24,16 @@ import (
 //利用快排的Partition算法，不断探索中值；
 //如果中值的idx正好等于mid，则说明idx标识的值就是超过半数的；否则，则不断调整探索的边界
 //时间复杂度：O(logN)，这个明显要好于粗暴的排序
+//本质上是在找中位数，但是感觉多少有点。。。
 //难度：3*
-func FindMajority1(arr []int) (int, error){
+func FindMajority1(arr []int) (int, error) {
 	if len(arr) == 0 {
 		return 0, errors.New("invalid")
 	}
 
 	beg := 0
 	end := len(arr) - 1
-	mid := len(arr)/2
+	mid := len(arr) / 2
 	for beg <= end {
 		idx := basic.Partition(arr, beg, end)
 		if idx == mid {
@@ -53,18 +56,18 @@ func FindMajority1(arr []int) (int, error){
 //因为超过一半，则最终剩下的必然是最多的数
 //时间复杂度：N，这个比思路1又进一步牛逼了
 //难度：2*
-func FindMajority2(arr []int) (int, error){
+func FindMajority2(arr []int) (int, error) {
 	if len(arr) == 0 {
 		return 0, errors.New("Invalid arr")
 	}
 
 	currNum := arr[0]
 	currCnt := 1
-	for i:=1; i<len(arr); i++ {
+	for i := 1; i < len(arr); i++ {
 		if currNum == arr[i] {
-			currCnt ++
+			currCnt++
 		} else {
-			currCnt --
+			currCnt--
 		}
 
 		if currCnt == 0 {
