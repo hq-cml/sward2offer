@@ -71,7 +71,12 @@ func FindMajority2(arr []int) (int, error) {
 		}
 
 		if currCnt == 0 {
-			currNum = arr[i]
+			if i == len(arr) - 1 {
+				return 0, errors.New("Not Exist")
+			}
+			currNum = arr[i+1]
+			currCnt = 1
+			i++
 		}
 	}
 

@@ -86,6 +86,14 @@ func TestFindMajority2(t *testing.T) {
 		wantErr bool
 	}{
 		{
+			name: "case0",
+			args: args{
+				arr: []int{1, 2, 3, 2, 2, 2, 5, 4, 2},
+			},
+			want:    2,
+			wantErr: false,
+		},
+		{
 			name: "case1",
 			args: args{
 				arr: []int{3, 2, 5, 6, 7, 2, 2, 2, 2},
