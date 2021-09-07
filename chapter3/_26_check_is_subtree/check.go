@@ -21,12 +21,32 @@ func Check(root1, root2 *common.TreeNode) bool {
 	}
 
 	//递归
+	isChild := false
+	//根相等，则尝试探测
 	if root1.Val == root2.Val {
-		return (Check(root1.Left, root2.Left) && Check(root1.Right, root2.Right)) || // 同时判断左右，是&&
-			Check(root1.Left, root2) || // ||操作用于分别探测的情况
-			Check(root1.Right, root2)
-	} else {
-		return Check(root1.Left, root2) ||
+		isChild = checkWithSameRoot(root1, root2)
+	}
+
+	//根不符合子树条件，继续左右进行探测
+	if !isChild {
+		isChild = Check(root1.Left, root2) ||
 			Check(root1.Right, root2)
 	}
+
+	return isChild
+}
+
+func checkWithSameRoot(root1, root2 *common.TreeNode) bool {
+	if root2 == nil {
+		return true
+	}
+	if root1 == nil {
+		return false
+	}
+
+	if root1.Val != root2.Val {
+		return false
+	}
+	return checkWithSameRoot(root1.Left, root2.Left) &&
+		checkWithSameRoot(root1.Right, root2.Right)
 }
