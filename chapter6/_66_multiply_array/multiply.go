@@ -16,7 +16,7 @@ package _66_multiply_array
 //构造矩阵：1, 3, 4
 //        2, 1, 4
 //        2, 3, 1
-//难度：4*，这种思路很抽象实际中很难想到
+//难度：5*，这种思路很抽象实际中很难想到
 func Multiply(src []int) []int {
 	//特殊情况
 	if len(src) == 0 {

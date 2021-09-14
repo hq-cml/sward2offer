@@ -34,3 +34,60 @@ func TestReverseList(t *testing.T) {
         })
     }
 }
+
+//测试环，会导致死循环
+//func TestReverseList2(t *testing.T) {
+//    type args struct {
+//        head *common.ListNode
+//    }
+//    p1 := &common.ListNode{
+//        Val:  1,
+//        Next: nil,
+//    }
+//    p2 := &common.ListNode{
+//        Val:  2,
+//        Next: nil,
+//    }
+//    p3 := &common.ListNode{
+//        Val:  3,
+//        Next: nil,
+//    }
+//    p4 := &common.ListNode{
+//        Val:  4,
+//        Next: nil,
+//    }
+//    p5 := &common.ListNode{
+//        Val:  5,
+//        Next: nil,
+//    }
+//    p6 := &common.ListNode{
+//        Val:  6,
+//        Next: nil,
+//    }
+//    p1.Next = p2
+//    p2.Next = p3
+//    p3.Next = p4
+//    p4.Next = p5
+//    p5.Next = p6
+//    p6.Next = p3
+//
+//
+//    tests := []struct {
+//        name string
+//        args args
+//        want *common.ListNode
+//    }{
+//        {
+//            name: "case1",
+//            args: args{
+//                head: p1,
+//            },
+//        },
+//    }
+//    for _, tt := range tests {
+//        t.Run(tt.name, func(t *testing.T) {
+//            _ = ReverseList(tt.args.head)
+//            //got.Foreach(common.NodePrint)
+//        })
+//    }
+//}
