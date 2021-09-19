@@ -1,6 +1,7 @@
 package main
 
 import (
+    "fmt"
     "math/rand"
     "time"
 )
@@ -26,5 +27,14 @@ type B struct {
 }
 
 func main() {
-
+    s := [10]int{1,2,3,4,5,6,7,8,9,10}
+    s1 := s[:5]
+    fmt.Println(s1)
+    s2 := s[3:]
+    fmt.Println(s2)
+    s2[0] = 100
+    s2[1] = 200
+    s2[2] = 300
+    fmt.Println(s1)
+    fmt.Println(s2)
 }
