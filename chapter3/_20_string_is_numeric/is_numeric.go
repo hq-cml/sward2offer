@@ -38,8 +38,8 @@ func IsNumeric(str string) bool {
 		//存在小数点，扫描小数部分
 		b = b[1:]
 		b, ok = scanUnSignedInt(b)
-		if !ok {
-			return false
+		if ok {
+			return true
 		}
 	}
 

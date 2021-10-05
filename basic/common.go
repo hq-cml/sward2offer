@@ -1,5 +1,7 @@
 package basic
 
+import "fmt"
+
 //分区函数
 //返回：一次分区完毕之后的中间Idx值，保证Idx前面的均小于Idx元素值，后面的均大于
 func Partition(arr []int, begIdx, endIdx int) int {
@@ -14,16 +16,19 @@ func Partition(arr []int, begIdx, endIdx int) int {
 
 	for endIdx > begIdx {
 		for arr[endIdx] >= val && endIdx > begIdx {
+			fmt.Println("X--------")
 			endIdx--
 		}
 		//swap
 		arr[begIdx], arr[endIdx] = arr[endIdx], arr[begIdx]
-
+		fmt.Println("Fuck")
 		for arr[begIdx] <= val && endIdx > begIdx {
+			fmt.Println("Y--------")
 			begIdx++
 		}
 		//swap
 		arr[begIdx], arr[endIdx] = arr[endIdx], arr[begIdx]
+		fmt.Println("Fuck")
 	}
 
 	return begIdx
