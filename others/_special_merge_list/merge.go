@@ -5,6 +5,8 @@
  * 输出： head = [3, 7, 1, 6, 1]
  * 例如输入：head1 = [1,3,5,7] head2 = [2,4,6,8,9]
  * 输出： head = [3, 7, 1, 6, 0, 1]
+ *
+ * PS: 本题也是LeetCode的原题：https://leetcode-cn.com/problems/add-two-numbers/
  */
 package _special_merge_list
 
