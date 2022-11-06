@@ -16,7 +16,8 @@ package _20_string_is_numeric
 //.B;
 
 //主要思路：
-//将数字分成3大块：整数部分，小数部分，指数部分
+//将数字分成3大块：整数部分，小数部分，指数部分，逐个去进行检测
+//核心思想是认为每个部分如果存在都应该合法，那么逐一探测下去最终应该字符串扫描完毕，如果没结束，那么说明存在非法
 //其中难点在于他们都不一定是必须存在的，所以要能够逐个判断并移动指针。
 //难度：3*
 func IsNumeric(str string) bool {
@@ -29,8 +30,12 @@ func IsNumeric(str string) bool {
 	if ok {
 		return true //说明仅仅是一个完整的整数
 	}
+	if b == nil {
+		// 整数部分不合法，例如“.123"
+		return false
+	}
 
-	//ok是有可能是false的，表明整数部分之后，还有剩余部分或者压根就没有整数部分
+	//ok == false，表明整数部分之后，还有剩余部分或者压根就没有整数部分
 	//剩下的部分，应该是小数或者指数，否则就算非法
 	if b[0] != '.' && b[0] != 'e' && b[0] != 'E' {
 		return false
@@ -62,6 +67,7 @@ func IsNumeric(str string) bool {
 }
 
 //扫描无符号型字符串整形
+//返回值1标识检测后剩余的字符串
 //bool返回值，表示str是否已经扫描完毕
 func scanUnSignedInt(str []byte) ([]byte, bool) {
 	length := len(str)
@@ -71,11 +77,12 @@ func scanUnSignedInt(str []byte) ([]byte, bool) {
 			return str[i:], false
 		}
 	}
-
+	// 遍历完毕
 	return str[i:], true
 }
 
 //扫描有符号型字符串整形
+//返回值1标识检测后剩余的字符串
 //bool返回值，表示str是否已经扫描完毕
 func scanSignedInt(str []byte) ([]byte, bool) {
 	if len(str) == 0 {
@@ -86,5 +93,6 @@ func scanSignedInt(str []byte) ([]byte, bool) {
 	} else if str[0] >= '0' && str[0] <= '9' {
 		return scanUnSignedInt(str)
 	}
+	// 存在非法字符
 	return nil, false
 }

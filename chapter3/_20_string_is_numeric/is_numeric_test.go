@@ -131,6 +131,20 @@ func TestIsNumeric(t *testing.T) {
 			},
 			want: true,
 		},
+		{
+			name: "case12",
+			args: args{
+				str: ".123",
+			},
+			want: false,
+		},
+		{
+			name: "case13",
+			args: args{
+				str: "0.1",
+			},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

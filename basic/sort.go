@@ -2,7 +2,9 @@ package basic
 
 import "github.com/hq-cml/sward2offer/common"
 
-//冒泡排序
+// 冒泡排序
+// 1. 总轮数是len-1，所以外层应该是1开始，到len-1
+// 2. 第一轮，内层比较次数也是len-1，内层是从0开始，到len-i
 func BubbleSort(arr []int) {
 	if len(arr) == 0 {
 		return
@@ -17,14 +19,14 @@ func BubbleSort(arr []int) {
 	}
 }
 
-//快速排序
+// 快速排序
 func QuickSort(arr []int) {
 	if len(arr) == 0 {
 		return
 	}
 
 	mid := Partition(arr, 0, len(arr)-1)
-	if mid == -1 {
+	if mid == -1 { //mid==-1，所以已经到了极限
 		return
 	}
 
@@ -33,7 +35,7 @@ func QuickSort(arr []int) {
 	QuickSort(arr[mid+1:]) //不包括mid
 }
 
-//堆排序
+// 堆排序
 func HeapSort(arr []int) []int {
 	if len(arr) == 0 {
 		return arr
