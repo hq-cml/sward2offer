@@ -7,7 +7,6 @@ import (
 	"testing"
 )
 
-
 func TestInsertSort(t *testing.T) {
 	type args struct {
 		arr []int
@@ -19,15 +18,15 @@ func TestInsertSort(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				arr: []int{5,1,3,4,2,7,8,6},
+				arr: []int{5, 1, 3, 4, 2, 7, 8, 6},
 				//arr: []int{7,8,6},
 			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-
-			fmt.Println(MergeSort(tt.args.arr))
+			//Quick(tt.args.arr)
+			//fmt.Println(tt.args.arr)
 		})
 	}
 }
@@ -44,49 +43,49 @@ func Test_partition(t *testing.T) {
 		{
 			name: "case-1",
 			args: args{
-				arr:    []int{1, 2},
+				arr: []int{1, 2},
 			},
 			want: 0,
 		},
 		{
 			name: "case-2",
 			args: args{
-				arr:    []int{2, 1},
+				arr: []int{2, 1},
 			},
 			want: 1,
 		},
 		{
 			name: "case1",
 			args: args{
-				arr:    []int{1, 2, 3, 4, 5, 6, 7, 8},
+				arr: []int{1, 2, 3, 4, 5, 6, 7, 8},
 			},
 			want: 0,
 		},
 		{
 			name: "case2",
 			args: args{
-				arr:    []int{8, 7, 6, 5, 4, 3, 2, 1},
+				arr: []int{8, 7, 6, 5, 4, 3, 2, 1},
 			},
 			want: 7,
 		},
 		{
 			name: "case3",
 			args: args{
-				arr:    []int{5, 1, 3, 4, 2, 7, 8, 6},
+				arr: []int{5, 1, 3, 4, 2, 7, 8, 6},
 			},
 			want: 4,
 		},
 		{
 			name: "case4",
 			args: args{
-				arr:    []int{5, 1, 3, 4, 2, 7, 6},
+				arr: []int{5, 1, 3, 4, 2, 7, 6},
 			},
 			want: 4,
 		},
 		{
 			name: "case5",
 			args: args{
-				arr:    []int{5, 3, 7, 6, 4, 1, 0, 2, 9, 10, 8},
+				arr: []int{5, 3, 7, 6, 4, 1, 0, 2, 9, 10, 8},
 			},
 			want: 5,
 		},
@@ -112,25 +111,25 @@ func TestQuickSort(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				arr: []int{5,1,3,4,2,7,8,6},
+				arr: []int{5, 1, 3, 4, 2, 7, 8, 6},
 			},
 		},
 		{
 			name: "case2",
 			args: args{
-				arr: []int{5,1,3,4,2,7,6},
+				arr: []int{5, 1, 3, 4, 2, 7, 6},
 			},
 		},
 		{
 			name: "case3",
 			args: args{
-				arr: []int{1,2,3,4,5,6,7,8},
+				arr: []int{1, 2, 3, 4, 5, 6, 7, 8},
 			},
 		},
 		{
 			name: "case4",
 			args: args{
-				arr: []int{8,7,6,5,4,3,2,1},
+				arr: []int{8, 7, 6, 5, 4, 3, 2, 1},
 			},
 		},
 	}
@@ -199,7 +198,6 @@ func TestPostTree(t *testing.T) {
 		})
 	}
 }
-
 
 func TestChildBrother(t *testing.T) {
 	type args struct {
@@ -329,8 +327,8 @@ func TestBuildTree(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "case1",
-			args:    args{
+			name: "case1",
+			args: args{
 				pre: []int{1, 2, 4, 7, 3, 5, 6, 8},
 				mid: []int{4, 7, 2, 1, 5, 3, 8, 6},
 			},
@@ -345,9 +343,12 @@ func TestBuildTree(t *testing.T) {
 				t.Errorf("BuildTree() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			common.Pre(got); fmt.Println()
-			common.Mid(got); fmt.Println()
-			common.Post(got); fmt.Println()
+			common.Pre(got)
+			fmt.Println()
+			common.Mid(got)
+			fmt.Println()
+			common.Post(got)
+			fmt.Println()
 		})
 	}
 }
@@ -364,7 +365,7 @@ func Test_fibo(t *testing.T) {
 		{
 			name: "",
 			args: args{
-				n:10,
+				n: 10,
 			},
 			want: 55,
 		},
@@ -626,8 +627,8 @@ func TestPrintTreeIn1Line(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "case1",
-			args:    args{
+			name: "case1",
+			args: args{
 				common.NewNodeWithChild(1,
 					common.NewNodeWithChild(2,
 						common.NewNode(4),
@@ -648,7 +649,6 @@ func TestPrintTreeIn1Line(t *testing.T) {
 	}
 }
 
-
 func TestCalc(t *testing.T) {
 	type args struct {
 		arr []int
@@ -660,41 +660,41 @@ func TestCalc(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "case1",
-			args:    args{
-				arr: []int{1,2,-4,3,1,2,-4},
+			name: "case1",
+			args: args{
+				arr: []int{1, 2, -4, 3, 1, 2, -4},
 			},
 			want:    6,
 			wantErr: false,
 		},
 		{
-			name:    "case2",
-			args:    args{
-				arr: []int{1,-2, 3, 10, -4,7, 2,-5},
+			name: "case2",
+			args: args{
+				arr: []int{1, -2, 3, 10, -4, 7, 2, -5},
 			},
 			want:    18,
 			wantErr: false,
 		},
 		{
-			name:    "case3",
-			args:    args{
-				arr: []int{1,-2, 3, 5, -3, 2},
+			name: "case3",
+			args: args{
+				arr: []int{1, -2, 3, 5, -3, 2},
 			},
 			want:    8,
 			wantErr: false,
 		},
 		{
-			name:    "case4",
-			args:    args{
-				arr: []int{1,-2, 3, 5, -1, 2},
+			name: "case4",
+			args: args{
+				arr: []int{1, -2, 3, 5, -1, 2},
 			},
 			want:    9,
 			wantErr: false,
 		},
 		{
-			name:    "case5",
-			args:    args{
-				arr: []int{-9,-2, -3, -5, -3},
+			name: "case5",
+			args: args{
+				arr: []int{-9, -2, -3, -5, -3},
 			},
 			want:    -2,
 			wantErr: false,
@@ -731,7 +731,7 @@ func TestFindSumPath(t *testing.T) {
 						common.NewNode(4),
 						common.NewNode(7)),
 					common.NewNode(12)),
-				num:  22,
+				num: 22,
 			},
 		},
 	}
@@ -815,16 +815,16 @@ func TestFindMaxNoRepititionStr(t *testing.T) {
 		want1 int
 	}{
 		{
-			name:  "case1",
-			args:  args{
+			name: "case1",
+			args: args{
 				str: "arabcacfr",
 			},
 			want:  1,
 			want1: 4,
 		},
 		{
-			name:  "case2",
-			args:  args{
+			name: "case2",
+			args: args{
 				str: "abcdeefghij",
 			},
 			want:  5,
@@ -963,7 +963,7 @@ func TestAdd(t *testing.T) {
 			args: args{
 				i: -5,
 				j: 11,
-			},want: 6,
+			}, want: 6,
 		},
 	}
 	for _, tt := range tests {
@@ -974,7 +974,6 @@ func TestAdd(t *testing.T) {
 		})
 	}
 }
-
 
 func TestDfs(t *testing.T) {
 	type args struct {
@@ -992,7 +991,7 @@ func TestDfs(t *testing.T) {
 					common.NewNodeWithChild(1,
 						common.NewNode(3),
 						nil),
-					common.NewNodeWithChild(4,common.NewNode(1),
+					common.NewNodeWithChild(4, common.NewNode(1),
 						common.NewNode(5))),
 			},
 			want: 4,
@@ -1019,9 +1018,9 @@ func TestMultiply(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				src: []int{1,2,3,4},
+				src: []int{1, 2, 3, 4},
 			},
-			want: []int{24,12,8,6},
+			want: []int{24, 12, 8, 6},
 		},
 	}
 	for _, tt := range tests {
@@ -1049,7 +1048,7 @@ func TestCheckRoot(t *testing.T) {
 					common.NewNodeWithChild(1,
 						common.NewNode(3),
 						nil),
-					common.NewNodeWithChild(4,common.NewNode(1),
+					common.NewNodeWithChild(4, common.NewNode(1),
 						common.NewNode(5))),
 			},
 			want: 4,
@@ -1118,16 +1117,16 @@ func TestIslandNum(t *testing.T) {
 			args: args{
 				arr: [][]byte{
 					{
-						1,1,1,1,0,
+						1, 1, 1, 1, 0,
 					},
 					{
-						1,1,0,1,0,
+						1, 1, 0, 1, 0,
 					},
 					{
-						1,1,0,0,0,
+						1, 1, 0, 0, 0,
 					},
 					{
-						0,0,0,0,0,
+						0, 0, 0, 0, 0,
 					},
 				},
 			},
@@ -1138,16 +1137,16 @@ func TestIslandNum(t *testing.T) {
 			args: args{
 				arr: [][]byte{
 					{
-						1,1,0,0,0,
+						1, 1, 0, 0, 0,
 					},
 					{
-						1,1,0,0,0,
+						1, 1, 0, 0, 0,
 					},
 					{
-						0,0,1,0,0,
+						0, 0, 1, 0, 0,
 					},
 					{
-						0,0,0,1,1,
+						0, 0, 0, 1, 1,
 					},
 				},
 			},
@@ -1188,7 +1187,7 @@ func TestDfsCalc(t *testing.T) {
 					common.NewNodeWithChild(1,
 						common.NewNode(3),
 						nil),
-					common.NewNodeWithChild(4,common.NewNode(1),
+					common.NewNodeWithChild(4, common.NewNode(1),
 						common.NewNode(5))),
 			},
 			want: 999,
@@ -1216,16 +1215,16 @@ func TestSolve(t *testing.T) {
 			args: args{
 				arr: [][]byte{
 					{
-						'X','X','X','X',
+						'X', 'X', 'X', 'X',
 					},
 					{
-						'X','O','O','X',
+						'X', 'O', 'O', 'X',
 					},
 					{
-						'X','X','O','X',
+						'X', 'X', 'O', 'X',
 					},
 					{
-						'X','O','X','X',
+						'X', 'O', 'X', 'X',
 					},
 				},
 			},
@@ -1235,16 +1234,16 @@ func TestSolve(t *testing.T) {
 			args: args{
 				arr: [][]byte{
 					{
-						'X','X','X','X','X','X',
+						'X', 'X', 'X', 'X', 'X', 'X',
 					},
 					{
-						'X','O','O','X','O','X',
+						'X', 'O', 'O', 'X', 'O', 'X',
 					},
 					{
-						'X','X','O','X','O','X',
+						'X', 'X', 'O', 'X', 'O', 'X',
 					},
 					{
-						'X','O','X','X','O','X',
+						'X', 'O', 'X', 'X', 'O', 'X',
 					},
 				},
 			},
@@ -1294,31 +1293,31 @@ func TestNextPermutation(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				arr: []int{1,2,3},
+				arr: []int{1, 2, 3},
 			},
 		},
 		{
 			name: "case2",
 			args: args{
-				arr: []int{3,2,1},
+				arr: []int{3, 2, 1},
 			},
 		},
 		{
 			name: "case3",
 			args: args{
-				arr: []int{1,3,2},
+				arr: []int{1, 3, 2},
 			},
 		},
 		{
 			name: "case4",
 			args: args{
-				arr: []int{4,2,5,1},
+				arr: []int{4, 2, 5, 1},
 			},
 		},
 		{
 			name: "case5",
 			args: args{
-				arr: []int{4,2,5,3,1},
+				arr: []int{4, 2, 5, 3, 1},
 			},
 		},
 	}

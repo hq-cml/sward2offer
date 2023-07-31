@@ -10,8 +10,6 @@ import (
 	"strconv"
 )
 
-//TODO lru lfu
-
 // 正则表达式
 // 模式中的字符'.'表示任意一个字符
 // 而'*'表示它前面的字符可以出现任意次（含0次）
@@ -99,12 +97,12 @@ func MaxCommonSubLen(s1, s2 []byte) int {
 }
 
 // 字典序有序排列，下一个值
-//1,2,3 → 1,3,2
-//3,2,1 → 1,2,3
-//1,3,2 → 2,1,3
-//4,2,5,1->4 1 2 5
-//5,3,6,2->4 1 2 5
-//2,4,5,1->2 1 4 5
+// 1,2,3 → 1,3,2
+// 3,2,1 → 1,2,3
+// 1,3,2 → 2,1,3
+// 4,2,5,1->4 1 2 5
+// 5,3,6,2->4 1 2 5
+// 2,4,5,1->2 1 4 5
 func NextPermutation(arr []int) {
 	if len(arr) <= 1 {
 		return
@@ -341,7 +339,7 @@ func CalcCnt(s string) int {
 			}
 		}
 	}
-	
+
 	return ret
 }
 
@@ -414,7 +412,7 @@ func add(n int, sum *int) bool {
 	return (n == 0) || add(n-1, sum)
 }
 
-//9, 11, 8, 5, 7, 12, 16, 14
+// 9, 11, 8, 5, 7, 12, 16, 14
 func MaxStock(price []int) int {
 	if len(price) < 2 {
 		return 0
@@ -475,7 +473,7 @@ func FindMaxNoRepititionStr1(str string) (int, int) {
 	exist[str[0]] = struct{}{}
 	idx := 0
 	max := 1
-	for ; j < strlen; {
+	for j < strlen {
 		c := str[j]
 		if _, ok := exist[c]; !ok {
 			exist[c] = struct{}{}
@@ -561,7 +559,7 @@ func TranslateRecurse(org string) int {
 	}
 }
 
-//判断一个2字符的串，是否在[10, 25]之间
+// 判断一个2字符的串，是否在[10, 25]之间
 func check(str string) bool {
 	if len(str) != 2 {
 		return false
@@ -1041,7 +1039,7 @@ func BinarySearch(arr []int, need int) int {
 	return -1
 }
 
-//  Quick Sort
+// Quick Sort
 func QuickSort(arr []int) {
 	length := len(arr)
 	if length == 0 || length == 1 {
