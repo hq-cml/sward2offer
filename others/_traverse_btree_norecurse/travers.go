@@ -10,6 +10,7 @@ import (
 
 //非递归，先序遍历二叉树
 //这种写法比较非主流，但是符合我个人思维
+//此外这种写法有一个问题是仅适用于前序，中序和后序都不太适用
 func Pre1(root *common.TreeNode) {
 	if root == nil {
 		return
@@ -87,7 +88,7 @@ func Post(root *common.TreeNode) {
 	}
 	stk := common.NewStack(false)
 	p := root
-	var vistedNode *common.TreeNode
+	var vistedNode *common.TreeNode // 用于记录上一个刚刚被遍历处理过的节点
 	for p != nil || stk.Len() > 0 {
 		for p != nil {
 			stk.Push(p)
@@ -99,9 +100,10 @@ func Post(root *common.TreeNode) {
 		if tmp.Right != nil && tmp.Right != vistedNode { //如果节点存在右孩子，并且右孩子没有被遍历过，则先处理右孩子
 			p = tmp.Right
 		} else {
-			fmt.Print(tmp.Val, " ") //如果没有右孩子，或者是有右孩子但是右孩子已经处理过了，则处理自身，且处理完毕要出栈
+			//如果没有右孩子，或者是有右孩子但是右孩子刚刚被遍历过，则意味着轮到了自己，理完毕要出栈
+			fmt.Print(tmp.Val, " ")
 			stk.Pop()
-			vistedNode = tmp //记录已经处理过的节点
+			vistedNode = tmp //记录刚刚处理过的节点
 		}
 	}
 }

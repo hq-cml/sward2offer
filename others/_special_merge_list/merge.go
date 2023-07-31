@@ -1,17 +1,20 @@
 /*
  * qtt面试题: 另类链表合并，实现类似于加法的操作
+ *           将数字的每一位逆序存入链表，然后两个链表merge（数字相加）
  *
- * 例如输入：head1 = [1,3,5,7] head2 = [2,4,6,8]
+ * 例1：7531+8642 => head1 = [1,3,5,7] head2 = [2,4,6,8]
  * 输出： head = [3, 7, 1, 6, 1]
- * 例如输入：head1 = [1,3,5,7] head2 = [2,4,6,8,9]
+ * 例2：98642+7531 => head1 = [1,3,5,7] head2 = [2,4,6,8,9]
  * 输出： head = [3, 7, 1, 6, 0, 1]
  *
- * PS: 本题也是LeetCode的原题：https://leetcode-cn.com/problems/add-two-numbers/
+ * PS: 本题也是LeetCode 2的原题：
+ *     https://leetcode-cn.com/problems/add-two-numbers/
  */
 package _special_merge_list
 
 import "github.com/hq-cml/sward2offer/common"
 
+// 主要是考虑进位问题
 func AddMerge(head1 *common.ListNode, head2 *common.ListNode) *common.ListNode{
     if head1 == nil {
         return head2

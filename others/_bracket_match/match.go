@@ -1,5 +1,7 @@
 /*
  * yzh面试题：括号匹配
+ * 给定一个字符串，判断是否是合法的括号匹配，括号有3种：(), [], {}
+ * PS：同时也是 leetcode 20
  */
 package _bracket_match
 
@@ -32,6 +34,5 @@ func Match(str string) bool {
 	if stk.Len() > 0 {
 		return false //比如：{{[[
 	}
-
 	return true
 }

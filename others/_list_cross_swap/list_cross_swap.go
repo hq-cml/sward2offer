@@ -10,33 +10,38 @@ import "github.com/hq-cml/sward2offer/common"
 
 //思路1：利用指针的来回变更指向实现，难度不大，主要是需要想清楚
 //难度：4*
-func CrossSwap(l *common.ListNode) *common.ListNode {
-	if l == nil || l.Next == nil {
-		return l
+func CrossSwap(head *common.ListNode) *common.ListNode {
+	if head == nil || head.Next == nil {
+		return head
 	}
 
-	head := l.Next //先将新的head保存
+	ret := head.Next // 最终结果，先预存等待返回
 
-	p1 := l
+	p1 := head
 	p2 := p1.Next
-	p3 := p2.Next //保留第三个节点，防止断裂
+
 	for p1 != nil && p2 != nil {
-		p2.Next = p1 //节点1和节点2互换指针
-		p1.Next = p3 //p1的指向，暂时指向p3（在后面p3和p4交换之后，p1可能还要指向p4）
-		tmp := p1    //暂时保存p1的指针，后面p1指向p4的时候，会需要用到
+		// p3保存后续处理节点
+		p3 := p2.Next
 
-		p1 = p3 //p1后移
+		// 反转1和2
+		p2.Next = p1
+		// p1有三种情况，取决于原来p2的情况
+		if p3 == nil {
+			p1.Next = nil // p2已经是结尾了
+		} else if p3.Next == nil {
+			p1.Next = p3 // p2是倒数第二个节点
+		} else {
+			p1.Next = p3.Next // p2是普通节点
+		}
+
+		// 后移
+		p1 = p3
 		if p1 != nil {
-			p2 = p1.Next //p2后移，其实指向了p4
-
-			if p2 != nil { //如果p4非空，则需要将之前的p1指向p4
-				tmp.Next = p2
-				p3 = p2.Next //p3继续后移，防止断裂
-			}
+			p2 = p1.Next
 		}
 	}
-
-	return head
+	return ret
 }
 
 //思路2：一个更加聪明的办法，直接交换节点的值，节点的指针不动（类似于O(1)复杂度删除节点的思路）

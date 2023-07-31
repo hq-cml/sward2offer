@@ -11,7 +11,7 @@
  *           1            前序： 1 2 4 5 3 6 7
  *         2              中：   4 5 2 6 7 3 1
  *       4   3            后：   5 4 7 6 3 2 1
- *        5   6
+ *        5 6
  *           7
  */
 package _brother_2_child
@@ -40,6 +40,23 @@ func Change2ChildRecurse(root *common.TreeNode) {
 
     //都处理完毕之后，根的右子树已经没用了，置空
     root.Right = nil
+}
+
+// 20221208 自我练习，本质上和上面一样
+func TranslateTree(root *common.TreeNode) *common.TreeNode{
+    if root == nil {
+        return root
+    }
+    right := TranslateTree(root.Right)
+
+    if root.Left == nil {
+        root.Left = right
+    } else {
+        left := TranslateTree(root.Left)
+        left.Right = right
+    }
+    root.Right = nil
+    return root
 }
 
 //非递归方式

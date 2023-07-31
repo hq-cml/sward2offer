@@ -12,7 +12,8 @@ package _find_substr_no_intersection
 //这个题
 // 最朴素的思路是穷举，显然不合理
 // 主要是空间换时间的思路，利用一个map，存储所有字母最后出现的位置
-// 这样就可以快速的判断是否存在交集
+// 这样就可以快速的判断是否存在交集：
+// 重新遍历字符串，
 //难度： 4*
 func FindSubStr(str string) []string {
 	length := len(str)
@@ -40,17 +41,18 @@ func FindSubStr(str string) []string {
 		if ok && idx != end {
 			if len(tmp) > 0 {
 				ret = append(ret, string(tmp)) //零散字母拼接
+				tmp = []byte{} // 清空零散串
 			}
-			for idx != end {          		//idx追赶end边界
+			for idx != end {          		//idx追赶end边界，只有追赶上了，才算是一个完整的无交集子集
 				idx++
-				tmp, ok := flags[str[idx]]
-				if ok && tmp > end {        //end边界后移
-					end = tmp
+				tmpIdx, ok := flags[str[idx]]
+				if ok && tmpIdx > end {     //end边界后移
+					end = tmpIdx
 				}
 			}
 			ret = append(ret, str[org:idx+1])
 		} else {
-			tmp = append(tmp, str[idx])     //零散字幕暂存
+			tmp = append(tmp, str[idx])     //零散字母暂存
 		}
 	}
 

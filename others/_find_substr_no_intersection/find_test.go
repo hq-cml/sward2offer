@@ -42,6 +42,13 @@ func TestFindSubStr1(t *testing.T) {
             },
             want: []string{"arrar", "bc"},
         },
+        {
+            name: "case5",
+            args: args{
+                str: "arrarbcdkkdkef",
+            },
+            want: []string{"arrar", "bc", "dkkdk", "ef"},
+        },
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
