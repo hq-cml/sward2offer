@@ -106,12 +106,12 @@ func AtoiApproximate(str string) (int, error) {
 		}
 	}
 
-	if checkOverflow(ret, sign == -1) {
-		return 0, errors.New("Over flow")
+	if addFlag {
+		ret = ret + 1
 	}
 
-	if addFlag {
-		return sign * (ret + 1), nil
+	if checkOverflow(ret, sign == -1) {
+		return 0, errors.New("Over flow")
 	}
 
 	return sign * ret, nil

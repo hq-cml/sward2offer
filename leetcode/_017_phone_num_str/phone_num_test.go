@@ -1,13 +1,13 @@
-package _22_generate_parenthesis
+package _017_phone_num_str
 
 import (
 	"fmt"
 	"testing"
 )
 
-func TestGenerate(t *testing.T) {
+func TestPhoneNumStr(t *testing.T) {
 	type args struct {
-		n int
+		phoneNum string
 	}
 	tests := []struct {
 		name string
@@ -17,14 +17,21 @@ func TestGenerate(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				n: 3,
+				phoneNum: "23",
+			},
+			want: nil,
+		},
+		{
+			name: "case2",
+			args: args{
+				phoneNum: "2",
 			},
 			want: nil,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := Generate(tt.args.n)
+			got := PhoneNumStr(tt.args.phoneNum)
 			fmt.Println(got)
 		})
 	}
