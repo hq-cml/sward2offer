@@ -84,6 +84,7 @@ func NewMaxListArr() *MaxListArr {
 		Help: []int{},
 	}
 }
+
 func (l *MaxListArr) PushBack(i int) {
 	l.Base = append(l.Base, i)
 	//

@@ -1,6 +1,8 @@
 package _62_joseph_ring
 
-import "testing"
+import (
+    "testing"
+)
 
 func TestCalclRing(t *testing.T) {
     type args struct {
@@ -20,6 +22,15 @@ func TestCalclRing(t *testing.T) {
                 m: 3,
             },
             want:    3,
+            wantErr: false,
+        },
+        {
+            name:    "case1",
+            args:    args{
+                n: 5,
+                m: 1,
+            },
+            want:    4,
             wantErr: false,
         },
     }

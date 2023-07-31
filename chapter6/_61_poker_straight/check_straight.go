@@ -31,6 +31,8 @@ func (a Arr) Swap(i, j int) {
 //先对数组排序，求出0的个数
 //求各个元素的gap，最终要看整体的gap的和，与0个数的比较（0可以匹配任意数字）
 //如果0的个数>gap总和，则是一个顺子，否则不是
+//例子：12450，0可以代替3，所以可以是顺子
+//     12560,0不够，5-2-1=2，至少需要两个0才能凑齐
 //难度：3*
 func CheckIsStraght(arr Arr) bool {
 	if arr.Len() == 0 {
@@ -51,8 +53,7 @@ func CheckIsStraght(arr Arr) bool {
 			continue
 		}
 
-		j := i+1
-		gapCnt += (arr.arr[j] - arr.arr[i] - 1) //gap数累计（-1是因为天然就应该自增，这个不能算）
+		gapCnt += (arr.arr[i+1] - arr.arr[i] - 1) //gap数累计（-1是因为天然就应该自增，这个不能算）
 	}
 
 	if zeroCnt >= gapCnt {

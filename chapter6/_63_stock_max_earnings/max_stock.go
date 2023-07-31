@@ -7,30 +7,32 @@
  */
 package _63_stock_max_earnings
 
+import "math"
+
 //思路：
-//一个错误：遍历一遍数组，求出最大值和最小值，然后max-min得到结果。这是错的，因为存在顺序！！
-//因为必须要先买入，才可能有卖出。
+//一个错误：遍历一遍数组，求出最大值和最小值，然后max-min得到结果。
+//这是错的，因为存在顺序问题！！必须要先买入，才可能有卖出。
 //思路1：暴力法，但是这样要O(N^2)
 //思路2：仍然采用遍历一遍的思路，但是，不断保存当前最小的值和当前最大的diff值。
 //	    代码不复杂，但是不容易想到，O(N)的复杂度实现
 //难度：4*
 func MaxStock(price []int) int {
+	// 至少2个交易日才能够出现价差
 	if len(price) < 2 {
 		return 0
 	}
 
-	min := price[0]
-	maxDiff := price[1] - min //目前只有这一个diff，哪怕是负数也是maxdiff
-	for i := 2; i < len(price); i++ {
-		if price[i-1] < min {
-			min = price[i-1] //到目前为止的最小值
+	currMin := price[0]
+	maxDiff := math.MinInt64
+	for i:=1; i<len(price); i++ {
+		// 当日价格减去历史最小值，得最大收益
+		if (price[i] - currMin) > maxDiff {
+			maxDiff = price[i] - currMin
 		}
-
-		currentDiff := price[i] - min
-		if currentDiff > maxDiff {
-			maxDiff = currentDiff //到目前诶之的最大收益
+		// 记录历史最低值
+		if price[i] < currMin {
+			currMin = price[i]
 		}
 	}
-
 	return maxDiff
 }

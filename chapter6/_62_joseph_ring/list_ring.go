@@ -12,7 +12,7 @@ import (
 )
 
 //约瑟夫环
-//难度：2*
+//难度：3*
 func CalclRing(n, m int) (int, error) {
 	if n <= 0 || m <= 0 {
 		return -1, errors.New("Invalid err")
@@ -24,7 +24,12 @@ func CalclRing(n, m int) (int, error) {
 	//构造一个长度为n的环形节点
 	head := initRing(n)
 
-	var pre *common.ListNode
+	// 求出pre的出质
+	pre := head
+	for pre.Next.Val != 0 {
+		pre = pre.Next
+	}
+
 	p := head
 	for p.Next != p { //剩下不止一个节点
 		for i := 0; i < m-1; i++ {

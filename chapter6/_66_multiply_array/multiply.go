@@ -8,39 +8,40 @@ package _66_multiply_array
 //思路：
 //思路1：如果可以用除法，是比较简单的，乘起来之后每行分别除以对应数，复杂度O(n)。但是题目要求不能用除法
 //思路2：常规思路就是两次循环，则复杂度O(n^2)
-//思路3：一个改进思路，构造一个逻辑二维矩阵
-//      然后分别按照从上到下和从下到上的顺序计算
-//      这样正好就规避了(0,0),(1,1),(2,2)...这条对角线
-//      复杂度降到O(n)
-//例子：数组：[2, 3, 4] => [12, 8, 6]
-//构造矩阵：1, 3, 4
-//        2, 1, 4
-//        2, 3, 1
-//难度：5*，这种思路很抽象实际中很难想到
+//思路3：
+// 例：
+// 给定 nums = [1,2,3,4]，返回 [24,12,8,6]。
+// 算法：
+// 1. 使用两个临时数组 left 和 right
+// 2. 将 left[i] 的值设为 nums[0] 到 nums[i-1] 的乘积
+// 3. 将 right[i] 的值设为 nums[i+1] 到 nums[n-1] 的乘积
+// 4. 将 res[i] 的值设为 left[i]*right[i]
+// 5. 返回 res
+//难度：4*
 func Multiply(src []int) []int {
 	//特殊情况
 	if len(src) == 0 {
 		return src
 	}
-	if len(src) == 1 {
-		return []int{1}
-	}
+	n := len(src)
 
 	//最终结果容器
-	dst := make([]int, len(src))
-	dst[0] = 1
+	left := make([]int, n)
+	left[0] = 1
+	right := make([]int, n)
+	right[n-1] = 1
 
-	//先自上而下 (左下角)
-	for i := 1; i < len(src); i++ { //将i理解为行
-		dst[i] = dst[i-1] * src[i-1]
+	for i:=1; i<n; i++ {
+		left[i] = left[i-1] * src[i-1]
 	}
-	//fmt.Println(dst)
+	for i:=n-2; i>=0; i-- {
+		right[i] = right[i+1] * src[i+1]
+	}
 
-	//再自下而上(右上角）
-	tmp := 1
-	for i := len(src) - 2; i >= 0; i-- { //将i理解为行
-		tmp *= src[i+1]
-		dst[i] *= tmp
+	// 最终结果
+	dst := make([]int, n)
+	for i:=0; i<n; i++ {
+		dst[i] = left[i] * right[i]
 	}
 	return dst
 }

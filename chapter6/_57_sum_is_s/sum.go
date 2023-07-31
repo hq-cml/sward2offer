@@ -8,7 +8,6 @@
  * 例如输入15，由于1+2+3+4+5=4+5+6=7+8=15，所以结果打印出3个连续序列1～5、
  * 4～6和7～8。
  */
-
 package _57_sum_is_s
 
 //题目1:
@@ -27,8 +26,10 @@ func FindTwoNum(arr []int, sum int) (int, int, bool) {
 	//滑动窗口
 	i := 0
 	j := length - 1
-	curr := arr[i] + arr[j]
 	for i < j {
+		curr := arr[i] + arr[j]
+
+		// 找到
 		if curr == sum {
 			return arr[i], arr[j], true
 		}
@@ -36,19 +37,11 @@ func FindTwoNum(arr []int, sum int) (int, int, bool) {
 		//左边界右移
 		if curr < sum {
 			i++
-			if i >= j {
-				break
-			}
-			curr = arr[i] + arr[j]
 		}
 
 		//右边界左移
 		if curr > sum {
 			j--
-			if j <= i {
-				break
-			}
-			curr = arr[i] + arr[j]
 		}
 	}
 	return 0, 0, false
@@ -57,41 +50,38 @@ func FindTwoNum(arr []int, sum int) (int, int, bool) {
 //题目2:
 //和为s的连续递增序列，列举出全部
 //思路和题目1类似，但两个指针均是从头开始，不断试探，但是区别在于要列举出全部组合
-//所以这里要明确退出条件，很穷表明，如果small>sum/2，则序列之后必然已经超过sum，可以退出
+//所以这里要明确退出条件：如果small>sum/2，则序列之后必然已经超过sum，可以退出
 //难度：3*
+// 书上退出条件比较难想到，自己实现的退出条件更容易理解一些
 func FindSequence(sum int) [][]int {
-	if sum < 3 {
+	if sum < 1 || sum == 2{
 		return nil
 	}
+	if sum == 1 {
+		return [][]int{{1}}
+	}
+	i:=1
+	j:=2
+	curr := i+j
+	var ret [][]int
 
-	midNum := (1 + sum) / 2 //作为退出条件
-	small := 1
-	big := 2
-	curr := small + big
-
-	ret := [][]int{}
-	for small < midNum {
-		if curr == sum {
-			//找到合适的，存起来
-			t := []int{}
-			for i := small; i <= big; i++ { //保存序列
-				t = append(t, i)
+	// i追上j，作为退出条件，效率略低但是更容易想到
+	for i!=j {
+		if curr < sum {
+			j++
+			curr += j
+		} else if curr == sum{
+			var s []int
+			for x:=i; x<=j; x++ {
+				s = append(s, x)
 			}
-			ret = append(ret, t) //将序列快照存储
-
-			//二选一均可，打破循环
-			//big ++
-			//curr += big
-			curr -= small
-			small++
-		} else if curr < sum {
-			big++
-			curr += big //注意，这里是加
+			ret = append(ret, s)
+			j ++
+			curr += j
 		} else {
-			curr -= small //注意，这里是减
-			small++
+			curr -= i
+			i++
 		}
 	}
-
 	return ret
 }

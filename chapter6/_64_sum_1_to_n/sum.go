@@ -19,7 +19,7 @@ func Sum1ton_ArithmeticProgression(n int) int {
 	return (int(math.Pow(float64(n), 2)) + n) >> 1
 }
 
-//递归
+//思路2：递归
 //利用&&的特性
 //难度：4*
 func Sum1ton_Recurse(n int) int {

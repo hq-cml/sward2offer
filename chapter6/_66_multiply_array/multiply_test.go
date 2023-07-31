@@ -17,9 +17,9 @@ func TestMultiply(t *testing.T) {
         {
             name: "case1",
             args: args{
-                src: []int{2,3,4},
+                src: []int{1,2,3,4},
             },
-            want: []int{12, 8, 6},
+            want: []int{24,12,8,6},
         },
 
     }
@@ -31,3 +31,4 @@ func TestMultiply(t *testing.T) {
         })
     }
 }
+
