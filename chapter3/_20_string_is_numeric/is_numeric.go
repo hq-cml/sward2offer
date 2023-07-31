@@ -62,12 +62,11 @@ func IsNumeric(str string) bool {
 	if len(b) > 0 {
 		return false
 	}
-
 	return true
 }
 
 //扫描无符号型字符串整形
-//返回值1标识检测后剩余的字符串
+//第一个返回值，表示检测后剩余的字符串
 //bool返回值，表示str是否已经扫描完毕
 func scanUnSignedInt(str []byte) ([]byte, bool) {
 	length := len(str)
@@ -82,7 +81,7 @@ func scanUnSignedInt(str []byte) ([]byte, bool) {
 }
 
 //扫描有符号型字符串整形
-//返回值1标识检测后剩余的字符串
+//第一个返回值，表示检测后剩余的字符串，如果返回nil，表示存在非法情况
 //bool返回值，表示str是否已经扫描完毕
 func scanSignedInt(str []byte) ([]byte, bool) {
 	if len(str) == 0 {

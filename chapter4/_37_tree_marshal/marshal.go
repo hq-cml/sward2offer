@@ -34,7 +34,7 @@ func TreeMarshal(root *common.TreeNode) string {
 //本质上仍是递归的应用
 //难度:5*
 func TreeUnMarshal(str string) *common.TreeNode {
-	//过滤掉逗号
+	//过滤掉最后逗号
 	str = strings.Trim(str, ",")
 
 	//idx作为str字符串的索引值
@@ -57,7 +57,7 @@ func unmarshal(str string, root **common.TreeNode, idx *int) {
 	//求出根的字符
 	tmpIdx := strings.Index(str[*idx:], ",")
 	if tmpIdx == -1 {
-		//不可能出现这种情况，因为至少会是$,
+		//出现这种情况，说明只有一个$，即整个树是nil
 		return
 	}
 

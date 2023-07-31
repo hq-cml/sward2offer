@@ -1,3 +1,3 @@
 module github.com/hq-cml/sward2offer
 
-go 1.13
+go 1.20

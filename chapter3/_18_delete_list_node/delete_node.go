@@ -2,9 +2,9 @@
  * 面试题18（一）：在O(1)时间删除链表结点
  * 题目：给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该结点。
  *
- *面试题18（二）：删除链表中重复的结点
- *题目：在一个排序的链表中，如何删除重复的结点？例如，在图3.4（a）中重复
- *结点被删除之后，链表如图3.4（b）所示。
+ * 面试题18（二）：删除链表中重复的结点
+ * 题目：在一个排序的链表中，如何删除重复的结点？例如，在图3.4（a）中重复
+ * 结点被删除之后，链表如图3.4（b）所示。
  */
 
 package _18_delete_list_node
@@ -34,7 +34,7 @@ func DeleteNodeInO1(head *common.ListNode, del *common.ListNode) *common.ListNod
 		if p2 == del {
 			p1.Next = nil
 		}
-	} else { //替换
+	} else { //常规情况，利用替换的思路来变相删除
 		del.Val = del.Next.Val
 		del.Next = del.Next.Next
 	}

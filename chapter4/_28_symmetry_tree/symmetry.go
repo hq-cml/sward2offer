@@ -17,15 +17,16 @@ func Symmetry(root *common.TreeNode) bool {
 }
 
 func symmetry(root1, root2 *common.TreeNode) bool {
-	//结束条件
+	// 结束条件
 	if root1 == nil && root2 == nil {
 		return true
 	}
-	if root1 == nil || root2 == nil { //有一个非空，必然不是镜像
+	// 结束条件：有一个非空，必然不是镜像
+	if root1 == nil || root2 == nil {
 		return false
 	}
 
-	//根不相同，必然不是镜像
+	// 结束条件：根不相同，必然不是镜像
 	if root1.Val != root2.Val {
 		return false
 	}

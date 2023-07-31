@@ -1,8 +1,8 @@
 package _26_check_is_subtree
 
 import (
-    "github.com/hq-cml/sward2offer/common"
-    "testing"
+	"github.com/hq-cml/sward2offer/common"
+	"testing"
 )
 
 func TestCheck(t *testing.T) {

@@ -73,7 +73,7 @@ func FindDuplicate1(s []int) (d int, exist bool){
 	//如果不存在重复，那么应该s[i] == i
 	//反之就是如果s[i] != i，就可能存在重复
 	for i:=0; i<n; i++ {
-		for s[i] != i {    //紧着第i位，一直交换，指导s[i]==i为止（颇为巧妙）
+		for s[i] != i {    //紧着第i位，一直交换，直到s[i]==i为止（颇为巧妙）
 			x := s[i]
 			if x == s[x] {
 				return x, true
@@ -103,7 +103,7 @@ func FindDuplicate2 (s []int) (int, bool, error) {
 		}
 	}
 
-	//正式逻辑
+	//正式逻辑，beg和end并非下标，而是数字的范围
 	beg := 1
 	end := n-1
 	for beg <= end { //n >= 2，所以end最小是1

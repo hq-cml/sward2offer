@@ -45,12 +45,12 @@ func Copy(src *CompNode) *CompNode {
 		pSrc = pSrc.Next
 	}
 
-	//复制随机字段
+	//同时遍历src和dst，复制随机指针字段
 	pSrc = src
 	pDst = dst
 	for pSrc != nil {
 		if pSrc.Radom != nil {
-			pDst.Radom = pMap[pSrc.Radom] //牛逼
+			pDst.Radom = pMap[pSrc.Radom] //妙
 		}
 		pSrc = pSrc.Next
 		pDst = pDst.Next

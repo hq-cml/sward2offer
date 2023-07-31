@@ -1,6 +1,9 @@
 package _10_fibonacci
 
-import "testing"
+import (
+    "fmt"
+    "testing"
+)
 
 func TestFibonacciNoRecurse(t *testing.T) {
     type args struct {
@@ -38,6 +41,7 @@ func TestFibonacciNoRecurse(t *testing.T) {
             if got := FibonacciNoRecurse(tt.args.n); got != tt.want {
                 t.Errorf("FibonacciNoRecurse() = %v, want %v", got, tt.want)
             }
+            fmt.Println(FibonacciNoRecurse(tt.args.n))
         })
     }
 }

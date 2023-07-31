@@ -1,6 +1,7 @@
 package basic
 
 // 分区函数
+// 这里和快排的分区函数是类似的，只是多了beg和end的边界参数
 // 返回：一次分区完毕之后的中间Idx值，保证Idx前面的均小于Idx元素值，后面的均大于
 func Partition(arr []int, begIdx, endIdx int) int {
 	// 边界校验

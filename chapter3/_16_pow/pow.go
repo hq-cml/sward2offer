@@ -14,15 +14,18 @@ const (
 	MIN = 0.0000001
 )
 
+// 浮点数判断0（利用绝对值）
 func equalZero(f float64) bool {
 	if math.Abs(f) <= MIN {
 		return true
 	}
 	return false
 }
-//主要考察考虑场景的完整性：比如底数为0，或者指数为负数的情况。
+
+//分析：主要考察考虑场景的完整性：比如底数为0，或者指数为负数的情况。
 //常规思路
 func Pow1(f float64, exp int) (float64, error) {
+	// 指数为0，返回1
 	if exp == 0 {
 		return 1, nil
 	}
@@ -101,7 +104,7 @@ func powRecurse(f float64, exp int) float64 {
 
 	r := powRecurse(f, exp>>1)  //向下递归
 	r = r*r           // 求平方
-	if exp & 1 == 1 { // exp 是奇数
+	if (exp & 1) == 1 { // exp 是奇数，多乘一个r
 		return r*f
 	} else {
 		return r      // exp 是偶数

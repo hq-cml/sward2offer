@@ -12,7 +12,7 @@ import (
 // 思路：
 // 这个题比较抽象借，借助画图，发现规律
 // 从外到内，一圈圈的打印，每一圈都是顺时针的顺序
-//难度：5*
+// 难度：5*
 func Print(arr []int, rows, cols int) error {
 	if len(arr) != rows*cols || len(arr) == 0 {
 		return errors.New("Wrong arr!")

@@ -63,7 +63,7 @@ func TestPrintTreeInMultiLine(t *testing.T) {
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
             if err := PrintTreeInMultiLine(tt.args.root); (err != nil) != tt.wantErr {
-                t.Errorf("PrintTreeInMultiLine() error = %v, wantErr %v", err, tt.wantErr)
+               t.Errorf("PrintTreeInMultiLine() error = %v, wantErr %v", err, tt.wantErr)
             }
         })
     }

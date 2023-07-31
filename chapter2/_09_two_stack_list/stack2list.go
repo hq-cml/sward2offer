@@ -31,13 +31,13 @@ func (l *List)DeleteHead() (v interface{}, exist bool) {
 		return l.s2.Pop()
 	}
 
-	if l.s1.Len() > 0 {
-		for l.s1.Len() > 0 {
-			v, _ := l.s1.Pop()
-			l.s2.Push(v)
-		}
-
-		return l.s2.Pop()
+	if l.s1.Len() == 0 {
+		return nil, false
 	}
-	return nil, false
+
+	for l.s1.Len() > 0 {
+		v, _ := l.s1.Pop()
+		l.s2.Push(v)
+	}
+	return l.s2.Pop()
 }

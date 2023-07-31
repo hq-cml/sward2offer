@@ -1,12 +1,11 @@
 /*
  * 面试题34：二叉树中和为某一值的路径
- * 题目：输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所
- * 有路径。从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+ * 题目：输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。
+ * 从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
  */
 package _34_find_path_num
 
 import (
-	"fmt"
 	"github.com/hq-cml/sward2offer/common"
 )
 
@@ -21,32 +20,40 @@ import (
 //fmt.Println(a) //1,2,3
 //tt(a)          //1,2,3,1
 //fmt.Println(a) //外层感知不到 1,2,3
-func FindPath(root *common.TreeNode, num int) {
-	path := []int{} //维护一个数组作为路径记录
-	findPath(root, num, path)
+func FindSumPath(root *common.TreeNode, num int) []int{
+	var path []int
+	if root == nil {
+		return nil
+	}
+	path, ok := findSumPath(root, num, 0, path)
+	if !ok {
+		return nil
+	}
+	return path
 }
 
-//难度：4*
-//本质上是一个先序遍历
-func findPath(node *common.TreeNode, num int, path []int) {
-	if node == nil {
-		return
+func findSumPath(root *common.TreeNode, num, curr int, path []int) ([]int, bool) {
+	curr += root.Val
+	path = append(path, root.Val)
+	// 当前累计值，等于需要值，则找到路径成功
+	if curr == num {
+		return path, true
 	}
-
-	path = append(path, node.Val)
-	if sum(path) == num &&
-		node.Left == nil && node.Right == nil { //题目要求必须是叶节点，所有左右需==nil
-		fmt.Println("The Path:", path)
+	// 未找到路径，则继续探测，先做后右
+	if root.Left != nil {
+		pathLeft, ok := findSumPath(root.Left, num, curr, path)
+		if ok {
+			return pathLeft, ok
+		}
 	}
-
-	findPath(node.Left, num, path)
-	findPath(node.Right, num, path)
+	if root.Right != nil {
+		pathRight, ok := findSumPath(root.Right, num, curr, path)
+		if ok {
+			return pathRight, ok
+		}
+	}
+	// 如果整个探测失败，需要回退
+	path = path[0: len(path)-1]
+	return path, false
 }
 
-func sum(arr []int) int {
-	num := 0
-	for _, v := range arr {
-		num += v
-	}
-	return num
-}

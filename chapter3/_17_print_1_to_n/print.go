@@ -38,21 +38,22 @@ func PrintN_1(n int) {
 
 	//打印第一个数
 	myPrint(string(str))
-	for !mockIncr(str) { //未溢出，就一直打印
+	for !doIncr(str) { //未溢出，就一直打印
 		myPrint(string(str))
 	}
 }
 
 // 模拟字符串数字 + 1
 // 返回值标志是否达到最大值溢出
-func mockIncr(str []byte) bool {
+func doIncr(str []byte) bool {
 	n := len(str)
 	for i := n - 1; i >= 0; i-- { //从个位数开始（数组的最后一位）
 		if str[i] == '9' {
 			if i > 0 {
-				str[i] = '0' //进位
+				str[i] = '0' //进位：当前i位变成0，继续更高位处理
+				continue
 			} else {
-				return true //i==0，此时再加1已经溢出
+				return true //i==0，最高位是9，此时再加1已经溢出
 			}
 		} else {
 			str[i] = str[i] + 1
@@ -72,6 +73,7 @@ func PrintN_2(n int) {
 	if n == 0 {
 		return
 	}
+	// 这种写法不需要初始化，初始化已经融入了递归过程中
 	str := make([]byte, n)
 	recursePrint(str, 0) //从数字的最高位（n位）开始
 }

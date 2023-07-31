@@ -2,7 +2,6 @@ package _19_simple_regexp
 
 import "testing"
 
-
 func TestRegexp(t *testing.T) {
 	type args struct {
 		str     string

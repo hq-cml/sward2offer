@@ -1,6 +1,6 @@
 package basic
 
-// ¶ş·Ö²éÕÒ
+// äºŒåˆ†æŸ¥æ‰¾
 func BinarySearch(arr []int, need int) int {
     if len(arr) == 0 {
         return -1

@@ -20,6 +20,13 @@ func TestCalc1(t *testing.T) {
 			},
 			want: 4,
 		},
+		{
+			name: "case2",
+			args: args{
+				-10,
+			},
+			want: 62,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -45,6 +52,13 @@ func TestCalc2(t *testing.T) {
 				15,
 			},
 			want: 4,
+		},
+		{
+			name: "case2",
+			args: args{
+				-10,
+			},
+			want: 62,
 		},
 	}
 	for _, tt := range tests {

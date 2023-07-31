@@ -34,7 +34,7 @@ func TestMirror(t *testing.T) {
 			common.Mid(tt.args.root)
 			fmt.Println()
 
-			Mirror(tt.args.root)
+			tt.args.root = Mirror(tt.args.root)
 
 			common.Pre(tt.args.root)
 			fmt.Println()

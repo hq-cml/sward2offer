@@ -37,17 +37,16 @@ func FindMin(arr []int) (int, error) {
 	//p1 < (p2-1)，说明区间里面至少还有3个数字
 	//这里略烧脑，如果写成p1<p2，则会导致死循环
 	for p1 < (p2 - 1) {
-		//p1 < p2说明已经不存在旋转了，直接返回第一个
+		//p1 < p2说明已经不存在旋转了，第一个就是最小值，直接返回第一个
 		if arr[p1] < arr[p2] {
 			return arr[p1], nil
 		}
-
+		// 取中值
 		mid := p1 + (p2-p1)>>1
 		if arr[p1] == arr[mid] && arr[p2] == arr[mid] {
 			//特例：1, 1, 1, 0, 1
 			return findMinInOrder(arr, p1, p2), nil
-		}
-		if arr[mid] <= arr[p2] {
+		} else if arr[mid] <= arr[p2] {
 			p2 = mid
 		} else { //arr[mid] > arr[p2]
 			p1 = mid

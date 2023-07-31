@@ -1,6 +1,7 @@
 package _34_find_path_num
 
 import (
+    "fmt"
     "github.com/hq-cml/sward2offer/common"
     "testing"
 )
@@ -28,7 +29,8 @@ func TestFindPath(t *testing.T) {
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
-            FindPath(tt.args.root, tt.args.num)
+            path := FindSumPath(tt.args.root, tt.args.num)
+            fmt.Println(path)
         })
     }
 }

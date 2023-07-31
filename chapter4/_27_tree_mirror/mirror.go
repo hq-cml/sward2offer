@@ -10,16 +10,16 @@ import "github.com/hq-cml/sward2offer/common"
 //树的题目，首先就应该思考递归策略：
 //左右子节点互换，进行比对。
 //难度：2*
-func Mirror(root *common.TreeNode) {
-	//结束条件
-	if root == nil {
-		return
+func Mirror(root *common.TreeNode) *common.TreeNode{
+	if root == nil  {
+		return nil
 	}
+	// 递归处理右子树，并且处理结果将作为左子树
+	left := Mirror(root.Right)
+	// 类似
+	right := Mirror(root.Left)
 
-	//左右互换
-	root.Left, root.Right = root.Right, root.Left
-
-	//递归下去
-	Mirror(root.Left)
-	Mirror(root.Right)
+	// 左右的处理结果，分别赋值给右左
+	root.Left, root.Right = left, right
+	return root
 }

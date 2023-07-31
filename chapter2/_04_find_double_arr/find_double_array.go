@@ -15,7 +15,7 @@ package _04_find_double_arr
 //充分利用题目对于二维数组预设条件
 //从右上角开始探测，假设右上角数字为i，需要寻找的为need
 //只要i>need，则该列肯定都>need，所以左移
-//只要i<need，则改行肯定都<need，左移下移
+//只要i<need，则改行肯定都<need，所以下移
 //每一轮都是不断地先向左，再向下，这样最终如果能够找到，那么就是在数组的右上角，否则找不到。
 func FindDoubleArray(arr []int, row, col int, needFind int) bool {
     if len(arr) != row * col {
