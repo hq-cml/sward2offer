@@ -13,7 +13,7 @@ import (
 )
 
 //思路：
-//这是一个递归思想，有点类似于斐波那契数列
+//这是一个递归思想，有点类似于跨台阶问题，斐波那契数列
 //难度：5*
 
 //0-a; 25-z
@@ -50,16 +50,12 @@ func translateRecurse(org string) int {
 		}
 	}
 
-	//因子
-	//如果前两个字符在10-25之间，factor==1，否则factor==0
-	factor := 1
-	if !check(org[:2]) {
-		factor = 0
+	if !check(org[0:2]) {
+		return translateRecurse(org[1:])
+	} else {
+		return translateRecurse(org[1:])+
+			translateRecurse(org[2:])
 	}
-
-	//其实，根据公式，本质上就是想得到f(0)
-	f0 := translateRecurse(org[1:]) + factor*translateRecurse(org[2:])
-	return f0
 }
 
 //思路2：利用循环代替递归
@@ -81,7 +77,7 @@ func translateLoop(org string) int {
 	}
 
 	numbers := make([]int, length)
-	numbers[length-1] = 1 //递归结束条件，在循环中作为边界条件
+	numbers[length-1] = 1 //循环结束条件，在循环中作为边界条件
 	numbers[length-2] = func() int {
 		if check(org[length-2:]) { //如果还剩两位，有两种可能
 			return 2

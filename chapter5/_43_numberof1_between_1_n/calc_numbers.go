@@ -23,7 +23,7 @@ func Calc(n int) int {
 }
 
 //递归
-//TODO 看不懂了
+//大概意思是，每一位都进行递归运算，分别算出每一位可能出现1的次数
 func numberOf1(str []byte) int {
 	//退出条件
 	if len(str) == 0 {
@@ -38,23 +38,28 @@ func numberOf1(str []byte) int {
 	if length == 1 && firstChar == 0 { //字符串只剩下"0"，退出
 		return 0
 	}
-	if length == 1 && firstChar > 0 { // why?
+	if length == 1 && firstChar > 0 { // 只有1位，且>0，则必然有一个1
 		return 1
 	}
 
 	numFirstDigit := 0
+	// firstChar不可能是0，只会大于0的某个数字
 	if firstChar == 1 {
+		// 如果==1，则该位出现1的个数，必然是下面所有数的和（例如：123，则出现23+1次）
 		t, _ := strconv.Atoi(string(str[1:]))
 		numFirstDigit = t + 1
 	} else { //firstChar > 1
+		// 如果>1，则该位出现1的个数，是10的len-1次方哥（例如：323，则出现100-199，共100次）
 		numFirstDigit = int(math.Pow10(length - 1))
 	}
 
+	// 除了最高位的1，其他位的1的个数
+	// 类似于上面的else逻辑，有点烧脑，例如：323，则会出现 3*2*10次的1
 	numOtherDigit := int(firstChar) * (length - 1) * int(math.Pow10(length-2))
 
-	numRecurse := numberOf1(str[1:])
-
-	return numFirstDigit + numOtherDigit + numRecurse
+	return numFirstDigit +  // 最高位
+		numOtherDigit +     // 其他位
+		numberOf1(str[1:])  // 递归向下一位
 }
 
 //思路2：

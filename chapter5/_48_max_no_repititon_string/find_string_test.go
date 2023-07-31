@@ -63,6 +63,14 @@ func TestFindMaxNoRepititionStrSlideWindow(t *testing.T) {
 			want:  5,
 			want1: 6,
 		},
+		{
+			name:  "case3",
+			args:  args{
+				str: "pwwkew",
+			},
+			want:  2,
+			want1: 3,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

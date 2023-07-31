@@ -19,7 +19,7 @@ import (
 // 利用两个堆
 // 左侧大顶堆，右侧小顶堆，先左后右，轮次放置，左侧整体都要小于右侧
 // 同时两个堆数量维持均衡，即，len(左堆) - len(右堆) <= 1
-// 则中位数只会是是左侧堆头或者两个堆头的平均数
+// 则中位数只会是是左侧堆头（奇数个时）或者两个堆头的平均数（偶数个时）
 // 时间复杂度O（N * LogN）
 func FindMidNum(arr []int) (float64, error) {
 	if len(arr) == 0 {
@@ -38,11 +38,12 @@ func FindMidNum(arr []int) (float64, error) {
 		}
 
 		//始终保持：len(左堆) - len(右堆) <= 1
+		//如果要放入左侧，则应该先检查右侧；反之，应该先检查左侧
 		if left {
 			//初步计划，放左侧
 			if leftHeap.Len() == 0 { //左堆为空，表示刚刚开始，则直接push
 				leftHeap.Push(v)
-			} else if v > rightHeap.Top() { //待放入的值，大于右侧最小值，所以他应该放入右侧，所以只能从右侧换一个出来放入左侧
+			} else if v > rightHeap.Top() { //待放入的值，大于右侧最小值，所以他应该放入右侧，所以只能从右侧换一个出来放入左侧（不会出现rightHeap.Top==nil的情况）
 				rightHeap.Push(v)
 				leftHeap.Push(rightHeap.Pop())
 			} else { //待放入的值，小于右侧最小值，则可以直接放入左侧
@@ -50,7 +51,7 @@ func FindMidNum(arr []int) (float64, error) {
 			}
 		} else {
 			//初步计划，放右侧
-			if v < leftHeap.Top() { //待放入值，小于左侧的最大值，所以他应该放到左侧，所以只能从左侧换一个值出来放入右侧
+			if v < leftHeap.Top() { //待放入值，小于左侧的最大值，所以他应该放到左侧，所以只能从左侧换一个值出来放入右侧（不会出现leftHeap.Top==nil的情况）
 				leftHeap.Push(v)
 				rightHeap.Push(leftHeap.Pop())
 			} else { //待放入的值，大于左侧最大值，则可以直接放入右侧

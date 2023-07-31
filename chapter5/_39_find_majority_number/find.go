@@ -24,7 +24,7 @@ import (
 //利用快排的Partition算法，不断探索中值；
 //如果中值的idx正好等于mid，则说明idx标识的值就是超过半数的；否则，则不断调整探索的边界
 //时间复杂度：O(logN)，这个明显要好于粗暴的排序
-//本质上是在找中位数，但是感觉多少有点。。。
+//本质上是在找中位数，但是感觉多少有点难想到。。。
 //难度：3*
 func FindMajority1(arr []int) (int, error) {
 	if len(arr) == 0 {
@@ -69,7 +69,7 @@ func FindMajority2(arr []int) (int, error) {
 		} else {
 			currCnt--
 		}
-
+		// 妙
 		if currCnt == 0 {
 			if i == len(arr) - 1 {
 				return 0, errors.New("Not Exist")

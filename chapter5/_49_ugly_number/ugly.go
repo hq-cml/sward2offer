@@ -1,8 +1,9 @@
 /*
  * 面试题49：丑数
- * 题目：我们把只包含因子2、3和5的数称作丑数（Ugly Number）。求按从小到
- * 大的顺序的第1500个丑数。例如6、8都是丑数，但14不是，因为它包含因子7。
+ * 题目：我们把只包含因子2、3和5的数称作丑数（Ugly Number）。
+ * 例如6、8都是丑数，但14不是，因为它包含因子7。
  * 习惯上我们把1当做第一个丑数。
+ * 求按从小到大的顺序的第1500个丑数。
  */
 package _49_ugly_number
 
@@ -36,6 +37,7 @@ func GetUglyNumber(n int) int {
 			uglyNumbers[p3]*3,
 			uglyNumbers[p5]*5)
 		uglyNumbers[nextIdx] = min //第nextIdx个丑数
+		nextIdx++
 
 		//p指针递进
 		//因为丑数是有序的，所以如果*因子仍然<=min，则可以快速递进（每轮不一定只有一个p递进，可能是多个p都需要递进）
@@ -49,7 +51,6 @@ func GetUglyNumber(n int) int {
 		for uglyNumbers[p5]*5 <= min {
 			p5++
 		}
-		nextIdx++
 	}
 	return uglyNumbers[n-1]
 }

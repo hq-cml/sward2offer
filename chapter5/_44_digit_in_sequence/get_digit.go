@@ -12,7 +12,7 @@ import "math"
 //观察：1位数，占10个字符 => 2位数，占180个 => 3位数，占2700个。。。。
 //先计算出第n位数组属于几位数，然后在从这个位数从头开始算。。
 //这个题目相当恶心，因为idx从0开始计数，所以边界非常烧脑，要保持idx的计数方式统一，否则会乱掉
-//难度：5*
+//难度：6*
 func GetDigit(idx int) int {
 	n := 1 //n标识几位数
 
@@ -21,11 +21,12 @@ func GetDigit(idx int) int {
 		if idx-getWidthOfN(n) == 0 {
 			//正好位于n位数的第一个数字的最高位，比如idx=10,190,2890...
 			//烧脑，idx从0开始，所以这里其实是真正字符串的第11,191,2891个字符
-			return 1
+			return 1 // 字符数字1
 		} else if idx-getWidthOfN(n) > 0 {
 			idx -= getWidthOfN(n)
 			n++
 		} else {
+			// idx < getWidthOfN(n)
 			break
 		}
 	}
