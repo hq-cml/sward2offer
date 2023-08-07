@@ -21,7 +21,7 @@ func TestDfs(t *testing.T) {
 					common.NewNodeWithChild(1,
 						common.NewNode(3),
 						nil),
-					common.NewNodeWithChild(4,common.NewNode(1),
+					common.NewNodeWithChild(4, common.NewNode(1),
 						common.NewNode(5))),
 			},
 			want: 4,

@@ -12,11 +12,11 @@
  */
 package _59_list_max_value
 
-//方法1：
-//思路：主要是需要一种能够用O(1)复杂度获取最大值的容器
-//利用MaxList来实现：结合之前的O(1)复杂度求栈最大值 & 两个栈模拟队列
-//将前面多次的成果，组装起来，在stack.go和list.go中
-//难度：3*
+// 方法1：
+// 思路：主要是需要一种能够用O(1)复杂度获取最大值的容器
+// 利用MaxList来实现：结合之前的O(1)复杂度求栈最大值 & 两个栈模拟队列
+// 将前面多次的成果，组装起来，在stack.go和list.go中
+// 难度：3*
 func FindWindowMax(arr []int, windowLen int) ([]int, bool) {
 	if arr == nil {
 		return nil, false
@@ -44,10 +44,11 @@ func FindWindowMax(arr []int, windowLen int) ([]int, bool) {
 	return ret, true
 }
 
-//方法2：
-//利用自己实现的O(1)复杂度的队列来实现
-//作者给的思路太晦涩，我自己实现了一套
-//难度：3*
+// HQ：推荐
+// 方法2：
+// 利用自己实现的O(1)复杂度的队列来实现
+// 作者给的思路太晦涩，我自己实现了一套
+// 难度：3*
 func FindWindowMaxSlide(arr []int, windowLen int) ([]int, bool) {
 	if arr == nil || windowLen <= 0 {
 		return nil, false

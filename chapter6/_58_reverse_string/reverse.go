@@ -30,7 +30,6 @@ func ReverseWord(str string) string {
 			reverse(b, start, end-1)
 			start = end + 1
 			end = end + 1
-			continue
 		} else {
 			end++
 		}
@@ -47,6 +46,11 @@ func SwapLeft(str string, n int) string {
 	if len(str) < n {
 		return str
 	}
+
+	if n > len(str) {
+		n = n % len(str)
+	}
+
 	//先翻转局部
 	b := []byte(str)
 	reverse(b, 0, n-1)

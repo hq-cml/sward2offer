@@ -418,7 +418,7 @@ func MaxStock(price []int) int {
 		return 0
 	}
 	currMin := price[0]
-	maxDiff := math.MinInt64
+	maxDiff := 0
 	for i := 1; i < len(price); i++ {
 		if (price[i] - currMin) > maxDiff {
 			maxDiff = price[i] - currMin
@@ -461,34 +461,6 @@ func FindSequence(sum int) [][]int {
 		}
 	}
 	return ret
-}
-
-func FindMaxNoRepititionStr1(str string) (int, int) {
-	if len(str) == 0 {
-		return -1, 0
-	}
-	strlen := len(str)
-	exist := map[byte]struct{}{}
-	i, j := 0, 1
-	exist[str[0]] = struct{}{}
-	idx := 0
-	max := 1
-	for j < strlen {
-		c := str[j]
-		if _, ok := exist[c]; !ok {
-			exist[c] = struct{}{}
-			length := j - i + 1
-			if length > max {
-				max = length
-				idx = i
-			}
-			j++
-		} else {
-			delete(exist, str[i])
-			i++
-		}
-	}
-	return idx, max
 }
 
 func FindMaxNoRepititionStr(str string) (int, int) {
@@ -573,22 +545,24 @@ func check(str string) bool {
 }
 
 // 连续子数组最大值
-func CalcDynamic(arr []int) (int, error) {
+func CalcSeq(arr []int) int {
 	if len(arr) == 0 {
-		return 0, nil
+		return 0
 	}
-	max := arr[0]
-	sum := arr[0]
-	for j := 1; j < len(arr); j++ {
-		if sum < 0 {
-			sum = 0
-		}
-		sum = sum + arr[j]
+
+	sum := 0
+	max := math.MinInt
+	for _, v := range arr {
+		sum += v
 		if sum > max {
 			max = sum
 		}
+		if sum < 0 {
+			sum = 0
+		}
 	}
-	return max, nil
+
+	return max
 }
 
 // 二叉树中和为某一值的路径

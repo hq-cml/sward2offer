@@ -1,6 +1,8 @@
 package _63_stock_max_earnings
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestMaxStock(t *testing.T) {
 	type args struct {
@@ -30,7 +32,7 @@ func TestMaxStock(t *testing.T) {
 			args: args{
 				price: []int{11, 9, 8, 7, 6, 5},
 			},
-			want: -1,
+			want: 0,
 		},
 	}
 	for _, tt := range tests {

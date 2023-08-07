@@ -2,21 +2,23 @@ package temp
 
 import (
 	"github.com/hq-cml/sward2offer/common"
+	"math"
 )
 
-func Reverse(head *common.ListNode) *common.ListNode {
-	if head == nil || head.Next == nil {
-		return head
+func Good1(root *common.TreeNode) int {
+	var ret int
+	var good func(*common.TreeNode, int)
+	good = func(root *common.TreeNode, currMax int) {
+		if root == nil {
+			return
+		}
+		if root.Val >= currMax {
+			ret++
+			currMax = root.Val
+		}
+		good(root.Left, currMax)
+		good(root.Right, currMax)
 	}
-
-	p1 := head
-	p2 := head.Next
-	head.Next = nil
-	for p2 != nil {
-		p3 := p2.Next
-		p2.Next = p1
-		p1 = p2
-		p2 = p3
-	}
-	return p1
+	good(root, math.MinInt)
+	return ret
 }

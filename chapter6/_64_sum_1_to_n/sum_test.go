@@ -1,6 +1,9 @@
 package _64_sum_1_to_n
 
-import "testing"
+import (
+	"github.com/hq-cml/sward2offer/temp"
+	"testing"
+)
 
 func TestSum1ton_ArithmeticProgression(t *testing.T) {
 	type args struct {
@@ -47,7 +50,7 @@ func TestSum1ton_Recurse(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Sum1ton_Recurse(tt.args.n); got != tt.want {
+			if got := temp.Sum(tt.args.n); got != tt.want {
 				t.Errorf("Sum1ton_Recurse() = %v, want %v", got, tt.want)
 			}
 		})

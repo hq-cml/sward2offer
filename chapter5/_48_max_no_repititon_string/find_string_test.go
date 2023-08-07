@@ -2,6 +2,7 @@ package _48_max_no_repititon_string
 
 import (
 	"fmt"
+	"github.com/hq-cml/sward2offer/temp"
 	"testing"
 )
 
@@ -16,8 +17,8 @@ func TestFindMaxNoRepititionString(t *testing.T) {
 		want1 int
 	}{
 		{
-			name:  "case1",
-			args:  args{
+			name: "case1",
+			args: args{
 				str: "arabcacfr",
 			},
 			want:  1,
@@ -48,24 +49,24 @@ func TestFindMaxNoRepititionStrSlideWindow(t *testing.T) {
 		want1 int
 	}{
 		{
-			name:  "case1",
-			args:  args{
+			name: "case1",
+			args: args{
 				str: "arabcacfr",
 			},
 			want:  1,
 			want1: 4,
 		},
 		{
-			name:  "case2",
-			args:  args{
+			name: "case2",
+			args: args{
 				str: "abcdeefghij",
 			},
 			want:  5,
 			want1: 6,
 		},
 		{
-			name:  "case3",
-			args:  args{
+			name: "case3",
+			args: args{
 				str: "pwwkew",
 			},
 			want:  2,
@@ -74,7 +75,7 @@ func TestFindMaxNoRepititionStrSlideWindow(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := FindMaxNoRepititionStrSlideWindow(tt.args.str)
+			got, got1 := temp.FindMaxNoRepStr(tt.args.str)
 			if got != tt.want {
 				t.Errorf("FindMaxNoRepititionStrSlideWindow() got = %v, want %v", got, tt.want)
 			}
@@ -96,16 +97,16 @@ func TestFindMaxNoRepititionStrDynamicPlan(t *testing.T) {
 		want1 int
 	}{
 		{
-			name:  "case1",
-			args:  args{
+			name: "case1",
+			args: args{
 				str: "arabcacfr",
 			},
 			want:  1,
 			want1: 4,
 		},
 		{
-			name:  "case2",
-			args:  args{
+			name: "case2",
+			args: args{
 				str: "abcdeefghij",
 			},
 			want:  5,

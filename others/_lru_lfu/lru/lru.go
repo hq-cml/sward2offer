@@ -77,7 +77,7 @@ func (lc *LRUCache) Get(key int) int {
 
 // Put 新建缓存
 func (lc *LRUCache) Put(key int, value int) {
-	// 曾经有缓存
+	// 曾经有缓存，刷新调整
 	if v, ok := lc.cache[key]; ok { // v 是双链表中的节点
 		v.value = value       // 更新链表节点中的值
 		lc.cache[key] = v     // 更新缓存中映射关系

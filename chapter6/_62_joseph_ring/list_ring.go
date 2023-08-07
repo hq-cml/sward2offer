@@ -11,8 +11,8 @@ import (
 	"github.com/hq-cml/sward2offer/common"
 )
 
-//约瑟夫环
-//难度：3*
+// 约瑟夫环
+// 难度：3*
 func CalclRing(n, m int) (int, error) {
 	if n <= 0 || m <= 0 {
 		return -1, errors.New("Invalid err")
@@ -24,7 +24,7 @@ func CalclRing(n, m int) (int, error) {
 	//构造一个长度为n的环形节点
 	head := initRing(n)
 
-	// 求出pre的出质
+	// 求出pre的初始值，指向倒数第一个节点
 	pre := head
 	for pre.Next.Val != 0 {
 		pre = pre.Next
