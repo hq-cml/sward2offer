@@ -1,4 +1,4 @@
-package replace_double_arr
+package temp
 
 import (
 	"fmt"

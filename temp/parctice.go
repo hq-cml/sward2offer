@@ -544,7 +544,7 @@ func check(str string) bool {
 	}
 }
 
-// 连续子数组最大值
+// 连续子数组最大和的值
 func CalcSeq(arr []int) int {
 	if len(arr) == 0 {
 		return 0

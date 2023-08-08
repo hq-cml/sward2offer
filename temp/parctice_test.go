@@ -702,11 +702,11 @@ func TestCalc(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := CalcDynamic(tt.args.arr)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Calc() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			got := CalcSeq(tt.args.arr)
+			//if (err != nil) != tt.wantErr {
+			//	t.Errorf("Calc() error = %v, wantErr %v", err, tt.wantErr)
+			//	return
+			//}
 			if got != tt.want {
 				t.Errorf("Calc() got = %v, want %v", got, tt.want)
 			}
