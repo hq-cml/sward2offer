@@ -14,8 +14,8 @@ func DelBackN(head *common.ListNode, n uint32) (*common.ListNode, error) {
 	if head == nil {
 		return nil, errors.New("nil ")
 	}
-	if n == 0 {
-		return nil, errors.New("n == 0")
+	if n <= 0 {
+		return nil, errors.New("n <= 0")
 	}
 	n = n + 1 // 倒数第N+1
 	p1, p2 := head, head

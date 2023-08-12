@@ -1,5 +1,7 @@
 /*
  * 将电话号码转化成为可能的字符串
+ * 例如，输入“2,3"
+ * 输出：[ad, ae, af, bd, be, bf, cd, ce, cf]
  */
 package _017_phone_num_str
 
@@ -8,7 +10,7 @@ import (
 	"log"
 )
 
-var Map = map[byte][]byte {
+var Map = map[byte][]byte{
 	'2': []byte{'a', 'b', 'c'},
 	'3': []byte{'d', 'e', 'f'},
 	// ...
