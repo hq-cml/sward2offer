@@ -9,18 +9,20 @@ import (
 	"github.com/hq-cml/sward2offer/common"
 )
 
-//思路：
-//这道题，还是在变相得考察二叉树的遍历！
-//注意：这里的实现中，path没有回退机制，其实这是利用了一个golang的slice特性
-//func tt(a []int) {
-//    a = append(a, 1)
-//    fmt.Println(a)
-//}
-//a  := []int{1,2,3}
-//fmt.Println(a) //1,2,3
-//tt(a)          //1,2,3,1
-//fmt.Println(a) //外层感知不到 1,2,3
-func FindSumPath(root *common.TreeNode, num int) []int{
+// 思路：
+// 这道题，还是在变相得考察二叉树的遍历！
+// 注意：这里的实现中，path没有回退机制，其实这是利用了一个golang的slice特性
+//
+//	func tt(a []int) {
+//	   a = append(a, 1)
+//	   fmt.Println(a)
+//	}
+//
+// a  := []int{1,2,3}
+// fmt.Println(a) //1,2,3
+// tt(a)          //1,2,3,1
+// fmt.Println(a) //外层感知不到 1,2,3
+func FindSumPath(root *common.TreeNode, num int) []int {
 	var path []int
 	if root == nil {
 		return nil
@@ -52,8 +54,7 @@ func findSumPath(root *common.TreeNode, num, curr int, path []int) ([]int, bool)
 			return pathRight, ok
 		}
 	}
-	// 如果整个探测失败，需要回退
-	path = path[0: len(path)-1]
+	// 如果整个探测失败，需要回退（没必要回退，利用了slice的特性）
+	// path = path[0: len(path)-1]
 	return path, false
 }
-

@@ -1,9 +1,6 @@
 package _filter_string
 
-import (
-	"github.com/hq-cml/sward2offer/temp"
-	"testing"
-)
+import "testing"
 
 func TestFilter(t *testing.T) {
 	type args struct {
@@ -38,7 +35,7 @@ func TestFilter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := temp.Filter(tt.args.str); got != tt.want {
+			if got := Filter(tt.args.str); got != tt.want {
 				t.Errorf("Filter() = %v, want %v", got, tt.want)
 			}
 		})

@@ -7,10 +7,10 @@
  */
 package _48_max_no_repititon_string
 
-//思路1：
-//暴力方法，穷举
-//从每个字符开始，向后延长直到遇到重复，时间复杂度O(N^2)
-//难度：2*
+// 思路1：
+// 暴力方法，穷举
+// 从每个字符开始，向后延长直到遇到重复，时间复杂度O(N^2)
+// 难度：2*
 func FindMaxNoRepititionString(str string) (int, int) {
 	var maxCnt = 0
 	var index = 0
@@ -39,12 +39,12 @@ func FindMaxNoRepititionString(str string) (int, int) {
 	return index, maxCnt
 }
 
-//思路2：
-//滑动窗口，左右两个边界指针，不断的向右移动
-//如果不重复，则右边界后移，如果重复，则左边界后移
-//利用一个map来判断是否出现重复
-//时间复杂度O(N)
-//难度：4*
+// 思路2：
+// 滑动窗口，左右两个边界指针，不断的向右移动
+// 如果不重复，则右边界后移，如果重复，则左边界后移
+// 利用一个map来判断是否出现重复
+// 时间复杂度O(N)
+// 难度：4*
 func FindMaxNoRepititionStrSlideWindow(str string) (int, int) {
 	var maxLen = 0 //最终最大的子串长度
 	var index = 0  //最终子串开始位置
@@ -73,45 +73,48 @@ func FindMaxNoRepititionStrSlideWindow(str string) (int, int) {
 }
 
 // 滑动窗口的变种实现，利用一个map来保存所有的字符的位置
-func FindMaxNoRepititionStrSlideWindow2(str string) (int, int) {
+// 我自己的方法
+func FindMaxNoRep(str string) (int, int) {
 	if len(str) == 0 {
 		return 0, 0
 	}
 
-	uniq := map[byte]int{} // char=>idx
-	i := 0 // 暂存不重复子串的起始位置
-	idx:=i // 最终返回的不重复子串的起始位置
-	max:=1 // 最大长度
-	uniq[str[0]] = 0
-	for j:=1; j<len(str); j++ {
-		// 不重复，则j不断后移
-		if beg, ok := uniq[str[j]]; !ok {
-			if j-i+1 > max {
-				idx = i
-				max = j-i+1
+	uniq := map[byte]int{}
+	idx := 0     // 最终返回值，最长子串的idx
+	max := -1    // 最终返回值，最长子串的长度
+	currIdx := 0 // 当前子串的开始idx
+	for i, c := range []byte(str) {
+		if repIdx, ok := uniq[c]; !ok {
+			uniq[c] = i
+			length := i - currIdx + 1
+			if length > max {
+				max = length
+				idx = currIdx // 将当前开始idx，作为返回结果
 			}
-			uniq[str[j]]=j
 		} else {
-			// 出现重复，则将开始到重复位置的串全部清空，然后从下一个字符重新开始
-			for ; i<=beg; i++ {
-				delete(uniq, str[i])
+			// 将重复的子串部分，全部清除掉
+			for j := currIdx; j <= repIdx; j++ {
+				delete(uniq, str[j])
 			}
-			uniq[str[j]]=j
+			uniq[c] = i          // 重复部分已清除，新字符入uniq
+			currIdx = repIdx + 1 // 当前子串的起始位置从清除后的位置开始
 		}
 	}
 
 	return idx, max
 }
 
-//思路3：
-//作者的方法（动态规划）
-//f(i)表示第i个字符结尾的，不包含重复字符的，子字符串最大长度，则：
-//	如果第i个字符未出现过，则f(i) = f(i-1) + 1
-//  如果第i个字符出现过，记录第i个字符和它上次出现的距离为d：
-//     d<=f(i-1)，即第i个字符，出现在f(i-1)对应的长度之中，则f(i) = d
-//     d >f(i-1)，即第i个字符，出现在很早的位置，则f(i) = f(i-1) + 1
-//其实，本质上这个方法和上面思路2是类似的，只是更加抽象化
-//难度：5*
+// 思路3：
+// 作者的方法（动态规划）
+// f(i)表示第i个字符结尾的，不包含重复字符的，子字符串最大长度，则：
+//
+//		如果第i个字符未出现过，则f(i) = f(i-1) + 1
+//	 如果第i个字符出现过，记录第i个字符和它上次出现的距离为d：
+//	    d<=f(i-1)，即第i个字符，出现在f(i-1)对应的长度之中，则f(i) = d
+//	    d >f(i-1)，即第i个字符，出现在很早的位置，则f(i) = f(i-1) + 1
+//
+// 其实，本质上这个方法和上面思路2是类似的，只是更加抽象化
+// 难度：5*
 func FindMaxNoRepititionStrDynamicPlan(str string) (int, int) {
 	var currLen int
 	var maxLen int

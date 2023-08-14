@@ -18,6 +18,8 @@ Advanced Data Structure：
 leetcode hot 100:
     1. 2数之和
     2. 5
+    32. 最长有效括号
+    39. 数组中选择元素组成一个目标值
 
 classic：
     1. c7根据前序和中序，构建二叉树

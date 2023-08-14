@@ -10,6 +10,144 @@ import (
 	"strconv"
 )
 
+// 二叉排序树转换成双向链表
+func Convert(root *common.TreeNode) *common.TreeNode {
+	var currTail *common.TreeNode
+	convert(root, &currTail)
+
+	//此时nowTail指向了队列尾部，需要不断向前移动到头部
+	head := currTail
+	for head != nil && head.Left != nil {
+		head = head.Left
+	}
+	return head
+}
+
+// 本质上，这是一个中序遍历递归
+// 但是，由于指针比较多，所以比较抽象（尤其是root.Right的没有做处理，交给递归过程了）
+// 第二个参数currTail，即当前已经处理好的链表尾部，通过这个二级指针，将整个链表顺直
+// 难度：5*
+func convert(root *common.TreeNode, currTail **common.TreeNode) {
+	if root == nil {
+		return
+	}
+
+	//递归左子树
+	if root.Left != nil {
+		convert(root.Left, currTail)
+	}
+
+	//当前节点是root，处理左节点善后
+	root.Left = *currTail
+	if (*currTail) != nil {
+		(*currTail).Right = root
+	}
+
+	//currTail后移成为当前节点（root.Right没有特殊处理，交给下面的递归过程了）
+	*currTail = root
+
+	//递归处理右子树
+	if root.Right != nil {
+		convert(root.Right, currTail)
+	}
+}
+
+// 检验栈的合法顺序
+func CheckValidStackOrder(a []int, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	stk := common.NewStackInt()
+	for len(a) > 0 {
+		tmp, ok := stk.Top()
+		if ok && tmp == b[0] {
+			stk.Pop()
+			b = b[1:]
+			continue
+		}
+
+		if a[0] == b[0] {
+			a = a[1:]
+			b = b[1:]
+		} else {
+			stk.Push(a[0])
+			a = a[1:]
+		}
+	}
+
+	if stk.Len() == 0 {
+		return true
+	}
+
+	for stk.Len() > 0 {
+		v, _ := stk.Pop()
+		if v == b[0] {
+			b = b[1:]
+		} else {
+			return false
+		}
+	}
+	return true
+}
+
+// 链表倒数第k个节点
+func FindBackN(head *common.ListNode, k int) (v int, err error) {
+	if head == nil {
+		return 0, errors.New("invalid")
+	}
+
+	if k <= 0 {
+		return 0, errors.New("invalid")
+	}
+
+	p1 := head
+	for p1 != nil && k > 0 {
+		p1 = p1.Next
+		k--
+	}
+
+	if k > 0 {
+		return 0, errors.New("invalid")
+	}
+	p2 := head
+	for p1 != nil {
+		p1 = p1.Next
+		p2 = p2.Next
+	}
+	return p2.Val, nil
+}
+
+// 简单的urlenocde替换，' '=> "%20"
+func Rep(str []byte) []byte {
+	if len(str) == 0 {
+		return nil
+	}
+
+	var cnt int
+	for _, c := range str {
+		if c == ' ' {
+			cnt++
+		}
+	}
+
+	l := len(str)
+	tmp := make([]byte, 2*cnt)
+	str = append(str, tmp...)
+	j := len(str) - 1
+	for i := l - 1; i >= 0; i-- {
+		if str[i] != ' ' {
+			str[j] = str[i]
+			j--
+		} else {
+			str[j-2] = '%'
+			str[j-1] = '2'
+			str[j] = '0'
+			j -= 3
+		}
+	}
+	return str
+}
 // 正则表达式
 // 模式中的字符'.'表示任意一个字符
 // 而'*'表示它前面的字符可以出现任意次（含0次）
@@ -463,28 +601,31 @@ func FindSequence(sum int) [][]int {
 	return ret
 }
 
-func FindMaxNoRepititionStr(str string) (int, int) {
+// 最长不重复子串
+func FindMaxNoRep(str string) (int, int) {
 	if len(str) == 0 {
 		return 0, 0
 	}
 
 	uniq := map[byte]int{}
-	i := 0
-	idx := i
-	max := 1
-	uniq[str[0]] = 0
-	for j := 1; j < len(str); j++ {
-		if beg, ok := uniq[str[j]]; !ok {
-			if j-i+1 > max {
-				idx = i
-				max = j - i + 1
+	idx := 0     // 最终返回值，最长子串的idx
+	max := -1    // 最终返回值，最长子串的长度
+	currIdx := 0 // 当前子串的开始idx
+	for i, c := range []byte(str) {
+		if repIdx, ok := uniq[c]; !ok {
+			uniq[c] = i
+			length := i - currIdx + 1
+			if length > max {
+				max = length
+				idx = currIdx // 将当前开始idx，作为返回结果
 			}
-			uniq[str[j]] = j
 		} else {
-			for ; i <= beg; i++ {
-				delete(uniq, str[i])
+			// 将重复的子串部分，全部清除掉
+			for j := currIdx; j <= repIdx; j++ {
+				delete(uniq, str[j])
 			}
-			uniq[str[j]] = j
+			uniq[c] = i          // 重复部分已清除，新字符入uniq
+			currIdx = repIdx + 1 // 当前子串的起始位置从清除后的位置开始
 		}
 	}
 
@@ -544,25 +685,23 @@ func check(str string) bool {
 	}
 }
 
-// 连续子数组最大和的值
-func CalcSeq(arr []int) int {
+// 连续子数组最大值
+func CalcDynamic(arr []int) (int, error) {
 	if len(arr) == 0 {
-		return 0
+		return 0, nil
 	}
-
-	sum := 0
-	max := math.MinInt
-	for _, v := range arr {
-		sum += v
-		if sum > max {
-			max = sum
-		}
+	max := arr[0]
+	sum := arr[0]
+	for j := 1; j < len(arr); j++ {
 		if sum < 0 {
 			sum = 0
 		}
+		sum = sum + arr[j]
+		if sum > max {
+			max = sum
+		}
 	}
-
-	return max
+	return max, nil
 }
 
 // 二叉树中和为某一值的路径
@@ -597,7 +736,7 @@ func findSumPath(root *common.TreeNode, num, curr int, path []int) ([]int, bool)
 		}
 	}
 
-	path = path[0 : len(path)-1]
+	//path = path[0 : len(path)-1]
 	return path, false
 }
 
@@ -632,6 +771,33 @@ func PrintTreeInLine(root *common.TreeNode) error {
 	return nil
 }
 
+// 判断二叉树是否对称
+func Symmetry(root *common.TreeNode) bool {
+	return symmetry(root, root)
+}
+
+func symmetry(root1, root2 *common.TreeNode) bool {
+	// 结束条件
+	if root1 == nil && root2 == nil {
+		return true
+	}
+	// 结束条件：有一个非空，必然不是镜像
+	if root1 == nil || root2 == nil {
+		return false
+	}
+
+	// 结束条件：根不相同，必然不是镜像
+	if root1.Val != root2.Val {
+		return false
+	}
+
+	//递归比较
+	//注意顺序：左子树和右子树对比
+	return symmetry(root1.Left, root2.Right) &&
+		symmetry(root1.Right, root2.Left)
+}
+
+// 求镜像
 func Mirror(root *common.TreeNode) *common.TreeNode {
 	if root == nil {
 		return root

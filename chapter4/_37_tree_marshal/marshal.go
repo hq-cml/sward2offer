@@ -7,7 +7,7 @@ package _37_tree_marshal
 import (
 	"fmt"
 	"github.com/hq-cml/sward2offer/common"
-	"strconv"
+	"github.com/spf13/cast"
 	"strings"
 )
 
@@ -37,47 +37,26 @@ func TreeUnMarshal(str string) *common.TreeNode {
 	//过滤掉最后逗号
 	str = strings.Trim(str, ",")
 
-	//idx作为str字符串的索引值
-	idx := 0
-	var root *common.TreeNode
-	unmarshal(str, &root, &idx)
+	root, _ := unMarshal(str)
 	return root
 }
 
-//关键是结束条件！
-//本质上，这还是要结合二叉树先序遍历的特点
-//root是二级指针，
-//关键是idx的使用，这是一个指针，所以他是随着构建，在不断向后
-func unmarshal(str string, root **common.TreeNode, idx *int) {
-	//退出条件：*idx最大值就是len(str)-1
-	if *idx > len(str)-1 {
-		return
+// 递归，不断消耗掉str，直到为空
+// 第二返回值表示的是剩余的str
+func unMarshal(str string) (*common.TreeNode, string) {
+	if len(str) == 0 {
+		return nil, str
+	}
+	tmp := strings.Split(str, ",")
+	if tmp[0] == "$" {
+		return nil, strings.Join(tmp[1:], ",")
+	}
+	root := &common.TreeNode{
+		Val: cast.ToInt(tmp[0]),
 	}
 
-	//求出根的字符
-	tmpIdx := strings.Index(str[*idx:], ",")
-	if tmpIdx == -1 {
-		//出现这种情况，说明只有一个$，即整个树是nil
-		return
-	}
-
-	if str[*idx:*idx+tmpIdx] == "$" { //$,
-		//当前这一枝儿，是空的
-		*root = nil
-		*idx += 2
-		return
-	} else {
-		//当前这一枝儿，非空，有数字，比如：123,
-		val, _ := strconv.Atoi(str[*idx : *idx+tmpIdx])
-		*root = &common.TreeNode{
-			Val: val,
-		}
-		*idx = *idx + tmpIdx + 1 //idx指向了下一个数字（可能是数字，也可能是$）
-	}
-
-	//递归的构建左子树（idx是指针，所以*idx是可以不断增长的）
-	unmarshal(str, &(*root).Left, idx)
-
-	//递归得构建右子树
-	unmarshal(str, &(*root).Right, idx)
+	// 递归左右
+	root.Left, str = unMarshal(strings.Join(tmp[1:], ","))
+	root.Right, str = unMarshal(str)
+	return root, str
 }
