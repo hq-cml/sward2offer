@@ -10,16 +10,13 @@ import (
 func OddEven1() {
 	var wg sync.WaitGroup
 	wg.Add(2)
-	notifyOdd := make(chan struct{})
-	notifyEven := make(chan struct{})
-	var max = 100
+	notifyOdd := make(chan struct{}, 1) // chan需要有1个容量，否则会有问题
+	notifyEven := make(chan struct{}, 1)
+	var max = 10
+
+	// 打印奇数
 	go func() {
 		defer wg.Done()
-		defer func() {
-			if r := recover(); r != nil {
-				fmt.Println("Odd err:", r)
-			}
-		}()
 		var i = 1
 		for {
 			<-notifyOdd
@@ -27,28 +24,23 @@ func OddEven1() {
 			notifyEven <- struct{}{}
 			i += 2
 			if i > max {
-				close(notifyOdd)
+				close(notifyEven) // close通常由写的一方来实现
 				break
 			}
 		}
 	}()
 
+	// 偶数
 	go func() {
 		defer wg.Done()
-		defer func() {
-			if r := recover(); r != nil {
-				fmt.Println("Even err:", r)
-			}
-		}()
 		var i = 2
 		for {
 			<-notifyEven
 			fmt.Println("Even: ", i)
-			//time.Sleep(1 * time.Second)
 			notifyOdd <- struct{}{}
 			i += 2
 			if i > max {
-				close(notifyEven)
+				close(notifyOdd)
 				break
 			}
 		}

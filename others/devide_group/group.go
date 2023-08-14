@@ -34,6 +34,7 @@ func init() {
 	rand.Seed(time.Now().Unix())
 }
 
+// 分组，核心思想是DFS深度探测
 func DevideGroup(groupList [][]string) ([][]string, error) {
 	// 入参校验
 	err := checkParams(groupList)
@@ -41,19 +42,40 @@ func DevideGroup(groupList [][]string) ([][]string, error) {
 		return nil, err
 	}
 
-	// 将每个初始队列洗牌，保证充分的随机性
+	// 将每个初始队列先洗牌随机打乱内部顺序，保证充分的随机性
+	for i := 0; i < len(groupList); i++ {
+		shuffle(groupList[i])
+	}
 
 	// 进行分组
 	grpPtr := make([]int, len(groupList)) // 每个输入组的下一个候选人指针
 	var result [][]string
-	devide(groupList, grpPtr, &result)
+	devide(groupList, grpPtr, &result, 2)
 
 	return result, nil
 }
 
-func devide(grpList [][]string, grpPtr []int, result *[][]string) bool {
-	// 随机确定队人数，每2个人组一队或者3个人组一队
-	memberCnt := 2 + rand.Intn(2)
+// 随机打乱一个队列
+func shuffle(s []string) {
+	if len(s) <= 1 {
+		return
+	}
+	for i := len(s) - 1; i > 0; i-- {
+		idx := rand.Intn(i)
+		s[idx], s[i] = s[i], s[idx]
+	}
+}
+
+// dfs深度探测
+//
+//	grpPtr 表示所有候选队列当前消耗到的成员指针
+//	result 保存最终结果
+//	memberCnt 期望组队成员数，只能是2或者3
+func devide(grpList [][]string, grpPtr []int, result *[][]string, memberCnt int) bool {
+	// 如果memberCnt>3，则说明2人组和3人组的方案都失败了，则此分支不再可能有正确结果！
+	if memberCnt > 3 {
+		return false
+	}
 
 	// 查看还有哪些队列非空
 	var candidateGrp []int
@@ -86,7 +108,7 @@ func devide(grpList [][]string, grpPtr []int, result *[][]string) bool {
 	}
 
 	// DFS深度探测剩下的
-	if devide(grpList, grpPtr, result) {
+	if devide(grpList, grpPtr, result, 2) {
 		// 探测成功！
 		return true
 	}
@@ -96,7 +118,9 @@ func devide(grpList [][]string, grpPtr []int, result *[][]string) bool {
 	for _, idx := range pickedGrp {
 		grpPtr[idx]--
 	}
-	return devide(grpList, grpPtr, result)
+
+	// 继续探测：2人组队方案失败，则尝试3人组队（4人组队则会直接失败）
+	return devide(grpList, grpPtr, result, memberCnt+1)
 }
 
 // 完美结局判断，所有的候选组，全部用完 & 组队同时存在2个和3个成员
