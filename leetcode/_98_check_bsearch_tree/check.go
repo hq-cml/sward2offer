@@ -5,32 +5,49 @@
  * 节点的右子树只包含 大于 当前节点的数。
  * 所有左子树和右子树自身必须也是二叉搜索树。
  *
+ * 例子：输入是按层来体现的
  * 输入：root = [2,1,3] => 输出：true
  * 输入：root = [5,1,4,null,null,3,6] => 输出：false
+ * 输入：[5,4,6,null,null,3,7] => false
  * 解释：根节点的值是 5 ，但是右子节点的值是 4 。
  */
 package _98_check_bsearch_tree
 
-// 0表示null
-func Check(node []int) bool {
-	length := len(node)
-	if length <= 1 {
+import (
+	"github.com/hq-cml/sward2offer/common"
+	"math"
+)
+
+// 这题很容易就进入误区，只判断根节点和左右子节点
+// 实际上应该是根节点和他的左右子树！
+func IsValidBST(root *common.TreeNode) bool {
+	if root == nil {
 		return true
 	}
 
-	for i := 0; i < length; i++ {
-		v := node[i]
-		left := 2*i + 1
-		right := 2*i + 2
-		if v == 0 {
-			continue // 空
-		}
-		if left <= length-1 && node[left] != 0 && node[left] > v {
-			return false
-		}
-		if right <= length-1 && node[right] != 0 && node[right] < v {
-			return false
-		}
+	if root.Left == nil && root.Right == nil {
+		return true
 	}
-	return true
+
+	if root.Left != nil && !check(root.Left, math.MinInt, root.Val) {
+		return false
+	}
+
+	if root.Right != nil && !check(root.Right, root.Val, math.MaxInt) {
+		return false
+	}
+
+	return IsValidBST(root.Left) && IsValidBST(root.Right)
+}
+
+// 判断一棵树的所有子树，均处于一个区间内！
+func check(root *common.TreeNode, lower, upper int) bool {
+	if root == nil {
+		return true
+	}
+	// 这里注意，根据定义，如果==，也是不合法的二叉搜索树
+	if root.Val <= lower || root.Val >= upper {
+		return false
+	}
+	return check(root.Left, lower, upper) && check(root.Right, lower, upper)
 }

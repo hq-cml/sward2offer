@@ -28,7 +28,7 @@ func TestCalc(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Calc(tt.args.n); got != tt.want {
+			if got := CalcTreeCnt(tt.args.n); got != tt.want {
 				t.Errorf("Calc() = %v, want %v", got, tt.want)
 			}
 		})

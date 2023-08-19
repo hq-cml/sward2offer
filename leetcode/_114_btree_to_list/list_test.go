@@ -24,6 +24,18 @@ func TestTransfer(t *testing.T) {
 			},
 			want: nil,
 		},
+		{
+			name: "case2",
+			args: args{
+				root: common.NewNodeWithChild(3,
+					common.NewNodeWithChild(1,
+						common.NewNode(3),
+						nil),
+					common.NewNodeWithChild(4, common.NewNode(1),
+						common.NewNode(5))),
+			},
+			want: nil,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

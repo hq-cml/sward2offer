@@ -8,3 +8,15 @@
  * 输入：nums = [1] => 1
  */
 package _136_only_one_num
+
+// 编程之美，直接利用异或
+func SingleNumber(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+	num := nums[0]
+	for i := 1; i < len(nums); i++ {
+		num = num ^ nums[i]
+	}
+	return num
+}

@@ -1,10 +1,13 @@
 package _98_check_bsearch_tree
 
-import "testing"
+import (
+	"github.com/hq-cml/sward2offer/common"
+	"testing"
+)
 
-func TestCheck(t *testing.T) {
+func Test_isValidBST(t *testing.T) {
 	type args struct {
-		node []int
+		root *common.TreeNode
 	}
 	tests := []struct {
 		name string
@@ -14,22 +17,21 @@ func TestCheck(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				node: []int{2, 1, 3},
-			},
-			want: true,
-		},
-		{
-			name: "case2",
-			args: args{
-				node: []int{5, 1, 4, 0, 0, 3, 6},
+				root: common.NewNodeWithChild(5,
+					common.NewNodeWithChild(4,
+						nil,
+						nil),
+					common.NewNodeWithChild(6,
+						common.NewNode(3),
+						common.NewNode(7))),
 			},
 			want: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Check(tt.args.node); got != tt.want {
-				t.Errorf("Check() = %v, want %v", got, tt.want)
+			if got := IsValidBST(tt.args.root); got != tt.want {
+				t.Errorf("isValidBST() = %v, want %v", got, tt.want)
 			}
 		})
 	}
