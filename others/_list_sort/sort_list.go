@@ -1,16 +1,16 @@
 /*
  * tt面试题：链表的归并排序
  */
-package _merge_order_list
+package _list_sort
 
 import (
 	"github.com/hq-cml/sward2offer/chapter3/_25_merge_order_list"
 	"github.com/hq-cml/sward2offer/common"
 )
 
-//归并排序的思路：
-//先拆，分而治之，然后在逐个合并
-//合并的部分，用到了之前“有序链表合并”的代码
+// 归并排序的思路：
+// 先拆，分而治之，然后在逐个合并
+// 合并的部分，用到了之前“有序链表合并”的代码
 func MergeListSort(head *common.ListNode) *common.ListNode {
 	if head == nil || head.Next == nil {
 		return head
