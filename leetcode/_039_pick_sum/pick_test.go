@@ -33,7 +33,7 @@ func TestFind(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := Find(tt.args.arr, tt.args.target)
+			got := FindAllCombin(tt.args.arr, tt.args.target)
 			fmt.Println(got)
 		})
 	}

@@ -1,6 +1,9 @@
 package _62_different_path
 
-import "testing"
+import (
+	"github.com/hq-cml/sward2offer/temp"
+	"testing"
+)
 
 func TestCalcPath(t *testing.T) {
 	type args struct {
@@ -39,7 +42,7 @@ func TestCalcPath(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := CalcPath(tt.args.m, tt.args.n); got != tt.want {
+			if got := temp.CalcPath(tt.args.m, tt.args.n); got != tt.want {
 				t.Errorf("CalcPath() = %v, want %v", got, tt.want)
 			}
 		})

@@ -1,6 +1,8 @@
 package _055_jump_game
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestJump(t *testing.T) {
 	type args struct {

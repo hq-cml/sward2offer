@@ -5,34 +5,36 @@
  */
 package _bracket_match
 
-import (
-	"github.com/hq-cml/sward2offer/common"
-)
-
+// 括号匹配
 func Match(str string) bool {
-	stk := common.NewStack(false)
-	for _, c := range str {
+	if len(str) == 0 {
+		return true
+	}
+	var stk []byte
+	for _, c := range []byte(str) {
 		switch c {
-		case '{', '[', '(':
-			stk.Push(byte(c))
+		case '(', '[', '{':
+			stk = append(stk, c) // push
 		case ')', ']', '}':
-			if stk.Len() == 0 {
+			if len(stk) == 0 {
 				return false
 			}
-			top, _ := stk.Top()
-			tc := top.(byte)
-			if (tc == '(' && c == ')') ||
-				(tc == '[' && c == ']') ||
-				(tc == '{' && c == '}') {
-				stk.Pop()
+			top := stk[len(stk) - 1]
+			if (top == '(' && c == ')' ) ||
+				(top == '[' && c == ']' ) ||
+				(top == '{' && c == '}' ) {
+				stk = stk[:len(stk)-1] // pop
 			} else {
 				return false
 			}
+		default:
+			return false
 		}
 	}
 
-	if stk.Len() > 0 {
-		return false //比如：{{[[
+	//特殊case比如：{{[[
+	if len(stk) > 0 {
+		return false
 	}
 	return true
 }

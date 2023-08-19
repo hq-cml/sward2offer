@@ -63,6 +63,5 @@ func CalcMax(arr []byte) int {
 			max = v
 		}
 	}
-
 	return max
 }

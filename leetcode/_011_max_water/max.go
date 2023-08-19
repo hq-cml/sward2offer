@@ -27,6 +27,7 @@ func MaxWater(arr []int) int {
 		if water > max {
 			max = water
 		}
+		// 木桶原理，取决于最短板，此时如果移动长的板只可能变得更少！
 		if arr[i] < arr[j] {
 			// i更矮，则应该右移i，因为如果左移j，无论怎么移动，都不可能得到更多的水
 			i++
