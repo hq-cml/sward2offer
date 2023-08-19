@@ -136,11 +136,7 @@ func TestFindMajority2(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := FindMajority2(tt.args.arr)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("FindMajority2() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			got := FindMajority2(tt.args.arr)
 			if got != tt.want {
 				t.Errorf("FindMajority2() got = %v, want %v", got, tt.want)
 			}

@@ -10,6 +10,45 @@ import (
 	"strconv"
 )
 
+// 课程表，有向无环图判断
+func CanFinish(numCourses int, prerequisites [][]int) bool {
+	var allCourse = map[int]int{}
+	for c := 0; c < numCourses; c++ {
+		allCourse[c] = 0 // 所有课程的入度
+	}
+
+	// 分析所有课程的出度，以及得到课程间的映射关系
+	m := map[int][]int{}
+	for _, pair := range prerequisites {
+		s, d := pair[1], pair[0]
+		allCourse[d]++
+		m[s] = append(m[s], d)
+	}
+
+	for len(allCourse) > 0 {
+		findZero := false
+		for c, indegree := range allCourse {
+			if indegree == 0 {
+				// 入度为0，则可以学习
+				delete(allCourse, c)
+
+				// 学习完成之后，则当前课程的下游课程的入度应该递减
+				for _, t := range m[c] {
+					allCourse[t]--
+				}
+				findZero = true
+			}
+		}
+
+		// 如果一轮下来，没在发现入度为0的课程且此时还存在没学完的课程
+		// 则说明存在环
+		if !findZero && len(allCourse) != 0 {
+			return false
+		}
+	}
+	return true
+}
+
 // 二叉搜索树判断
 func IsValidBST(root *common.TreeNode) bool {
 	if root == nil {

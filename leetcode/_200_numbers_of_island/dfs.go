@@ -6,30 +6,31 @@
 package _200_numbers_of_island
 
 // 思路：仍然是dfs深度遍历的变种
-//      遍历整个数组，一旦遇到一块陆地，则进行dfs深度，将所有的连接的陆地连城一块
-func IslandNum(arr [][]byte) int {
+//
+//	遍历整个数组，一旦遇到一块陆地，则进行dfs深度，将所有的连接的陆地连城一块
+func IslandNum(grid [][]byte) int {
 	// 初步校验
-	rows := len(arr)
+	rows := len(grid)
 	if rows < 1 {
 		return 0
 	}
-	cols := len(arr[0])
+	cols := len(grid[0])
 	if cols < 1 {
 		return 0
 	}
 
 	// 已访问标记
 	var visited [][]bool
-	for i:=0; i<rows; i++ {
+	for i := 0; i < rows; i++ {
 		visited = append(visited, make([]bool, cols))
 	}
 
 	// 逐个探测
 	cnt := 0
-	for i:=0; i<rows; i++ {
-		for j:=0; j<cols; j++ {
+	for i := 0; i < rows; i++ {
+		for j := 0; j < cols; j++ {
 			// 奔着新陆地
-			dsfIsland(arr, rows, cols, i, j, visited, &cnt, true)
+			dsfIsland(grid, rows, cols, i, j, visited, &cnt, true)
 		}
 	}
 	return cnt
@@ -59,7 +60,7 @@ func dsfIsland(arr [][]byte, rows, cols, i, j int, visited [][]bool, cnt *int, n
 
 	// 遇到陆地
 	if new {
-		*cnt ++ // 是新陆地，岛屿自增
+		*cnt++ // 是新陆地，岛屿自增
 	}
 	dsfIsland(arr, rows, cols, i+1, j, visited, cnt, false) // 非新陆地
 	dsfIsland(arr, rows, cols, i, j+1, visited, cnt, false)

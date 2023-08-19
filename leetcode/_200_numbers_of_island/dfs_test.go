@@ -1,6 +1,9 @@
 package _200_numbers_of_island
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestSolve(t *testing.T) {
 	type args struct {
@@ -16,16 +19,16 @@ func TestSolve(t *testing.T) {
 			args: args{
 				arr: [][]byte{
 					{
-						1,1,1,1,0,
+						1, 1, 1, 1, 0,
 					},
 					{
-						1,1,0,1,0,
+						1, 1, 0, 1, 0,
 					},
 					{
-						1,1,0,0,0,
+						1, 1, 0, 0, 0,
 					},
 					{
-						0,0,0,0,0,
+						0, 0, 0, 0, 0,
 					},
 				},
 			},
@@ -36,16 +39,16 @@ func TestSolve(t *testing.T) {
 			args: args{
 				arr: [][]byte{
 					{
-						1,1,0,0,0,
+						1, 1, 0, 0, 0,
 					},
 					{
-						1,1,0,0,0,
+						1, 1, 0, 0, 0,
 					},
 					{
-						0,0,1,0,0,
+						0, 0, 1, 0, 0,
 					},
 					{
-						0,0,0,1,1,
+						0, 0, 0, 1, 1,
 					},
 				},
 			},
@@ -54,9 +57,11 @@ func TestSolve(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := IslandNum(tt.args.arr); got != tt.want {
+			got := IslandNum(tt.args.arr)
+			if got != tt.want {
 				t.Errorf("IslandNum() = %v, want %v", got, tt.want)
 			}
+			fmt.Println(got)
 		})
 	}
 }

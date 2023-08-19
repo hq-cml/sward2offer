@@ -20,12 +20,12 @@ import (
 //思路4：最巧妙，利用一个数字和她的计数器，来实现，遍历一次数组，相等加1，不等减1，为0则换下一个数字。
 //      这个思路其实就是每次都在数组中去除不同的两个成员，直到最终剩下的那个肯定是超过半数的数字。
 
-//思路3：
-//利用快排的Partition算法，不断探索中值；
-//如果中值的idx正好等于mid，则说明idx标识的值就是超过半数的；否则，则不断调整探索的边界
-//时间复杂度：O(logN)，这个明显要好于粗暴的排序
-//本质上是在找中位数，但是感觉多少有点难想到。。。
-//难度：3*
+// 思路3：
+// 利用快排的Partition算法，不断探索中值；
+// 如果中值的idx正好等于mid，则说明idx标识的值就是超过半数的；否则，则不断调整探索的边界
+// 时间复杂度：O(logN)，这个明显要好于粗暴的排序
+// 本质上是在找中位数，但是感觉多少有点难想到。。。
+// 难度：3*
 func FindMajority1(arr []int) (int, error) {
 	if len(arr) == 0 {
 		return 0, errors.New("invalid")
@@ -50,35 +50,25 @@ func FindMajority1(arr []int) (int, error) {
 	return 0, errors.New("Something wrong")
 }
 
-//思路4：
-//充分利用了超过半数，这一特点！！！
-//采用一次遍历，进行相同计数的方式，不同则减一
-//因为超过一半，则最终剩下的必然是最多的数
-//时间复杂度：N，这个比思路1又进一步牛逼了
-//难度：2*
-func FindMajority2(arr []int) (int, error) {
-	if len(arr) == 0 {
-		return 0, errors.New("Invalid arr")
-	}
+// 思路4：
+// 充分利用了超过半数，这一特点！！！
+// 采用一次遍历，进行相同计数的方式，不同则减一
+// 因为超过一半，则最终剩下的必然是最多的数
+// 时间复杂度：N，这个比思路1又进一步牛逼了
+// 难度：2*
+func FindMajority2(arr []int) int {
+	ret := 0
+	cnt := 0
+	for _, v := range arr {
+		if cnt == 0 {
+			ret = v
+		}
 
-	currNum := arr[0]
-	currCnt := 1
-	for i := 1; i < len(arr); i++ {
-		if currNum == arr[i] {
-			currCnt++
+		if ret == v {
+			cnt++
 		} else {
-			currCnt--
-		}
-		// 妙
-		if currCnt == 0 {
-			if i == len(arr) - 1 {
-				return 0, errors.New("Not Exist")
-			}
-			currNum = arr[i+1]
-			currCnt = 1
-			i++
+			cnt--
 		}
 	}
-
-	return currNum, nil
+	return ret
 }
