@@ -4,7 +4,7 @@ import "testing"
 
 func TestFindPath(t *testing.T) {
 	type args struct {
-		arr  []byte
+		arr  [][]byte
 		rows int
 		cols int
 		find string
@@ -17,7 +17,11 @@ func TestFindPath(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				arr:  []byte("abtgcfcsjdeh"),
+				arr: [][]byte{
+					[]byte("abtg"),
+					[]byte("cfcs"),
+					[]byte("jdeh"),
+				},
 				rows: 3,
 				cols: 4,
 				find: "bfce",
@@ -27,7 +31,11 @@ func TestFindPath(t *testing.T) {
 		{
 			name: "case2",
 			args: args{
-				arr:  []byte("abtgcfcsjdeh"),
+				arr: [][]byte{
+					[]byte("abtg"),
+					[]byte("cfcs"),
+					[]byte("jdeh"),
+				},
 				rows: 3,
 				cols: 4,
 				find: "abfb",
@@ -37,7 +45,11 @@ func TestFindPath(t *testing.T) {
 		{
 			name: "case3",
 			args: args{
-				arr:  []byte("abtgcfcsjdeh"),
+				arr: [][]byte{
+					[]byte("abtg"),
+					[]byte("cfcs"),
+					[]byte("jdeh"),
+				},
 				rows: 3,
 				cols: 4,
 				find: "abtgshedjc",
@@ -47,7 +59,11 @@ func TestFindPath(t *testing.T) {
 		{
 			name: "case4",
 			args: args{
-				arr:  []byte("abtgcfcsjdeh"),
+				arr: [][]byte{
+					[]byte("abtg"),
+					[]byte("cfcs"),
+					[]byte("jdeh"),
+				},
 				rows: 3,
 				cols: 4,
 				find: "abtgshedjca",
@@ -57,7 +73,11 @@ func TestFindPath(t *testing.T) {
 		{
 			name: "case5",
 			args: args{
-				arr:  []byte("abtgcfcsjdeh"),
+				arr: [][]byte{
+					[]byte("abtg"),
+					[]byte("cfcs"),
+					[]byte("jdeh"),
+				},
 				rows: 3,
 				cols: 4,
 				find: "q",
@@ -67,7 +87,11 @@ func TestFindPath(t *testing.T) {
 		{
 			name: "case6",
 			args: args{
-				arr:  []byte("abtgcfcsjdeh"),
+				arr: [][]byte{
+					[]byte("abtg"),
+					[]byte("cfcs"),
+					[]byte("jdeh"),
+				},
 				rows: 3,
 				cols: 4,
 				find: "g",
@@ -77,7 +101,7 @@ func TestFindPath(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := FindPath(tt.args.arr, tt.args.rows, tt.args.cols, tt.args.find); got != tt.want {
+			if got := Exist(tt.args.arr, tt.args.find); got != tt.want {
 				t.Errorf("FindPath() = %v, want %v", got, tt.want)
 			}
 		})

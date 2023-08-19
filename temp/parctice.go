@@ -10,6 +10,167 @@ import (
 	"strconv"
 )
 
+// 二叉搜索树判断
+func IsValidBST(root *common.TreeNode) bool {
+	if root == nil {
+		return true
+	}
+
+	if root.Left == nil && root.Right == nil {
+		return true
+	}
+
+	if root.Left != nil && !checkBST(root.Left, math.MinInt, root.Val) {
+		return false
+	}
+
+	if root.Right != nil && !checkBST(root.Right, root.Val, math.MaxInt) {
+		return false
+	}
+
+	return IsValidBST(root.Left) && IsValidBST(root.Right)
+}
+
+// 判断一棵树的所有子树，均处于一个区间内！
+func checkBST(root *common.TreeNode, lower, upper int) bool {
+	if root == nil {
+		return true
+	}
+	// 这里注意，根据定义，如果==，也是不合法的二叉搜索树
+	if root.Val <= lower || root.Val >= upper {
+		return false
+	}
+	return checkBST(root.Left, lower, upper) && checkBST(root.Right, lower, upper)
+}
+
+// 1..n，一共n个数字，组成多少种二叉搜索树
+func CalcTreeCnt(n int) int {
+	g := make([]int, n+1)
+	g[0] = 1
+	g[1] = 1
+
+	// 从2开始，一直到n，计算出每一个G[i]
+	for i := 2; i <= n; i++ {
+		cnt := 0
+		for j := 0; j < i; j++ {
+			cnt += g[j] * g[i-j-1]
+		}
+		g[i] = cnt
+	}
+
+	return g[n]
+}
+
+// 子集组合的穷举
+func PickSet(arr []int) [][]int {
+	if len(arr) == 0 {
+		return nil
+	}
+
+	length := len(arr)
+	var ret [][]int
+	for n := 0; n <= length; n++ {
+		ret = append(ret, pickSet(arr, n)...)
+	}
+
+	return ret
+}
+
+// 从数组中取出n个元素，所有的组合可能性
+func pickSet(arr []int, n int) [][]int {
+	var ret [][]int
+	if n == 0 {
+		ret = append(ret, []int{})
+		return ret
+	}
+
+	if n == len(arr) {
+		ret = append(ret, arr)
+		return ret
+	}
+
+	// 挨个取出元素
+	for i, v := range arr {
+		var left []int
+		//直觉上应该把arr[:i]也算上
+		//但实际上，如果算上会出现重复，不算则刚好
+		//left = append(left, arr[:i]...)
+		left = append(left, arr[i+1:]...)
+		tmp := pickSet(left, n-1)
+		for _, t := range tmp {
+			t = append(t, v)
+			ret = append(ret, t)
+		}
+	}
+	return ret
+}
+
+// 一个数组，和一个目标数，找出所有可能的不重复组合，保证子数组和==目标数，元素可以重复使用
+func FindAllCombin(arr []int, target int) [][]int {
+	if len(arr) == 0 {
+		return nil
+	}
+	var ret [][]int
+	var curr []int
+	sort.Ints(arr) // 先排序
+
+	// dfs
+	var find func(arr []int, begIdx int, crr []int, target int)
+	find = func(arr []int, begIdx int, curr []int, target int) {
+		// 每个成员都有尝试的必要
+		for idx, v := range arr {
+			// idx只能>=begIdx，进而保证了不出现重复
+			if idx < begIdx {
+				continue
+			}
+
+			// 如果找到need，则得到一组结果，否则，继续dfs
+			if v == target {
+				ret = append(ret, append(curr, v))
+			} else if v < target {
+				// target > v才有进一步找的必要（因为数组是递增的正整数）
+				find(arr, idx, append(curr, v), target-v)
+			} else {
+				continue
+			}
+		}
+	}
+	find(arr, 0, curr, target)
+	return ret
+}
+
+// 在旋转数组中二分查找变种
+func FindInRotateArr(arr []int, target int) int {
+	if len(arr) == 0 {
+		return -1
+	}
+
+	beg := 0
+	end := len(arr) - 1
+
+	for beg <= end {
+		mid := (end-beg)/2 + end
+		if arr[mid] == target {
+			return mid
+		} else if arr[mid] > arr[beg] {
+			// 选转部分不在前半部分，在后半部，所以前半部是递增的
+			if target >= arr[beg] && target < arr[mid] {
+				end = mid - 1
+			} else {
+				beg = mid + 1
+			}
+		} else {
+			// 旋转部分不在后半部，在前半部，所以后半部分是递增的
+			if target > arr[mid] && target <= arr[end] {
+				beg = mid + 1
+			} else {
+				end = mid - 1
+			}
+		}
+	}
+	return -1
+}
+
 // 二叉排序树转换成双向链表
 func Convert(root *common.TreeNode) *common.TreeNode {
 	var currTail *common.TreeNode
@@ -148,6 +309,7 @@ func Rep(str []byte) []byte {
 	}
 	return str
 }
+
 // 正则表达式
 // 模式中的字符'.'表示任意一个字符
 // 而'*'表示它前面的字符可以出现任意次（含0次）
@@ -1069,24 +1231,23 @@ func PostTree(root *common.TreeNode) {
 	if root == nil {
 		return
 	}
-	stk := common.NewStack(false)
-	p := root
+	var stk []*common.TreeNode
 	var pre *common.TreeNode
-	for p != nil || stk.Len() > 0 {
+	p := root
+	for p != nil || len(stk) > 0 {
 		for p != nil {
-			stk.Push(p)
+			stk = append(stk, p) // push
 			p = p.Left
 		}
-		top, _ := stk.Top()
-		node := top.(*common.TreeNode)
+		node := stk[len(stk)-1] // top
+
 		if node.Right != nil && node.Right != pre {
 			p = node.Right
 		} else {
+			stk = stk[:len(stk)-1] // pop
 			fmt.Println(node.Val)
-			stk.Pop()
 			pre = node
 		}
-
 	}
 }
 
@@ -1094,15 +1255,15 @@ func MidTree(root *common.TreeNode) {
 	if root == nil {
 		return
 	}
-	stk := common.NewStack(false)
+	var stk []*common.TreeNode
 	p := root
-	for p != nil || stk.Len() > 0 {
+	for p != nil || len(stk) > 0 {
 		for p != nil {
-			stk.Push(p)
+			stk = append(stk, p) // push
 			p = p.Left
 		}
-		top, _ := stk.Pop()
-		node := top.(*common.TreeNode)
+		node := stk[len(stk)-1] // pop
+		stk = stk[:len(stk)-1]
 		fmt.Println(node.Val)
 		if node.Right != nil {
 			p = node.Right
@@ -1114,17 +1275,16 @@ func PreTree(root *common.TreeNode) {
 	if root == nil {
 		return
 	}
-	stk := common.NewStack(false)
-	//stk.Push(root)
+	var stk []*common.TreeNode
 	p := root
-	for p != nil || stk.Len() > 0 {
+	for p != nil || len(stk) > 0 {
 		for p != nil {
-			stk.Push(p)
+			stk = append(stk, p) // push
 			fmt.Println(p.Val)
 			p = p.Left
 		}
-		top, _ := stk.Pop()
-		node := top.(*common.TreeNode)
+		node := stk[len(stk)-1] // pop
+		stk = stk[:len(stk)-1]
 		if node.Right != nil {
 			p = node.Right
 		}

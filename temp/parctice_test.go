@@ -171,7 +171,7 @@ func TestReverseList(t *testing.T) {
 	}
 }
 
-func TestPostTree(t *testing.T) {
+func TestTree(t *testing.T) {
 	type args struct {
 		root *common.TreeNode
 	}
@@ -833,7 +833,7 @@ func TestFindMaxNoRepititionStr(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := FindMaxNoRepititionStr(tt.args.str)
+			got, got1 := FindMaxNoRep(tt.args.str)
 			if got != tt.want {
 				t.Errorf("FindMaxNoRepititionStr() got = %v, want %v", got, tt.want)
 			}

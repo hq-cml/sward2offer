@@ -12,61 +12,70 @@
  */
 package _12_find_path
 
-//回溯法
-//通常，都是利用栈或者递归来实现！
-//难度：5*
-func FindPath(arr []byte, rows, cols int, find string) bool {
-	if rows < 1 || cols < 1 || len(arr) != rows*cols {
+// 回溯法
+// 通常，都是利用栈或者递归来实现！
+// 难度：5*
+func Exist(board [][]byte, word string) bool {
+	rows := len(board)
+	if rows == 0 {
 		return false
 	}
-	visited := make([]bool, rows*cols)
-	idx := 0
+	cols := len(board[0])
+	if cols == 0 {
+		return false
+	}
+
+	visited := make([][]bool, rows)
+	for i := 0; i < rows; i++ {
+		visited[i] = make([]bool, cols)
+	}
+
 	//可从任意一个格子开始，任意一般性
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
-			if findPath(arr, rows, cols, i, j, find, idx, visited) { //发现任意一条路，即可退出
+			if dfsExist(board, word, rows, cols, i, j, visited) {
 				return true
 			}
 		}
 	}
-
 	return false
 }
 
-//递归
-//idx表示本轮要检测的是find的第idx位字符(idx从0开始)
-//row，col表示本次探测，是针对arr数组的哪一个元素
-func findPath(arr []byte, rows, cols int, row, col int, find string, idx int, visited []bool) bool {
+// 递归
+func dfsExist(board [][]byte, word string, rows, cols int, i, j int, visited [][]bool) bool {
 	//探测完毕，完全成功，符合要求
-	if idx >= len(find) {
+	if len(word) == 0 {
 		return true
 	}
 
 	//异常边界
-	if row < 0 || row >= rows || col < 0 || col >= cols {
+	if i < 0 || j < 0 || i >= rows || j >= cols {
 		return false
 	}
 
-	//如果探测不成功或者探测的目标已经访问过，则探测失败，返回false
-	if arr[row*cols+col] != find[idx] || visited[row*cols+col] {
+	//探测的目标已经访问过，则探测失败，返回false
+	if visited[i][j] {
+		return false
+	}
+
+	// 对比当前字符
+	if word[0] != board[i][j] {
 		return false
 	}
 
 	//当前这个字符，阶段性成功，标记已经访问的路径
-	visited[row*cols+col] = true
+	visited[i][j] = true
 
 	//沿着当前道路，继续向上、下、左、右去探测，只要有一条路ok了，就说明当前位置是ok的
-	ok := findPath(arr, rows, cols, row, col+1, find, idx+1, visited) ||
-		findPath(arr, rows, cols, row, col-1, find, idx+1, visited) ||
-		findPath(arr, rows, cols, row+1, col, find, idx+1, visited) ||
-		findPath(arr, rows, cols, row-1, col, find, idx+1, visited)
-
-	if ok {
+	if dfsExist(board, word[1:], rows, cols, i+1, j, visited) ||
+		dfsExist(board, word[1:], rows, cols, i, j+1, visited) ||
+		dfsExist(board, word[1:], rows, cols, i-1, j, visited) ||
+		dfsExist(board, word[1:], rows, cols, i, j-1, visited) {
 		//任意一条成功，则返回成功
 		return true
 	} else {
 		//上下左右均失败，则说明当前点不是一个合适的路径，探测失败，并且需要回退
-		visited[row*cols+col] = false
+		visited[i][j] = false
 		return false
 	}
 }
