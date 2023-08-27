@@ -10,6 +10,33 @@ import (
 	"strconv"
 )
 
+// 最长递增子序列
+func SubList(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	// 初始化都是1，因为1个元素的子序列也是满足条件的
+	dp := make([]int, len(nums))
+	for i := 0; i < len(nums); i++ {
+		dp[i] = 1
+	}
+
+	// 从第二个开始
+	var max int = 1
+	for i := 1; i < len(nums); i++ {
+		for j := i - 1; j >= 0; j-- {
+			if nums[j] < nums[i] && dp[j]+1 > dp[i] {
+				dp[i] = dp[j] + 1
+				if dp[i] > max {
+					max = dp[i]
+				}
+			}
+		}
+	}
+	return max
+}
+
 // 课程表，有向无环图判断
 func CanFinish(numCourses int, prerequisites [][]int) bool {
 	var allCourse = map[int]int{}
@@ -941,6 +968,7 @@ func findSumPath(root *common.TreeNode, num, curr int, path []int) ([]int, bool)
 	return path, false
 }
 
+// 树按行打印
 func PrintTreeInLine(root *common.TreeNode) error {
 	if root == nil {
 		return nil
@@ -1009,6 +1037,7 @@ func Mirror(root *common.TreeNode) *common.TreeNode {
 	return root
 }
 
+// 子树校验
 func CheckSubtree(root1, root2 *common.TreeNode) bool {
 	if checkSubtree(root1, root2) {
 		return true
