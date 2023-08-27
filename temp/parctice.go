@@ -10,6 +10,89 @@ import (
 	"strconv"
 )
 
+// 在二叉树上的抢劫
+func Rob(root *common.TreeNode) int {
+	// 难点在于此，如何设计这个map来暂存计算结果
+	// map的意义：key表示node节点的父亲节点
+	parentRobbed := map[*common.TreeNode]int{}    // 暂存父节点被偷的结果
+	parentNotRobbed := map[*common.TreeNode]int{} // 暂存父节点未被偷的结果
+	return helper(root, false, parentRobbed, parentNotRobbed)
+}
+
+// robFather，父亲是否被偷过
+func helper(node *common.TreeNode, robFather bool, parentRobbed, parentNotRobbed map[*common.TreeNode]int) int {
+	if node == nil {
+		return 0
+	}
+
+	if robFather {
+		// 父亲被偷，则当前不能偷了
+		if v, ok := parentRobbed[node]; ok {
+			return v
+		}
+		curr := helper(node.Left, false, parentRobbed, parentNotRobbed) +
+			helper(node.Right, false, parentRobbed, parentNotRobbed)
+		parentRobbed[node] = curr
+		return curr
+	} else {
+		// 父亲未被偷，则当前节点可偷可不偷
+		if v, ok := parentNotRobbed[node]; ok {
+			return v
+		}
+		yes := node.Val + helper(node.Left, true, parentRobbed, parentNotRobbed) +
+			helper(node.Right, true, parentRobbed, parentNotRobbed)
+		no := helper(node.Left, false, parentRobbed, parentNotRobbed) +
+			helper(node.Right, false, parentRobbed, parentNotRobbed)
+		curr := Max(yes, no)
+		parentNotRobbed[node] = curr
+		return curr
+	}
+}
+
+func Max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+// 凑零钱
+// 正确思路：动态规划
+//
+//	dp[i]表示，要凑出金额i，需要的最少钞票数，则假设钞票面额a,b,c 3种
+//	dp[i] = 1 + Min(dp[i-a], dp[i-b], dp[i-c])
+func CoinChange(coins []int, amount int) int {
+	if len(coins) == 0 {
+		return 0
+	}
+	dp := make([]int, amount+1)
+	dp[0] = 0
+	for i := 1; i <= amount; i++ {
+		min := math.MaxInt
+		for _, coin := range coins {
+			if coin < i {
+				if dp[i-coin] == -1 {
+					continue
+				}
+				if 1+dp[i-coin] < min {
+					min = 1 + dp[i-coin]
+				}
+			} else if coin == i {
+				min = 1
+				break
+			} else {
+				continue
+			}
+		}
+		if min != math.MaxInt {
+			dp[i] = min
+		} else {
+			dp[i] = -1
+		}
+	}
+	return dp[amount]
+}
+
 // 最长递增子序列
 func SubList(nums []int) int {
 	if len(nums) == 0 {
