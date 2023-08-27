@@ -16,7 +16,6 @@ package _347_freq_topk
 
 // 思路1：这题很明显可以使用堆排序，不过性能还是不够高
 // 思路2：桶排序思想!
-//
 func TopKFrequent(nums []int, k int) []int {
 	// 先统计词频
 	freq := make(map[int]int)
