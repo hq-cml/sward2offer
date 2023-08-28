@@ -8,30 +8,28 @@ package _437_path_sum
 
 import "github.com/hq-cml/sward2offer/common"
 
-var (
-	ret int
-)
-
-func PathSum(root *common.TreeNode, targetSum int) int {
+// 思路：本质上还是树的遍历
+func pathSum(root *common.TreeNode, targetSum int) int {
 	if root == nil {
 		return 0
 	}
-	help(root, targetSum)
-	PathSum(root.Left, targetSum)
-	PathSum(root.Right, targetSum)
-	return ret
+
+	var ret int
+	help(root, targetSum, &ret)
+
+	return ret + pathSum(root.Left, targetSum) + pathSum(root.Right, targetSum)
 }
 
-func help(node *common.TreeNode, target int) {
+// 遍历一个单节点
+func help(node *common.TreeNode, target int, ret *int) {
 	if node == nil {
 		return
 	}
 
 	if node.Val == target {
-		ret++
+		*ret++
 	}
 
-	help(node.Left, target-node.Val)
-	help(node.Right, target-node.Val)
-
+	help(node.Left, target-node.Val, ret)
+	help(node.Right, target-node.Val, ret)
 }
