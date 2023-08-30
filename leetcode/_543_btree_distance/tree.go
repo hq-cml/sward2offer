@@ -12,7 +12,8 @@ package _543_btree_distance
 import "github.com/hq-cml/sward2offer/common"
 
 // 思路：本质上是树的遍历 + 距离求值
-//    距离求值：某个节点为根的距离，实际上就是左子树高 + 右子树高
+//
+//	距离求值：某个节点为根的距离，实际上就是左子树高 + 右子树高
 func diameterOfBinaryTree(root *common.TreeNode) int {
 	max := 0
 	var dfs func(*common.TreeNode)
