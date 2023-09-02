@@ -44,6 +44,14 @@ func TestFind(t *testing.T) {
 			},
 			want: -1,
 		},
+		{
+			name: "case5",
+			args: args{
+				arr:    []int{3, 1},
+				target: 1,
+			},
+			want: 1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

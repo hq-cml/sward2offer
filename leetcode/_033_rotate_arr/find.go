@@ -13,29 +13,32 @@
 package _033_rotate_arr
 
 // 二分查找的变种
-func Find(arr []int, target int) int {
-	if len(arr) == 0 {
+func Find(nums []int, target int) int {
+	if len(nums) == 0 {
 		return -1
 	}
 	beg := 0
-	end := len(arr) - 1
+	end := len(nums) - 1
 	for beg <= end {
 		mid := (end-beg)/2 + beg
-		if arr[mid] == target {
+		if nums[mid] == target {
 			return mid
 		} else {
-			if arr[mid] > arr[beg] {
-				// 旋转发生在后半截，则前半截是顺序递增的
+			// 如果nums[mid] != target，则
+			// 首先，通过比较nums[mid]和nums[beg]来判断旋转发生在前半截还是后半截
+			// 其次，利用了递增特性，再来确定目标存在于前半截还是后半截
+			if nums[mid] > nums[beg] {
+				// 前半截是顺序递增的（旋转发生在后半截）
 				// 利用递增特性，判断target是否可能出现在这个区间内
-				if target >= arr[beg] && target < arr[mid] {
+				if target >= nums[beg] && target <= nums[mid-1] {
 					end = mid - 1
 				} else {
 					beg = mid + 1
 				}
 			} else {
-				// 旋转发生在前半截，则后半截是顺序递增的
+				// 后半截是顺序递增的（旋转发生在前半截）
 				// 利用递增特性，判断target是否可能出现在这个区间内
-				if target > arr[mid] && target <= arr[end] {
+				if mid+1 <= len(nums)-1 && target >= nums[mid+1] && target <= nums[end] {
 					beg = mid + 1
 				} else {
 					end = mid - 1
