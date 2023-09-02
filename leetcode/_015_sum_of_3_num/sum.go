@@ -20,7 +20,7 @@ func Find3Num(arr []int, sum int) {
 	sort.Ints(arr)
 	uniq := map[string]struct{}{}
 	for idx, v := range arr {
-		tmp := find2Num(arr, sum -v , idx) // 三个值，每次挑出一个值，然后指针逼近寻找另两个
+		tmp := find2Num(arr, sum-v, idx) // 三个值，每次挑出一个值，然后指针逼近寻找另两个
 		if len(tmp) != 0 {
 			for _, t := range tmp {
 				key := genUnionKey(v, t)
@@ -33,11 +33,13 @@ func Find3Num(arr []int, sum int) {
 	}
 }
 
+// 在一个有序的数组中，找到两个数的和为sum，且要避开黑名单idx
+// 采用双指针逼近的策略
 func find2Num(arr []int, sum int, blackIdx int) [][2]int {
 	var ret [][2]int
 	i := 0
-	j := len(arr)-1
-	for i < j  {
+	j := len(arr) - 1
+	for i < j {
 		if i == blackIdx {
 			i++
 			continue
@@ -51,7 +53,7 @@ func find2Num(arr []int, sum int, blackIdx int) [][2]int {
 		} else if arr[i]+arr[j] < sum {
 			i++
 		} else {
-			ret = append(ret, [2]int{arr[i],arr[j]})
+			ret = append(ret, [2]int{arr[i], arr[j]})
 			i++ // 随意
 		}
 	}
@@ -67,22 +69,3 @@ func genUnionKey(n int, a [2]int) string {
 		return fmt.Sprintf("%d_%d_%d", a[0], n, a[1])
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

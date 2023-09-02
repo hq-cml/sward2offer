@@ -1,6 +1,6 @@
 /*
  * 将电话号码转化成为可能的字符串
- * 例如，输入“2,3"
+ * 例如，输入“23"
  * 输出：[ad, ae, af, bd, be, bf, cd, ce, cf]
  */
 package _017_phone_num_str
