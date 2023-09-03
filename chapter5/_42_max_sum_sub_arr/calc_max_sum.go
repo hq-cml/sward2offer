@@ -18,21 +18,15 @@ import (
 // 同时，设置两个变量，表示累计值和曾经出现的最大值。
 // 难度:4*
 func CalcMax(arr []int) int {
-	if len(arr) == 0 {
-		return 0
-	}
-
-	max := math.MinInt64 //最大值
-	accumulate := 0      //累计值
+	max := math.MinInt
+	var accu int
 	for _, v := range arr {
-		if accumulate <= 0 {
-			accumulate = v //accumulate清零，从当前开始，重新算
-		} else {
-			accumulate += v
+		accu += v
+		if accu > max {
+			max = accu
 		}
-
-		if accumulate > max { //记录出现过的最大值
-			max = accumulate
+		if accu < 0 { //accumulate清零，从当前开始，重新算
+			accu = 0
 		}
 	}
 	return max

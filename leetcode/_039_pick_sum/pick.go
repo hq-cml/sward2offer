@@ -8,7 +8,7 @@
  * 例2：
  * 输入: candidates = [3,2,5], target = 8
  * 输出: [[2,2,2,2],[2,3,3],[3,5]]
-*/
+ */
 package _039_pick_sum
 
 import "sort"
@@ -17,13 +17,13 @@ import "sort"
 // 另外就是对于结果要求不重复，这里的处理很巧妙
 // 首先将待选数组排序，进而保证结果的录入选取只能从当前值（因为允许多次使用）往后
 // 这样结果成员是由小到大的，自然就不会出现重复的情况了
-func FindAllCombin(arr []int, target int) [][]int {
-	if len(arr) == 0 {
+func FindAllCombin(candidates []int, target int) [][]int {
+	if len(candidates) == 0 {
 		return nil
 	}
 	var ret [][]int
 	var curr []int
-	sort.Ints(arr) // 先排序
+	sort.Ints(candidates) // 先排序
 
 	// dfs
 	var find func(arr []int, begIdx int, crr []int, target int)
@@ -37,7 +37,9 @@ func FindAllCombin(arr []int, target int) [][]int {
 
 			// 如果找到need，则得到一组结果，否则，继续dfs
 			if v == target {
-				ret = append(ret, append(curr, v))
+				r := make([]int, len(curr))
+				copy(r, curr)
+				ret = append(ret, append(r, v))
 			} else if v < target {
 				// target > v才有进一步找的必要（因为数组是递增的正整数）
 				find(arr, idx, append(curr, v), target-v)
@@ -46,6 +48,6 @@ func FindAllCombin(arr []int, target int) [][]int {
 			}
 		}
 	}
-	find(arr, 0, curr, target)
+	find(candidates, 0, curr, target)
 	return ret
 }

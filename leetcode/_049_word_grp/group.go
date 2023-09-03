@@ -19,11 +19,11 @@ import "sort"
 //
 //	优化的点是map的设计，这里设计成了string=>idx
 //	这样只需要一次性的遍历，即解决了所有的问题
-func Group(arr []string) [][]string {
+func Group(strs []string) [][]string {
 	uniq := map[string]int{}
 	idx := 0
 	var ret [][]string
-	for _, s := range arr {
+	for _, s := range strs {
 		t := sortStr(s)
 		if _, ok := uniq[t]; !ok {
 			uniq[t] = idx // 分组的索引

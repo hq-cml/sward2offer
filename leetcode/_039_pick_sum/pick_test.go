@@ -15,18 +15,26 @@ func TestFind(t *testing.T) {
 		args args
 		want [][]int
 	}{
+		//{
+		//	name: "case1",
+		//	args: args{
+		//		arr:    []int{7, 2, 3, 6},
+		//		target: 7,
+		//	},
+		//	want: nil,
+		//}, {
+		//	name: "case1",
+		//	args: args{
+		//		arr:    []int{2, 5, 3},
+		//		target: 8,
+		//	},
+		//	want: nil,
+		//},
 		{
-			name: "case1",
+			name: "case2",
 			args: args{
-				arr:    []int{7, 2, 3, 6},
-				target: 7,
-			},
-			want: nil,
-		}, {
-			name: "case1",
-			args: args{
-				arr:    []int{2, 5, 3},
-				target: 8,
+				arr:    []int{7, 3, 2},
+				target: 18,
 			},
 			want: nil,
 		},

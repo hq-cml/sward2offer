@@ -997,22 +997,19 @@ func check(str string) bool {
 }
 
 // 连续子数组最大值
-func CalcDynamic(arr []int) (int, error) {
-	if len(arr) == 0 {
-		return 0, nil
-	}
-	max := arr[0]
-	sum := arr[0]
-	for j := 1; j < len(arr); j++ {
-		if sum < 0 {
-			sum = 0
+func CalcMax(arr []int) int {
+	max := math.MinInt
+	var accu int
+	for _, v := range arr {
+		accu += v
+		if accu > max {
+			max = accu
 		}
-		sum = sum + arr[j]
-		if sum > max {
-			max = sum
+		if accu < 0 { //accumulate清零，从当前开始，重新算
+			accu = 0
 		}
 	}
-	return max, nil
+	return max
 }
 
 // 二叉树中和为某一值的路径
