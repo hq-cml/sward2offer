@@ -20,38 +20,39 @@ package _10_fibonacci
         如果一次性跨2层阶梯，我们只是在每一种跨越n-2层阶梯方式的基础上再加上2就能到达第n层阶梯了，所以方法还是F（n-2）；
         如果先跨1步，这样加上原来的n-2步，就一共走了n-1步了，方法数就是F（n-1）了，然后再跨多1步，同上，我们只是在每一种跨越
         n-1层阶梯方式的基础上再加上1就能到达第n层阶梯了，所以方法还是F（n-1）。
- */
+*/
 
-
-//递归写法
-//递归的问题：往往可能存在大量的重复计算！！所以性能不会高！也有可能栈溢出的风险。
+// 递归写法
+// 递归的问题：往往可能存在大量的重复计算！！所以性能不会高！也有可能栈溢出的风险。
 func FibonacciRecurse(n int) int {
-    if n <= 0 {
-        return 0
-    }
-    if n == 1 {
-        return 1
-    }
+	if n <= 0 {
+		return 0
+	}
+	if n == 1 {
+		return 1
+	}
+	if n == 2 {
+		return 2
+	}
 
-    return FibonacciRecurse(n-1) + FibonacciRecurse(n-2)
+	return FibonacciRecurse(n-1) + FibonacciRecurse(n-2)
 }
 
-//非递归
-//不用递归的时候，自然联想到利用循环或者栈
+// 非递归
+// 不用递归的时候，自然联想到利用循环或者栈
 func FibonacciNoRecurse(n int) int {
-    if n <= 0 {
-        return 0
-    }
-    if n == 1 {
-        return 1
-    }
-
-    i1 := 0
-    i2 := 1
-    for i := 1; i < n; i ++ {
-        tmp := i2
-        i2 = i1 + i2
-        i1 = tmp
-    }
-    return i2
+	if n == 0 {
+		return 0
+	}
+	if n == 1 {
+		return 1
+	}
+	dp := make([]int, n+1)
+	dp[0] = 0
+	dp[1] = 1
+	dp[2] = 2
+	for i := 3; i <= n; i++ {
+		dp[i] = dp[i-1] + dp[i-2]
+	}
+	return dp[n]
 }

@@ -1293,23 +1293,6 @@ func heapfy(arr []int, currIdx, bondIdx int) {
 	}
 }
 
-func fibo(n int) int {
-	if n <= 0 {
-		return 0
-	}
-	if n == 1 {
-		return 1
-	}
-	n1 := 0
-	n2 := 1
-	for i := 2; i <= n; i++ {
-		tmp := n2
-		n2 = n1 + n2
-		n1 = tmp
-	}
-	return n2
-}
-
 func BuildTree(pre, mid []int) (*common.TreeNode, error) {
 	if len(pre) != len(mid) {
 		return nil, errors.New("Error")

@@ -12,12 +12,12 @@ package _078_sub_set
 
 // 思路：直觉上，能够想到递归思路，类似于全排列
 // 如果长度为len，所有的子集则是依次选取0,1,2...len个字符，作为全部子集
-func PickSet(arr []int) [][]int {
+func PickSet(nums []int) [][]int {
 	var ret [][]int
-	length := len(arr)
+	length := len(nums)
 	// 依次选取0,1,2...len个字符
 	for n := 0; n <= length; n++ {
-		ret = append(ret, pickSet(arr, n)...)
+		ret = append(ret, pickSet(nums, n)...)
 	}
 	return ret
 }

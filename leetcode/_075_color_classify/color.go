@@ -13,11 +13,11 @@
 package _075_color_classify
 
 // 思路1：类似于基数排序，直接统计每个数字的个数，然后再直接更改，只需要扫描2遍
-func Classify(arr []int) []int {
+func Classify(nums []int) []int {
 	cnt0 := 0
 	cnt1 := 0
 	cnt2 := 0
-	for _, v := range arr {
+	for _, v := range nums {
 		switch v {
 		case 0:
 			cnt0++
@@ -31,21 +31,21 @@ func Classify(arr []int) []int {
 	}
 	i := 0
 	for cnt0 > 0 {
-		arr[i] = 0
+		nums[i] = 0
 		i++
 		cnt0--
 	}
 	for cnt1 > 0 {
-		arr[i] = 1
+		nums[i] = 1
 		i++
 		cnt1--
 	}
 	for cnt2 > 0 {
-		arr[i] = 2
+		nums[i] = 2
 		i++
 		cnt2--
 	}
-	return arr
+	return nums
 }
 
 // 思路2：类似于快排的思路，分两次分类

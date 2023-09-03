@@ -15,27 +15,31 @@
 package _055_jump_game
 
 // 思路：递归思想
+// Tips：这题的另一个巧妙之处是failedIndexes，如果没有这个设置，一些case会超时
 func Jump(arr []int) bool {
 	if len(arr) == 0 {
 		return false
 	}
+	failedIndexes := make([]bool, len(arr)) //失败黑名单，缓存结果进行加速
 	target := len(arr) - 1
-	return jump(arr, 0, target)
+	return jump(arr, 0, target, failedIndexes)
 }
 
 // 无需多言
-func jump(arr []int, begIdx int, targetIdx int) bool {
+func jump(arr []int, begIdx int, targetIdx int, failedIndexes []bool) bool {
+	if failedIndexes[begIdx] {
+		return false
+	}
 	if begIdx == targetIdx {
 		return true
 	}
-	if begIdx > targetIdx {
-		return false
-	}
+
 	curr := arr[begIdx]
 	for i := 1; i <= curr; i++ {
-		if jump(arr, begIdx+i, targetIdx) {
+		if jump(arr, begIdx+i, targetIdx, failedIndexes) {
 			return true
 		}
 	}
+	failedIndexes[begIdx] = true
 	return false
 }
