@@ -28,17 +28,17 @@ func MaxProduct(nums []int) int {
 		return 0
 	}
 
-	preMax := nums[0] //最大值
-	preMin := nums[0] //最小值
+	currMax := nums[0] //最大值
+	currMin := nums[0] //最小值
 	ret := nums[0]
 	for i := 1; i < len(nums); i++ {
-		a := preMax * nums[i] //累计值
-		b := preMin * nums[i]
+		a := currMax * nums[i] //累计值
+		b := currMin * nums[i]
 
-		preMax = Max(nums[i], Max(a, b)) // 从累计值和当前值进行比较，选择大的，即如果出现比当前值还小，就从当前值开始
-		preMin = Min(nums[i], Min(a, b))
+		currMax = Max(nums[i], Max(a, b)) // 从累计值和当前值进行比较，选择大的，即如果出现比当前值还小，就从当前值开始
+		currMin = Min(nums[i], Min(a, b))
 
-		ret = Max(ret, preMax)
+		ret = Max(ret, currMax)
 	}
 
 	return ret

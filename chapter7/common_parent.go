@@ -10,6 +10,11 @@ import (
 )
 
 // 做了leetCode之后得到的牛逼思路，基于递归！
+// 这题非常的抽象！所谓公共祖先，而且还要求最低，则应该保证：
+// 节点左子树包含p或者q && 右子树包含p或者q，这样的节点才是最低且公共
+// 如果某个节点左子树或者右子树，同时包括p和q，那么这个节点就不是最低公共
+// 所以，本题的不要把LowestCommonAncestor理解为求p和q的公共最低，而应该理解为：
+// 在root这颗树及其子树总，找到一个p或者q就可以
 func LowestCommonAncestor(root, p, q *common.TreeNode) *common.TreeNode {
 	if root == nil {
 		return nil
@@ -24,7 +29,9 @@ func LowestCommonAncestor(root, p, q *common.TreeNode) *common.TreeNode {
 	left := LowestCommonAncestor(root.Left, p, q)
 	right := LowestCommonAncestor(root.Right, p, q)
 
-	// 如果左右结果都非空，说明真正的公共节点正是自身root
+	// 如果左右结果都非空
+	// 说明左子树存在一个p或者q，同时右子树存在一个p或者q
+	// 说明真正的公共节点正是自身root
 	if left != nil && right != nil {
 		return root
 	}

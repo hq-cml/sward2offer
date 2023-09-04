@@ -5,6 +5,33 @@ package _234_list_per
 
 import "github.com/hq-cml/sward2offer/common"
 
+// 下面的官方思路，要么太傻缺，要么想不到，自己实现一个，依赖辅助栈
+func IsPalindrome0(head *common.ListNode) bool {
+	if head == nil || head.Next == nil {
+		return true
+	}
+
+	var stk []int
+	p := head
+	for p != nil {
+		stk = append(stk, p.Val)
+		p = p.Next
+	}
+
+	p = head
+	for p != nil {
+		top := stk[len(stk)-1]
+		if top != p.Val {
+			return false
+		}
+
+		// pop
+		stk = stk[:len(stk)-1]
+		p = p.Next
+	}
+	return true
+}
+
 // 思路1：快慢指针找到中点，然后翻转后半部分，再然后来进行对比
 func IsPalindrome(head *common.ListNode) bool {
 	if head == nil {

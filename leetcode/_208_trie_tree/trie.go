@@ -20,8 +20,8 @@ type Trie struct {
 
 type Node struct {
 	C      byte
-	Child  [26]*Node
-	IsWord bool // 以当前node结尾，是否作为一个合法单词
+	Child  [26]*Node // 这是一个数组，不是slice，所以天然初始化
+	IsWord bool      // 以当前node结尾，是否作为一个合法单词
 }
 
 func Constructor() Trie {

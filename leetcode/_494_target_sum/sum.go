@@ -36,8 +36,8 @@ func FindTargetSumWays(nums []int, target int) int {
 			return
 		}
 
-		find(arr[1:], target, curr+arr[0])
-		find(arr[1:], target, curr-arr[0])
+		find(arr[1:], target, curr+arr[0]) // 加法
+		find(arr[1:], target, curr-arr[0]) // 减法
 	}
 	find(nums, target, 0)
 	return ret
