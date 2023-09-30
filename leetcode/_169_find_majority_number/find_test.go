@@ -1,4 +1,4 @@
-package _39_find_majority_number
+package _169_find_majority_number
 
 import "testing"
 

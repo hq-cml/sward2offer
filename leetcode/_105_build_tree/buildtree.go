@@ -10,15 +10,15 @@
  *  4      5    6
  *    7       8
  */
-package _07_build_tree
+package _105_build_tree
 
 import (
 	"errors"
 	"github.com/hq-cml/sward2offer/common"
 )
 
-//先用简单例子，来把抽象的问题具象化，会发现这其实也是一个递归的过程:
-//利用前序和中序的特点，确定根和左右子树部分，然后继续递归。
+// 先用简单例子，来把抽象的问题具象化，会发现这其实也是一个递归的过程:
+// 利用前序和中序的特点，确定根和左右子树部分，然后继续递归。
 func BuildTree(pre, mid []int) (*common.TreeNode, error) {
 	if len(pre) != len(mid) {
 		return nil, errors.New("valid pre & mid")
@@ -43,7 +43,7 @@ func BuildTree(pre, mid []int) (*common.TreeNode, error) {
 	root := common.NewNode(head)
 	var err1 error
 	var err2 error
-	root.Left, err1 = BuildTree(pre[1 : idx+1], mid[0 : idx])
+	root.Left, err1 = BuildTree(pre[1:idx+1], mid[0:idx])
 	root.Right, err2 = BuildTree(pre[idx+1:], mid[idx+1:])
 	if err1 != nil || err2 != nil {
 		return nil, errors.New(err1.Error() + err2.Error())

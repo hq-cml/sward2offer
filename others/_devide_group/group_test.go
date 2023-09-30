@@ -1,4 +1,4 @@
-package devide_group
+package _devide_group
 
 import (
 	"testing"

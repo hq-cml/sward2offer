@@ -1,4 +1,4 @@
-package _30_stack_min
+package _155_min_stack
 
 import (
 	"fmt"

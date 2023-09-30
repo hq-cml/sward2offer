@@ -3,7 +3,7 @@
  * 题目：一个链表中包含环，如何找出环的入口结点？例如，在图3.8的链表中，
  * 环的入口结点是结点3。
  */
-package _23_check_list_ring
+package _141_142_list_ring
 
 import "github.com/hq-cml/sward2offer/common"
 
@@ -13,7 +13,7 @@ import "github.com/hq-cml/sward2offer/common"
 //3. 找出入口：双指针策略，P1指针先前进N步（N为环长度）然后P1,P2同速前进，汇合点就是入口节点（有点类似于上一题的倒数k节点）
 //难度：4*
 
-//判断是否存在环，返回：是否成环，环的长度
+// 判断是否存在环，返回：是否成环，环的长度
 func CheckRing(head *common.ListNode) (bool, int) {
 	if head == nil || head.Next == nil {
 		return false, 0
@@ -48,7 +48,7 @@ func CheckRing(head *common.ListNode) (bool, int) {
 	return find, length
 }
 
-//找到入口
+// 找到入口
 func FindEntry(head *common.ListNode) *common.ListNode {
 	exist, length := CheckRing(head)
 	if !exist {

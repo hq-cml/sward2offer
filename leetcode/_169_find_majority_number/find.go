@@ -6,7 +6,7 @@
  *
  * 编程之美：2.3 寻找水王
  */
-package _39_find_majority_number
+package _169_find_majority_number
 
 import (
 	"errors"

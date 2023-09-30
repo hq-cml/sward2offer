@@ -1,4 +1,4 @@
-package _07_build_tree
+package _105_build_tree
 
 import (
 	"fmt"
@@ -18,8 +18,8 @@ func TestBuildTree(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "case1",
-			args:    args{
+			name: "case1",
+			args: args{
 				pre: []int{1, 2, 4, 7, 3, 5, 6, 8},
 				mid: []int{4, 7, 2, 1, 5, 3, 8, 6},
 			},
@@ -34,9 +34,12 @@ func TestBuildTree(t *testing.T) {
 				t.Errorf("BuildTree() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			common.Pre(got); fmt.Println()
-			common.Mid(got); fmt.Println()
-			common.Post(got); fmt.Println()
+			common.Pre(got)
+			fmt.Println()
+			common.Mid(got)
+			fmt.Println()
+			common.Post(got)
+			fmt.Println()
 			//if !reflect.DeepEqual(got, tt.want) {
 			//	t.Errorf("BuildTree() got = %v, want %v", got, tt.want)
 			//}

@@ -1,4 +1,4 @@
-package _63_stock_max_earnings
+package _121_max_stock
 
 import (
 	"testing"

@@ -21,7 +21,7 @@
  * 示例输出:[小强 大3][阿红 E][五 少华][福军 小明][大壮 阿花][A 一][少平 福堂][小红 大力][阿朵 B][二 少军]
  * [福民 小花][大1 阿蓝][C 三][少安 福平 小丽][大2 阿紫 D][四 少康 福心]
  */
-package devide_group
+package _devide_group
 
 import (
 	"errors"

@@ -3,11 +3,11 @@
  * 题目：定义一个函数，输入一个链表的头结点，反转该链表并输出反转后链表的
  * 头结点。
  */
-package _24_reverse_list
+package _206_list_reverse
 
 import "github.com/hq-cml/sward2offer/common"
 
-//难度：3*
+// 难度：3*
 func ReverseList(head *common.ListNode) *common.ListNode {
 	if head == nil || head.Next == nil {
 		return head
