@@ -11,7 +11,7 @@
  * 输入：[5,4,6,null,null,3,7] => false
  * 解释：根节点的值是 5 ，但是右子节点的值是 4 。
  */
-package _98_check_bsearch_tree
+package _098_check_bsearch_tree
 
 import (
 	"github.com/hq-cml/sward2offer/common"

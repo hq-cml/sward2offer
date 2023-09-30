@@ -5,7 +5,7 @@
  *
  * PS：本题也是leetcode 3原题
  */
-package _48_max_no_repititon_string
+package _003_max_norep_str
 
 // 思路1：
 // 暴力方法，穷举

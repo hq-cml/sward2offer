@@ -10,7 +10,7 @@
  *
  * 输入：n = 1 => 输出：1
  */
-package _96_different_bsearch_tree
+package _096_different_bsearch_tree
 
 // 思路：动态规划！
 // 假设有n个结点，G(i)表示i个结点的二叉搜索树的数量，则：

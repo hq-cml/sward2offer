@@ -1,4 +1,4 @@
-package _96_different_bsearch_tree
+package _096_different_bsearch_tree
 
 import "testing"
 

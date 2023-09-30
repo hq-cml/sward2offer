@@ -1,4 +1,4 @@
-package _98_check_bsearch_tree
+package _098_check_bsearch_tree
 
 import (
 	"github.com/hq-cml/sward2offer/common"

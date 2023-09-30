@@ -1,6 +1,6 @@
 1. 两数之和
-2. 两数相加 others/special_merge_list
-3. 最长不含重复字子字符串 chapter5/48
+2. 两数相加
+3. 最长不含重复字子字符串
 4. 两个正序数组中位数  HARD TODO
 5. 最长回文子串
 10. 正则 chapter3/19 HARD

@@ -1,4 +1,4 @@
-package _48_max_no_repititon_string
+package _003_max_norep_str
 
 import (
 	"fmt"
@@ -16,8 +16,8 @@ func TestFindMaxNoRepititionString(t *testing.T) {
 		want1 int
 	}{
 		{
-			name:  "case1",
-			args:  args{
+			name: "case1",
+			args: args{
 				str: "arabcacfr",
 			},
 			want:  1,
@@ -48,24 +48,24 @@ func TestFindMaxNoRepititionStrSlideWindow(t *testing.T) {
 		want1 int
 	}{
 		{
-			name:  "case1",
-			args:  args{
+			name: "case1",
+			args: args{
 				str: "arabcacfr",
 			},
 			want:  1,
 			want1: 4,
 		},
 		{
-			name:  "case2",
-			args:  args{
+			name: "case2",
+			args: args{
 				str: "abcdeefghij",
 			},
 			want:  5,
 			want1: 6,
 		},
 		{
-			name:  "case3",
-			args:  args{
+			name: "case3",
+			args: args{
 				str: "pwwkew",
 			},
 			want:  2,
@@ -96,16 +96,16 @@ func TestFindMaxNoRepititionStrDynamicPlan(t *testing.T) {
 		want1 int
 	}{
 		{
-			name:  "case1",
-			args:  args{
+			name: "case1",
+			args: args{
 				str: "arabcacfr",
 			},
 			want:  1,
 			want1: 4,
 		},
 		{
-			name:  "case2",
-			args:  args{
+			name: "case2",
+			args: args{
 				str: "abcdeefghij",
 			},
 			want:  5,
