@@ -1,49 +1,52 @@
-package _62_different_path
+package _020_bracket
 
 import (
 	"github.com/hq-cml/sward2offer/temp"
 	"testing"
 )
 
-func TestCalcPath(t *testing.T) {
+func TestMatch(t *testing.T) {
 	type args struct {
-		m int
-		n int
+		str string
 	}
 	tests := []struct {
 		name string
 		args args
-		want int
+		want bool
 	}{
 		{
 			name: "case1",
 			args: args{
-				m: 3,
-				n: 2,
+				str: "({{",
 			},
-			want: 3,
+			want: false,
 		},
 		{
 			name: "case2",
 			args: args{
-				m: 7,
-				n: 3,
+				str: ")",
 			},
-			want: 28,
+			want: false,
 		},
 		{
 			name: "case3",
 			args: args{
-				m: 3,
-				n: 3,
+				str: "()",
 			},
-			want: 6,
+			want: true,
+		},
+		{
+			name: "case4",
+			args: args{
+				str: "{()[]}",
+			},
+			want: true,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := temp.CalcPath(tt.args.m, tt.args.n); got != tt.want {
-				t.Errorf("CalcPath() = %v, want %v", got, tt.want)
+			if got := temp.Match(tt.args.str); got != tt.want {
+				t.Errorf("Match() = %v, want %v", got, tt.want)
 			}
 		})
 	}

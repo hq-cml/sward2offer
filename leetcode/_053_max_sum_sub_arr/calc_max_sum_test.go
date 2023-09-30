@@ -1,4 +1,4 @@
-package _42_max_sum_sub_arr
+package _053_max_sum_sub_arr
 
 import (
 	"testing"

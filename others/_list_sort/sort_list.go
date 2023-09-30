@@ -4,8 +4,8 @@
 package _list_sort
 
 import (
-	"github.com/hq-cml/sward2offer/chapter3/_25_merge_order_list"
 	"github.com/hq-cml/sward2offer/common"
+	"github.com/hq-cml/sward2offer/leetcode/_021_merge_order_list"
 )
 
 // 归并排序的思路：
@@ -31,7 +31,7 @@ func MergeListSort(head *common.ListNode) *common.ListNode {
 	head2 := p1.Next
 	p1.Next = nil
 
-	return _25_merge_order_list.MergeRecurs(
+	return _021_merge_order_list.MergeRecurs(
 		MergeListSort(head),
 		MergeListSort(head2))
 }

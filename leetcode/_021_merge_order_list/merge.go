@@ -4,12 +4,12 @@
  * 照递增排序的。例如输入图3.11中的链表1和链表2，则合并之后的升序链表如链
  * 表3所示。
  */
-package _25_merge_order_list
+package _021_merge_order_list
 
 import "github.com/hq-cml/sward2offer/common"
 
-//思路1：普通写法
-//难度：2*
+// 思路1：普通写法
+// 难度：2*
 func Merge(head1, head2 *common.ListNode) *common.ListNode {
 	if head1 == nil {
 		return head2
@@ -51,8 +51,8 @@ func Merge(head1, head2 *common.ListNode) *common.ListNode {
 	return head
 }
 
-//思路2：递归，很精妙的递归写法，但是我觉得实际面试中，很难这么想到。
-//难度：3*
+// 思路2：递归，很精妙的递归写法，但是我觉得实际面试中，很难这么想到。
+// 难度：3*
 func MergeRecurs(head1, head2 *common.ListNode) *common.ListNode {
 	if head1 == nil {
 		return head2

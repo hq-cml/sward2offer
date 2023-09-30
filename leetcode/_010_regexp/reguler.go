@@ -7,12 +7,12 @@
  *
  * PS：本题是LeetCode 10
  */
-package _19_simple_regexp
+package _010_regexp
 
-//思路：
-//利用递归来实现状态机，需要想清楚各种情况
-//遇到这种题目，也就只能欣赏欣赏了。
-//难度：5*
+// 思路：
+// 利用递归来实现状态机，需要想清楚各种情况
+// 遇到这种题目，也就只能欣赏欣赏了。
+// 难度：5*
 func Regexp(str, pattern string) bool {
 	//退出条件：字符串与模式串同时结束，返回true
 	if len(str) == 0 && len(pattern) == 0 {

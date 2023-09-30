@@ -6,7 +6,7 @@
  * PS：这道题也是编程之美2.14
  *     leetcode 53
  */
-package _42_max_sum_sub_arr
+package _053_max_sum_sub_arr
 
 import (
 	"math"

@@ -3,7 +3,7 @@
  * 给定一个字符串，判断是否是合法的括号匹配，括号有3种：(), [], {}
  * PS：同时也是 leetcode 20
  */
-package _bracket_match
+package _020_bracket
 
 // 括号匹配
 func Match(str string) bool {
@@ -19,10 +19,10 @@ func Match(str string) bool {
 			if len(stk) == 0 {
 				return false
 			}
-			top := stk[len(stk) - 1]
-			if (top == '(' && c == ')' ) ||
-				(top == '[' && c == ']' ) ||
-				(top == '{' && c == '}' ) {
+			top := stk[len(stk)-1]
+			if (top == '(' && c == ')') ||
+				(top == '[' && c == ']') ||
+				(top == '{' && c == '}') {
 				stk = stk[:len(stk)-1] // pop
 			} else {
 				return false

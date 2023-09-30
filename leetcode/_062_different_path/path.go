@@ -16,7 +16,7 @@
  * 示例 4：
  * 输入：m = 3, n = 3 => 输出：6
  */
-package _62_different_path
+package _062_different_path
 
 // 递归
 // 动态规划：dp[i][j] = dp[i-1][j] + dp[i][j-1]

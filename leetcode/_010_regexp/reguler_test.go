@@ -1,4 +1,4 @@
-package _19_simple_regexp
+package _010_regexp
 
 import "testing"
 
