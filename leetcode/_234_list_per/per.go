@@ -1,5 +1,5 @@
 /**
- *
+ * 链表回文
  */
 package _234_list_per
 
