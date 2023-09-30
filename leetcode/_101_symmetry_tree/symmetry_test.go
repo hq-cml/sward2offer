@@ -1,4 +1,4 @@
-package _28_symmetry_tree
+package _101_symmetry_tree
 
 import (
 	"github.com/hq-cml/sward2offer/common"

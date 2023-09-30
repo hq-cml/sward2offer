@@ -1,7 +1,7 @@
 /**
  * 最小值，方正证券题目
  */
-package _47_max_gift_value
+package _064_max_gift
 
 import "math"
 

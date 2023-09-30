@@ -1,12 +1,12 @@
-package _47_max_gift_value
+package _064_max_gift
 
 import "testing"
 
 func TestMaxGiftValue(t *testing.T) {
 	type args struct {
-		values []int
-		rows   int
-		cols   int
+		values  []int
+		rows    int
+		cols    int
 		recurse bool
 	}
 	tests := []struct {
@@ -17,9 +17,9 @@ func TestMaxGiftValue(t *testing.T) {
 		{
 			name: "case1",
 			args: args{
-				values: []int{1, 10, 3, 8, 12, 2, 9, 6, 5, 7, 4, 11, 3, 7, 16, 5},
-				rows:   4,
-				cols:   4,
+				values:  []int{1, 10, 3, 8, 12, 2, 9, 6, 5, 7, 4, 11, 3, 7, 16, 5},
+				rows:    4,
+				cols:    4,
 				recurse: true,
 			},
 			want: 53,
@@ -27,9 +27,9 @@ func TestMaxGiftValue(t *testing.T) {
 		{
 			name: "case2",
 			args: args{
-				values: []int{1, 10, 3, 8, 12, 2, 9, 6, 5, 7, 4, 11, 3, 7, 16, 5},
-				rows:   4,
-				cols:   4,
+				values:  []int{1, 10, 3, 8, 12, 2, 9, 6, 5, 7, 4, 11, 3, 7, 16, 5},
+				rows:    4,
+				cols:    4,
 				recurse: false,
 			},
 			want: 53,

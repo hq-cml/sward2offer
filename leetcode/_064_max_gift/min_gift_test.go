@@ -1,7 +1,7 @@
 /**
  *
  */
-package _47_max_gift_value
+package _064_max_gift
 
 import "testing"
 
