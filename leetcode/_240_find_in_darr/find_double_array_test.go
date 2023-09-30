@@ -1,4 +1,4 @@
-package _04_find_double_arr
+package _240_find_in_darr
 
 import (
 	"testing"

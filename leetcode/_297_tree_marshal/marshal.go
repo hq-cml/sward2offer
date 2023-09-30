@@ -2,7 +2,7 @@
  * 面试题37：序列化二叉树
  * 题目：请实现两个函数，分别用来序列化和反序列化二叉树。
  */
-package _37_tree_marshal
+package _297_tree_marshal
 
 import (
 	"fmt"
@@ -15,8 +15,8 @@ import (
 //思路1：转换成前序和中序遍历，然后将两个序列返回，作为序列化。反序列化则是之前做过的，根据前序和中序遍历进行重建。
 //思路2：引入叶子节点空指针的特殊字符，这样就可以只用一个前序序列，也能够重建。这仍然是一个递归的思路。
 
-//字符串序列化
-//难度：3*
+// 字符串序列化
+// 难度：3*
 func TreeMarshal(root *common.TreeNode) string {
 	if root == nil {
 		return "$,"
@@ -30,9 +30,9 @@ func TreeMarshal(root *common.TreeNode) string {
 		TreeMarshal(root.Right)
 }
 
-//反序列化：
-//本质上仍是递归的应用
-//难度:5*
+// 反序列化：
+// 本质上仍是递归的应用
+// 难度:5*
 func TreeUnMarshal(str string) *common.TreeNode {
 	//过滤掉最后逗号
 	str = strings.Trim(str, ",")

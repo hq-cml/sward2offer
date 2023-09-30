@@ -1,4 +1,4 @@
-package _59_list_max_value
+package _239_list_max_value
 
 import (
 	"fmt"

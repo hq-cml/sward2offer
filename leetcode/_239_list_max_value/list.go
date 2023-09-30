@@ -1,13 +1,13 @@
 /*
  * 实现Max为O(1)复杂度的List
  */
-package _59_list_max_value
+package _239_list_max_value
 
 import "fmt"
 
-//O(1)复杂度实现一个List，支持Max操作
-//方法1：
-//利用Maxstack结构来实现，即两个栈实现一个队列
+// O(1)复杂度实现一个List，支持Max操作
+// 方法1：
+// 利用Maxstack结构来实现，即两个栈实现一个队列
 type MaxList struct {
 	stack1 *MaxStack
 	stack2 *MaxStack
@@ -20,13 +20,13 @@ func NewMaxList() *MaxList {
 	}
 }
 
-//队尾插入
+// 队尾插入
 func (ml *MaxList) Insert(value int) {
 	fmt.Println("Insert", value)
 	ml.stack1.Push(value)
 }
 
-//队头弹出
+// 队头弹出
 func (ml *MaxList) Pop() (int, bool) {
 	if ml.stack2.Len() > 0 {
 		return ml.stack2.Pop()
@@ -68,11 +68,11 @@ func (ml *MaxList) Max() (int, bool) {
 	}
 }
 
-//方法2：
-//思路：参考O(1)复杂度获取Max的Stack的实现
-//设置两个队列，一个主队列，一个辅助队列，关键在辅助队列
-//如果新增的元素，大于辅助队列的尾巴则不断清空尾巴，直到不满足之后，入辅助队列尾巴（因为被清理掉的那些，不可能作为最大值）
-//如果删除的元素，要删除的正好是辅助队列的头相等，则辅助队列和主队列都清空头；否则主队列自己删除
+// 方法2：
+// 思路：参考O(1)复杂度获取Max的Stack的实现
+// 设置两个队列，一个主队列，一个辅助队列，关键在辅助队列
+// 如果新增的元素，大于辅助队列的尾巴则不断清空尾巴，直到不满足之后，入辅助队列尾巴（因为被清理掉的那些，不可能作为最大值）
+// 如果删除的元素，要删除的正好是辅助队列的头相等，则辅助队列和主队列都清空头；否则主队列自己删除
 type MaxListArr struct {
 	Base []int
 	Help []int //辅助队列
